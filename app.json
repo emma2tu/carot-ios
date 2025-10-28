@@ -13,17 +13,48 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.carot-ios",
+      "infoPlist": {
+        "NSBluetoothAlwaysUsageDescription": "We use Bluetooth to connect to your blue light necklace.",
+        "NSBluetoothPeripheralUsageDescription": "Bluetooth is required to read light measurements."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "permissions": [
+          "android.permission.BLUETOOTH",
+          "android.permission.BLUETOOTH_ADMIN",
+          "android.permission.BLUETOOTH_SCAN",
+          "android.permission.BLUETOOTH_CONNECT",
+          "android.permission.BLUETOOTH",
+          "android.permission.BLUETOOTH_ADMIN",
+          "android.permission.BLUETOOTH_SCAN",
+          "android.permission.BLUETOOTH_CONNECT"
+        ]
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ],
+      "package": "com.anonymous.carotios"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-asset",
+      "react-native-ble-plx"
+    ],
+    "assetBundlePatterns": [
+      "assets/**"
+    ]
   }
 }

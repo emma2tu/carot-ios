@@ -264,7 +264,7 @@ Defaulting to \`null\`.`}var GJ=eR,KJ=rR;function YJ({className:e,value:t,...r})
             const msg = JSON.parse(event.data);
             if (msg.type === 'bleData') {
               const text = `${msg.timestamp}: ${msg.value}`;
-              console.log('Received from RN:', text);
+              console.log('Received from sensor:', text);
               // update simple HTML for now
               document.getElementById('output').textContent = text;
             }

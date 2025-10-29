@@ -12,9 +12,14 @@ global.Buffer = global.Buffer || Buffer;
 // =========== BLE IDENTIFIERS (UPDATE THESE) =============
 // If you don't know UUIDs yet, start with DEVICE_NAME_PREFIX (advertised name)
 // and watch the logs to see services/characteristics, then paste them here.
-const DEVICE_NAME_PREFIX = 'BLUELIGHT'; // e.g., "BlueLight", "MyNecklace"
-const SERVICE_UUID = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'; // TODO set to your service
-const CHAR_UUID    = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy';  // TODO set to your characteristic
+const DEVICE_NAME_PREFIX = 'CIRCUITPY1330'; // e.g., "BlueLight", "MyNecklace"
+//const SERVICE_UUID = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'; // TODO set to your service
+//const CHAR_UUID    = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy';  // TODO set to your characteristic
+
+const SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e'; // Nordic UART Service
+const TX_CHAR_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; // Notify characteristic (device → app)
+const RX_CHAR_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e'; // Write characteristic (app → device)
+
 // ========================================================
 
 // BLE manager (singleton)
@@ -96,12 +101,15 @@ export default function App() {
 
     async function scanAndConnect() {
       console.log('[BLE] scanning…');
+      
       manager.startDeviceScan(null, { allowDuplicates: false }, async (error, device) => {
         if (error) {
           console.error('[BLE] scan error', error);
           return;
         }
         if (!device) return;
+
+        //console.log(']BLE] nearby device:', device.name, device.id)
 
         // Match device by advertised name; tweak to exact name if needed
         if (device.name && device.name.startsWith(DEVICE_NAME_PREFIX)) {
@@ -112,8 +120,29 @@ export default function App() {
             console.log('[BLE] connected', connected.id);
 
             const ready = await connected.discoverAllServicesAndCharacteristics();
+
+            // Find UART TX (Notify) and RX (Write) characteristics
+            let txChar = null;
+            let rxChar = null;
+
             const services = await ready.services();
-            console.log('[BLE] services:', services.map(s => s.uuid));
+            for (const s of services) {
+              const chs = await ready.characteristicsForService(s.uuid);
+              for (const c of chs) {
+                if (c.uuid.toLowerCase() === TX_CHAR_UUID) txChar = c;
+                if (c.uuid.toLowerCase() === RX_CHAR_UUID) rxChar = c;
+              }
+            }
+
+            if (!txChar || !rxChar) {
+              console.error('[BLE] Could not find UART TX/RX characteristics');
+              return;
+            }
+
+
+            //const services = await ready.services();
+            // for debugging
+            // console.log('[BLE] services:', services.map(s => s.uuid));
 
             // If you don't yet know UUIDs, log chars to discover them:
             for (const s of services) {
@@ -121,6 +150,69 @@ export default function App() {
               console.log('[BLE] chars for', s.uuid, chs.map(c => c.uuid));
             }
 
+            txChar.monitor((err, char) => {
+              if (err) {
+                console.error('[BLE] notify error', err);
+                return;
+              }
+              if (!char?.value) return;
+
+              const decoded = b64ToUtf8(char.value);
+              console.log('[BLE] RX from device:', decoded);
+              
+              // Parse "timestamp,value" if applicable
+              // Convert BLE base64 payload to text and split into complete lines
+              lineBuf += b64ToUtf8(char.value);
+              let idx;
+              while ((idx = lineBuf.indexOf('\n')) !== -1) {
+                const line = lineBuf.slice(0, idx);
+                lineBuf = lineBuf.slice(idx + 1);
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+
+                // Expecting "timestamp,value" per line
+                const [timestamp, raw] = trimmed.split(',');
+                const value = Number(raw);
+
+                const payload = { type: 'bleData', timestamp, value };
+                // → forward to WebView
+                if (webref.current) {
+                  webref.current.postMessage(JSON.stringify(payload));
+                }
+              }
+            });
+
+            async function sendCommand(cmd) {
+              if (!rxChar) {
+                console.warn('[BLE] No RX characteristic available yet');
+                return;
+              }
+              const base64 = Buffer.from(cmd + '\n', 'utf8').toString('base64');
+              await rxChar.writeWithResponse(base64);
+              console.log('[BLE] Sent command:', cmd);
+            }
+
+            // -------------- Periodic GET loop -----------------
+            console.log('[BLE] Starting periodic GET requests...');
+            await sendCommand('HELLO'); // optional handshake
+
+            const intervalId = setInterval(async () => {
+              console.log('[BLE] Sending periodic GET...');
+              try {
+                await sendCommand('GET');
+              } catch (err) {
+                console.error('[BLE] Failed to send GET:', err);
+              }
+            }, 3000); // every 3 seconds
+
+            // stop when disconnected
+            connected.onDisconnected((err, dev) => {
+              console.warn('[BLE] disconnected', dev?.id, err || '');
+              clearInterval(intervalId);
+              setTimeout(scanAndConnect, 1500);
+            });
+
+            /*
             // Subscribe to your text data characteristic
             ready.monitorCharacteristicForService(SERVICE_UUID, CHAR_UUID, (err, char) => {
               if (err) {
@@ -149,6 +241,7 @@ export default function App() {
                 }
               }
             });
+            */
 
             // Optional: handle disconnects & restart scan
             connected.onDisconnected((err, dev) => {
@@ -179,7 +272,12 @@ export default function App() {
   const onMessage = useCallback((event) => {
     try {
       const data = JSON.parse(event.nativeEvent.data);
-      console.log('[WEBVIEW MSG]', data);
+      if (data.type === 'bleData') {
+      console.log('[WebView → BLE Data]', data);
+      // You can also forward to a global listener if needed
+      } else {
+        console.log('[WEBVIEW MSG]', data);
+      }
       // e.g., handle {type:'ping'} or control commands from your page
     } catch {
       console.log('[WEBVIEW RAW]', event.nativeEvent.data);

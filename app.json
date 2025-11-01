@@ -23,26 +23,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "permissions": [
-          "android.permission.BLUETOOTH",
-          "android.permission.BLUETOOTH_ADMIN",
-          "android.permission.BLUETOOTH_SCAN",
-          "android.permission.BLUETOOTH_CONNECT",
-          "android.permission.BLUETOOTH",
-          "android.permission.BLUETOOTH_ADMIN",
-          "android.permission.BLUETOOTH_SCAN",
-          "android.permission.BLUETOOTH_CONNECT"
-        ]
+        "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.BLUETOOTH",
         "android.permission.BLUETOOTH_ADMIN",
         "android.permission.BLUETOOTH_CONNECT",
-        "android.permission.BLUETOOTH",
-        "android.permission.BLUETOOTH_ADMIN",
-        "android.permission.BLUETOOTH_CONNECT"
+        "android.permission.BLUETOOTH_SCAN"
       ],
       "package": "com.anonymous.carotios"
     },
@@ -53,8 +41,6 @@
       "expo-asset",
       "react-native-ble-plx"
     ],
-    "assetBundlePatterns": [
-      "assets/**"
-    ]
+    "assetBundlePatterns": ["assets/**"]
   }
 }

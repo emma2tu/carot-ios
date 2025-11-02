@@ -25,6 +25,7 @@ export default function App() {
     sendCommand,
     clearLog,
     connectAndListen,
+    stats,
   } = useBluetoothUART();
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function App() {
     })();
   }, []);
 
-  // 🔹 Send initial HELLO + start periodic GET if connected
+  // Send initial HELLO + start periodic GET if connected
   useEffect(() => {
     if (isConnected) {
       //sendCommand('HELLO');
@@ -66,21 +67,35 @@ export default function App() {
     }
   }, [isConnected, sendCommand]);
 
-  // 🔹 Forward BLE readings to WebView
+  // Forward BLE readings to WebView
   useEffect(() => {
-    if (!webref.current) return;
+    if (!webref.current || sensorLogData.length === 0) return;
+
+      // Compute stats from your readings
+      const totalExposure = sensorLogData.reduce((sum, r) => sum + r.intensity, 0);
+      const avgIntensity = totalExposure / sensorLogData.length;
+      const maxIntensity = Math.max(...sensorLogData.map(r => r.intensity));
+      const currentIntensity = sensorLogData[sensorLogData.length - 1];
+
+      // post to WebView
+      webref.current.postMessage(JSON.stringify({
+        type: 'bleData',
+        payload: {
+          totalExposure,
+          avgIntensity,
+          maxIntensity,
+          currentIntensity,
+        },
+      })
+    );
+
     sensorLogData.forEach((entry) => {
       webref.current.postMessage(JSON.stringify({ type: 'bleData', entry }));
     });
+
   }, [sensorLogData]);
 
-  // 🔹 NEW: Forward connection status to WebView
-  useEffect(() => {
-    if (!webref.current) return;
-    webref.current.postMessage(JSON.stringify({ type: 'bleConnection', isConnected }));
-  }, [isConnected]);
-
-  // 🔹 Notify WebView when BLE connection status changes
+  // Notify WebView when BLE connection status changes
   useEffect(() => {
     if (webref.current) {
       webref.current.postMessage(
@@ -112,22 +127,6 @@ export default function App() {
     [isConnected, connectAndListen, sendCommand]
   );
 
-
-  /*
-  useEffect(() => {
-    if (webref.current) {useEffect(() => {
-  if (webref.current) {
-    webref.current.postMessage(JSON.stringify({
-      type: 'bleConnection',
-      isConnected
-    }));
-  }
-}, [isConnected]);
-      webref.current.postMessage(JSON.stringify({ type: 'bleStatus', isConnected }));
-    }
-  }, [isConnected]);
-*/
-
   // 🔹 Show loading indicator while HTML loads
   if (!html || !baseDir) {
     return (
@@ -142,7 +141,7 @@ export default function App() {
   // 🔹 Render WebView with a connection status banner
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      {/* 🔸 Connection status bar */}
+      {/* Connection status bar */}
 
       <View style={{ padding: 10, backgroundColor: '#f8f8f8' }}>
         {isScanning ? (
@@ -160,7 +159,30 @@ export default function App() {
         )}
       </View>
 
-      {/* 🔸 Web content */}
+      {/* 🔹 Stats summary */}
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingVertical: 10,
+        backgroundColor: '#eef6ff',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd'
+      }}>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ fontWeight: '600' }}>Total</Text>
+          <Text>{stats.totalExposure.toFixed(1)} BLU</Text>
+        </View>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ fontWeight: '600' }}>Average</Text>
+          <Text>{stats.avgIntensity.toFixed(1)} BLU</Text>
+        </View>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ fontWeight: '600' }}>Max</Text>
+          <Text>{stats.maxIntensity.toFixed(1)} BLU</Text>
+        </View>
+      </View>
+
+      {/* Web content */}
       <WebView
         ref={webref}
         source={{ html, baseUrl: baseDir }}
@@ -183,27 +205,6 @@ export default function App() {
 
         // use the named onMessage callback defined above
         onMessage={onMessage}
-
-        /*
-        injectedJavaScript={`
-          (function() {
-            const oldLog = console.log;
-            console.log = function(...args) {
-              window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'log', args }));
-              oldLog(...args);
-            };
-          })();
-          true;
-        `}
-        onMessage={(event) => {
-          try {
-            const data = JSON.parse(event.nativeEvent.data);
-            console.log('[WebView MSG]', data);
-          } catch {
-            console.log('[WebView RAW]', event.nativeEvent.data);
-          }
-        }}
-          */
 
       />
     </SafeAreaView>

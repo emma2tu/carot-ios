@@ -702,40 +702,64 @@ function XJ({ className: e = "w-10 h-10" }) {
                                             E.jsxs("div", { 
                                               className: "max-w-6xl mx-auto p-3 sm:p-4 space-y-4 sm:space-y-6", children: [t && E.jsx(dt, { 
                                                 className: "p-3 sm:p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-0", 
-                                                children: E.jsxs("div", { 
-                                                  className: "flex items-center justify-between gap-2 flex-wrap", children: [E.jsxs("div", { 
-                                                    className: "flex items-center gap-2 sm:gap-3", children: [E.jsx("div", { 
+                                                children: 
+                                                
+                                                E.jsxs("div", { 
+                                                  className: "flex items-center justify-between gap-2 flex-wrap", children: [
+                                                    E.jsxs("div", { 
+                                                    className: "flex items-center gap-2 sm:gap-3", children: [
+
+                                                      E.jsx("div", { 
                                                       className: "w-3 h-3 bg-green-400 rounded-full animate-pulse flex-shrink-0" }), E.jsx("span", { 
-                                                        className: "text-sm sm:text-base", children: "Necklace connected" })] }), E.jsxs("div", { 
+                                                        className: "text-sm sm:text-base", children: "Necklace connected" })] }), 
+                                                        
+                                                        E.jsxs("div", { 
                                                           className: "flex items-center gap-2", children: [E.jsx(hl, { 
                                                             className: "w-4 h-4 sm:w-5 sm:h-5" }), E.jsxs("span", { 
-                                                              className: "text-sm sm:text-base", children: [r, " intensity"] })] })] }) }), E.jsxs("div", { 
+                                                              className: "text-sm sm:text-base", children: [r, " intensity"] })] })] }) }), 
+
+                                                              E.jsxs("div", { 
                                                                 className: "grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4", children: [E.jsxs(dt, { 
-                                                                  className: "p-4 sm:p-6", children: [E.jsxs("div", { 
+                                                                  className: "p-4 sm:p-6", children: [
+                                                                    
+                                                                  E.jsxs("div", { 
                                                                     className: "flex items-center justify-between mb-2", children: [E.jsx("span", { 
                                                                       className: "text-gray-600 text-xs sm:text-sm", children: "Total Exposure" }), E.jsx(hl, { 
-                                                                        className: "w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0" })] }), E.jsxs("div", { 
+                                                                        className: "w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0" })] }), 
+                                                                        
+                                                                        E.jsxs("div", { id: "totalExposure",
                                                                           className: "text-gray-900", children: [c.totalExposure, " BLU"] }), E.jsx("p", { 
                                                                             className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Today" })] }), E.jsxs(dt, { 
-                                                                              className: "p-4 sm:p-6", children: [E.jsxs("div", { 
+                                                                              className: "p-4 sm:p-6", children: [
+                                                                                
+                                                                              E.jsxs("div", { 
                                                                                 className: "flex items-center justify-between mb-2", children: [E.jsx("span", { 
                                                                                   className: "text-gray-600 text-xs sm:text-sm", children: "Avg Intensity" }), E.jsx(Xc, { 
-                                                                                    className: "w-4 h-4 sm:w-5 sm:h-5 text-indigo-500 flex-shrink-0" })] }), E.jsx("div", { 
+                                                                                    className: "w-4 h-4 sm:w-5 sm:h-5 text-indigo-500 flex-shrink-0" })] }), 
+                                                                                    
+                                                                                    E.jsx("div", { id: "avgIntensity",
                                                                                       className: "text-gray-900", children: c.averageIntensity }), E.jsx(YJ, { 
-                                                                                        value: c.averageIntensity, max: 255, 
-                                                                                        className: "mt-2" })] }), E.jsxs(dt, { 
-                                                                                          className: "p-4 sm:p-6", children: [E.jsxs("div", { 
+                                                                                        value: c.averageIntensity, max: 255, className: "mt-2" })] }), E.jsxs(dt, { 
+                                                                                          className: "p-4 sm:p-6", children: [
+                                                                                            
+                                                                                          E.jsxs("div", { 
                                                                                             className: "flex items-center justify-between mb-2", children: [E.jsx("span", { 
                                                                                               //className: "text-gray-600 text-xs sm:text-sm", children: "Peak Time" }), E.jsx(ya, { 
                                                                                               className: "text-gray-600 text-xs sm:text-sm", children: "Intensity" }), E.jsx(ya, { 
-                                                                                                className: "w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" })] }), E.jsx("div", { 
+                                                                                                className: "w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" })] }), 
+                                                                                                
+                                                                                                E.jsx("div", { 
                                                                                                   className: "text-gray-900", children: c.peakTime }), E.jsxs("p", { 
                                                                                                     className: "text-gray-500 mt-1 text-xs sm:text-sm", children: ["", "BLU"] })] }), E.jsxs(dt, { 
                                                                                                     //className: "text-gray-500 mt-1 text-xs sm:text-sm", children: ["Intensity: ", c.peakIntensity] })] }), E.jsxs(dt, { 
-                                                                                                      className: "p-4 sm:p-6", children: [E.jsxs("div", { 
+                                                                                                      className: "p-4 sm:p-6", children: [
+                                                                                                        
+                                                                                                      E.jsxs("div", { 
                                                                                                         className: "flex items-center justify-between mb-2", children: [E.jsx("span", { 
                                                                                                           className: "text-gray-600 text-xs sm:text-sm", children: "Peak Intensity" }), E.jsx(rj, { 
-                                                                                                            className: "w-4 h-4 sm:w-5 sm:h-5 text-purple-500 flex-shrink-0" })] }), E.jsx("div", { 
+                                                                                                            className: "w-4 h-4 sm:w-5 sm:h-5 text-purple-500 flex-shrink-0" })] }), 
+                                                                                                            
+                                                                                                            E.jsx("div", { id: "maxIntensity",
                                                                                                               className: "text-gray-900", children: c.peakIntensity }), E.jsx("p", { 
                                                                                                                 className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Max reading" })] })] }), E.jsxs(_L, { defaultValue: "exposure", className: "space-y-4", children: [E.jsxs(OL, { className: "grid w-full grid-cols-2", children: [E.jsx(XS, { value: "exposure", className: "text-xs sm:text-sm", children: "Tracking" }), E.jsx(XS, { value: "data", className: "text-xs sm:text-sm", children: "Data" })] }), E.jsx(QS, { value: "exposure", className: "space-y-4", children: E.jsx(mZ, {}) }), E.jsx(QS, { value: "data", className: "space-y-4", children: E.jsx(FJ, {}) })] }), !e && E.jsxs(Kg, { className: "border-orange-200 bg-orange-50", children: [E.jsx(Dh, { className: "h-4 w-4 text-orange-600" }), E.jsxs(Yg, { className: "text-orange-900 text-xs sm:text-sm", children: [E.jsx("strong", { children: "Web Bluetooth not supported." }), " This browser doesn't support Web Bluetooth API. For iPhone deployment, use Capacitor with @capacitor-community/bluetooth-le plugin. Mock data mode is available for testing."] })] }), n && t && E.jsxs(Kg, { className: "border-blue-200 bg-blue-50", children: [E.jsx(Dh, { className: "h-4 w-4 text-blue-600" }), E.jsxs(Yg, { className: "text-blue-900 text-xs sm:text-sm", children: [E.jsx("strong", { children: "Mock Mode Active." }), " Using simulated blue light data. On Android/Desktop Chrome, real Bluetooth connection available. For iOS, wrap with Capacitor and use native Bluetooth plugin."] })] }), i && E.jsxs(Kg, { className: "border-red-200 bg-red-50", children: [E.jsx(Dh, { className: "h-4 w-4 text-red-600" }), E.jsx(Yg, { className: "text-red-900 text-xs sm:text-sm", children: i })] }), E.jsx(dt, { className: "p-3 sm:p-4 bg-gray-50 border-gray-200", children: E.jsxs("div", { className: "flex gap-2 sm:gap-3", children: [E.jsx("div", { className: "text-gray-600 flex-shrink-0", children: "💡" }), E.jsxs("div", { className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Development Notes" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", children: [E.jsxs("li", { children: [E.jsx("strong", { children: "Web Bluetooth API:" }), " Works on Chrome/Edge (Android/Desktop)"] }), E.jsxs("li", { children: [E.jsx("strong", { children: "iOS Safari:" }), " Web Bluetooth not supported - use Capacitor wrapper"] }), E.jsxs("li", { children: [E.jsx("strong", { children: "Data Storage:" }), " All data saved locally in browser localStorage"] }), E.jsxs("li", { children: [E.jsx("strong", { children: "Production:" }), " Replace UUIDs with your necklace's actual service/characteristic IDs"] })] })] })] }) })] })] }) } var JJ = (e, t, r, n, i, a, l, u) => { let c = document.documentElement, d = ["light", "dark"]; function h(x) { (Array.isArray(e) ? e : [e]).forEach(w => { let g = w === "class", y = g && a ? i.map(_ => a[_] || _) : i; g ? (c.classList.remove(...y), c.classList.add(a && a[x] ? a[x] : x)) : c.setAttribute(w, x) }), p(x) } function p(x) { u && d.includes(x) && (c.style.colorScheme = x) } function v() { return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light" } if (n) h(n); else try { let x = localStorage.getItem(t) || r, w = l && x === "system" ? v() : x; h(w) } catch { } }, eee = N.createContext(void 0), tee = { setTheme: e => { }, themes: [] }, ree = () => { var e; return (e = N.useContext(eee)) != null ? e : tee }; N.memo(({ forcedTheme: e, storageKey: t, attribute: r, enableSystem: n, enableColorScheme: i, defaultTheme: a, value: l, themes: u, nonce: c, scriptProps: d }) => { let h = JSON.stringify([r, t, a, e, u, l, n, i]).slice(1, -1); return N.createElement("script", { ...d, suppressHydrationWarning: !0, nonce: typeof window > "u" ? c : "", dangerouslySetInnerHTML: { __html: `(${JJ.toString()})(${h})` } }) }); const nee = ({ ...e }) => { const { theme: t = "system" } = ree(); return E.jsx(qZ, { theme: t, className: "toaster group", style: { "--normal-bg": "var(--popover)", "--normal-text": "var(--popover-foreground)", "--normal-border": "var(--border)" }, ...e }) }; function iee() { return N.useEffect(() => { window.ReactNativeWebView?.postMessage(JSON.stringify({ type: "APP_LOADED" })) }, []), E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { children: E.jsx(iee, {}) }));</script>
   <style rel="stylesheet" crossorigin>
@@ -4957,7 +4981,7 @@ function XJ({ className: e = "w-10 h-10" }) {
       }
     });
   </script>
-  */
+*/
  <script>
   (function() {
     // Initially hide the banner
@@ -4977,13 +5001,13 @@ function XJ({ className: e = "w-10 h-10" }) {
       try {
         const msg = JSON.parse(event.data);
 
-        // 🧠 Step 1: Web asks native to connect
+        // Step 1: Web asks native to connect
         if (msg.type === 'connectBluetooth') {
           // Send trigger to native side
           window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'connectBluetooth' }));
         }
 
-        // 🧠 Step 2: Native sends connection update
+        // Step 2: Native sends connection update
         if (msg.type === 'bleConnection') {
           const connected = msg.isConnected;
 
@@ -4995,7 +5019,7 @@ function XJ({ className: e = "w-10 h-10" }) {
             );
 
           if (banner) {
-            banner.textContent = connected ? '✅ Necklace Connected' : '🔴 Disconnected';
+            banner.textContent = connected ? 'Necklace Connected' : 'Disconnected';
             banner.style.color = connected ? 'green' : 'red';
           }
         }
@@ -5009,9 +5033,10 @@ function XJ({ className: e = "w-10 h-10" }) {
 <script>
 window.addEventListener('message', (event) => {
   try {
-    const msg = JSON.parse(event.data);
+    const msg = JSON.parse(event.data || '{}');
     if (msg.type === 'bleData' && msg.entry) {
-      const { intensity, deviceTimestamp } = msg.entry;
+      const { totalExposure, avgIntensity, maxIntensity, currentIntensity } = msg.payload;
+      const { intensity, deviceTimestamp} = msg.entry;
 
       // store readings globally
       window.readings = window.readings || [];
@@ -5027,15 +5052,16 @@ window.addEventListener('message', (event) => {
       );
 
       // update UI cards (assuming you have specific IDs for them)
-      document.getElementById('avgIntensity').textContent = avg.toFixed(2);
-      document.getElementById('totalExposure').textContent = total.toFixed(0);
-      document.getElementById('lastUpdate').textContent = new Date(
-        deviceTimestamp || Date.now()
-      ).toLocaleTimeString();
+      //document.getElementById('avgIntensity').textContent = avg.toFixed(2);
+      // document.getElementById('totalExposure').textContent = total.toFixed(0);
+      document.getElementById('totalExposure').textContent = totalExposure.toFixed(0);
+      document.getElementById('avgIntensity').textContent = avgIntensity.toFixed(2);
+      document.getElementById('maxIntensity').textContent = maxIntensity.toFixed(2);
+      //document.getElementById('lastUpdate').textContent = new Date(deviceTimestamp || Date.now()).toLocaleTimeString();
     }
 
     if (msg.type === 'bleConnection') {
-      const status = msg.isConnected ? '✅ Connected' : '❌ Disconnected';
+      const status = msg.isConnected ? 'Connected' : 'Disconnected';
       document.getElementById('bleStatus').textContent = status;
     }
   } catch (err) {
@@ -5058,7 +5084,7 @@ window.addEventListener('message', (event) => {
   function updateIntensityCard(value) {
     const labelEl = findByLabel("Intensity");
     if (!labelEl) {
-      console.warn("⚠️ Intensity label not found yet");
+      console.warn("Intensity label not found yet");
       return;
     }
 
@@ -5066,9 +5092,9 @@ window.addEventListener('message', (event) => {
     const valueEl = labelEl.closest('div')?.parentElement?.querySelector('.text-gray-900');
     if (valueEl) {
       valueEl.textContent = value.toFixed(1);
-      console.log(`📈 Updated Intensity: ${value.toFixed(1)}`);
+      console.log(`Updated Intensity: ${value.toFixed(1)}`);
     } else {
-      console.warn("⚠️ Intensity value element not found");
+      console.warn("Intensity value element not found");
     }
   }
 
@@ -5082,7 +5108,7 @@ window.addEventListener('message', (event) => {
         updateIntensityCard(intensity);
       }
     } catch (err) {
-      console.error('⚠️ BLE message parse error:', err);
+      console.error('BLE message parse error:', err);
     }
   }
 
@@ -5090,7 +5116,7 @@ window.addEventListener('message', (event) => {
   document.addEventListener('message', handleMessage);
   window.addEventListener('message', handleMessage);
 
-  console.log('✅ BLE Intensity updater initialized');
+  console.log('BLE Intensity updater initialized');
 })();
 </script>
 

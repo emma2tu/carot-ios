@@ -18,14 +18,15 @@ export default function App() {
   const {
     isConnected,
     isScanning,
-    connectionState, // added
+    connectionState,
     sensorLogData,
     statusLogData,
     error,
     sendCommand,
     clearLog,
+    clearSavedData,
     connectAndListen,
-    stats,
+    stats, // exported live stats
   } = useBluetoothUART();
 
   useEffect(() => {
@@ -67,33 +68,13 @@ export default function App() {
     }
   }, [isConnected, sendCommand]);
 
-  // Forward BLE readings to WebView
+  // send persisted stats whenever they update
   useEffect(() => {
-    if (!webref.current || sensorLogData.length === 0) return;
-
-      // Compute stats from your readings
-      const totalExposure = sensorLogData.reduce((sum, r) => sum + r.intensity, 0);
-      const avgIntensity = totalExposure / sensorLogData.length;
-      const maxIntensity = Math.max(...sensorLogData.map(r => r.intensity));
-      const currentIntensity = sensorLogData[sensorLogData.length - 1];
-
-      // post to WebView
-      webref.current.postMessage(JSON.stringify({
-        type: 'bleData',
-        payload: {
-          totalExposure,
-          avgIntensity,
-          maxIntensity,
-          currentIntensity,
-        },
-      })
+    if (!webref.current) return;
+    webref.current.postMessage(
+      JSON.stringify({ type: 'updateStats', payload: stats })
     );
-
-    sensorLogData.forEach((entry) => {
-      webref.current.postMessage(JSON.stringify({ type: 'bleData', entry }));
-    });
-
-  }, [sensorLogData]);
+  }, [stats]);
 
   // Notify WebView when BLE connection status changes
   useEffect(() => {

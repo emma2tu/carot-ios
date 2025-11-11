@@ -4954,147 +4954,77 @@ function XJ({ className: e = "w-10 h-10" }) {
 <body>
 
   <div id="root"></div>
-  /*
   <script>
-    window.addEventListener('message', (event) => {
+    (function() {
+      // Initially hide the banner
+      const observer = new MutationObserver(() => {
+        const banner = Array.from(document.querySelectorAll('span'))
+          .find(el => el.textContent.includes('Necklace connected') || el.textContent.includes('Connect'));
+        if (banner) {
+          banner.textContent = ''; // start blank
+          banner.style.color = 'gray';
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
 
-      try {
-        const msg = JSON.parse(event.data);
+      // Listen for messages from React Native
+      window.addEventListener('message', (event) => {
+        try {
+          const msg = JSON.parse(event.data);
 
-        if (msg.type === 'bleConnection') {
-          const connected = msg.isConnected;
-          const el = document.querySelector('#connection-status');
-          if (el) {
-            el.textContent = connected ? '✅ Connected to Necklace' : '🔴 Disconnected';
-            el.style.color = connected ? 'green' : 'red';
+          // Step 1: Web asks native to connect
+          if (msg.type === 'connectBluetooth') {
+            // Send trigger to native side
+            window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'connectBluetooth' }));
           }
-        }
 
-        if (msg.type === 'bleData') {
-          const text = `${msg.timestamp}: ${msg.value}`;
-          console.log('Received from sensor:', text);
-          // update simple HTML for now
-          document.getElementById('output').textContent = text;
+          // Step 2: Native sends connection update
+          if (msg.type === 'bleConnection') {
+            const connected = msg.isConnected;
+
+            const banner = Array.from(document.querySelectorAll('span'))
+              .find(el =>
+                el.textContent.includes('Necklace connected') ||
+                el.textContent.includes('Connect') ||
+                el.textContent === ''
+              );
+
+            if (banner) {
+              banner.textContent = connected ? 'Necklace Connected' : 'Disconnected';
+              banner.style.color = connected ? 'green' : 'red';
+            }
+          }
+        } catch (err) {
+          console.error('BLE message parse error', err);
         }
-      } catch (err) {
-        console.error('Failed to parse BLE message', err);
-      }
-    });
+      });
+    })();
   </script>
-*/
- <script>
-  (function() {
-    // Initially hide the banner
-    const observer = new MutationObserver(() => {
-      const banner = Array.from(document.querySelectorAll('span'))
-        .find(el => el.textContent.includes('Necklace connected') || el.textContent.includes('Connect'));
-      if (banner) {
-        banner.textContent = ''; // start blank
-        banner.style.color = 'gray';
-        observer.disconnect();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
 
-    // Listen for messages from React Native
-    window.addEventListener('message', (event) => {
-      try {
-        const msg = JSON.parse(event.data);
-
-        // Step 1: Web asks native to connect
-        if (msg.type === 'connectBluetooth') {
-          // Send trigger to native side
-          window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'connectBluetooth' }));
-        }
-
-        // Step 2: Native sends connection update
-        if (msg.type === 'bleConnection') {
-          const connected = msg.isConnected;
-
-          const banner = Array.from(document.querySelectorAll('span'))
-            .find(el =>
-              el.textContent.includes('Necklace connected') ||
-              el.textContent.includes('Connect') ||
-              el.textContent === ''
-            );
-
-          if (banner) {
-            banner.textContent = connected ? 'Necklace Connected' : 'Disconnected';
-            banner.style.color = connected ? 'green' : 'red';
-          }
-        }
-      } catch (err) {
-        console.error('BLE message parse error', err);
-      }
-    });
-  })();
-</script>
-
-<script>
-window.addEventListener('message', (event) => {
-  try {
-    const msg = JSON.parse(event.data || '{}');
-    if (msg.type === 'bleData' && msg.entry) {
-      const { totalExposure, avgIntensity, maxIntensity, currentIntensity } = msg.payload;
-      const { intensity, deviceTimestamp} = msg.entry;
-
-      // store readings globally
-      window.readings = window.readings || [];
-      window.readings.push(msg.entry);
-
-      // calculate stats
-      const avg =
-        window.readings.reduce((sum, r) => sum + (r.intensity || 0), 0) /
-        window.readings.length;
-      const total = window.readings.reduce(
-        (sum, r) => sum + (r.intensity || 0),
-        0
-      );
-
-      // update UI cards (assuming you have specific IDs for them)
-      //document.getElementById('avgIntensity').textContent = avg.toFixed(2);
-      // document.getElementById('totalExposure').textContent = total.toFixed(0);
-      document.getElementById('totalExposure').textContent = totalExposure.toFixed(0);
-      document.getElementById('avgIntensity').textContent = avgIntensity.toFixed(2);
-      document.getElementById('maxIntensity').textContent = maxIntensity.toFixed(2);
-      //document.getElementById('lastUpdate').textContent = new Date(deviceTimestamp || Date.now()).toLocaleTimeString();
-    }
-
-    if (msg.type === 'bleConnection') {
-      const status = msg.isConnected ? 'Connected' : 'Disconnected';
-      document.getElementById('bleStatus').textContent = status;
-    }
-  } catch (err) {
-    console.error('Message parse error:', err);
-  }
-});
-</script>
-
-<script>
+  <script>
 (function() {
-  let latestIntensity = null;
-
-  // Utility: find the element by visible label text
-  function findByLabel(label) {
-    const spans = [...document.querySelectorAll('span, div, p')];
-    return spans.find(el => el.textContent.trim() === label);
+  // Utility: find card by label text
+  function findCardByLabel(label) {
+    const elements = [...document.querySelectorAll('span, div, p, h3')];
+    return elements.find(el => el.textContent.trim().toLowerCase() === label.toLowerCase());
   }
 
-  // Update the “Intensity” card dynamically
-  function updateIntensityCard(value) {
-    const labelEl = findByLabel("Intensity");
+  // Update a card’s displayed numeric value
+  function updateCardValue(label, value) {
+    const labelEl = findCardByLabel(label);
     if (!labelEl) {
-      console.warn("Intensity label not found yet");
+      console.warn(`Label "${label}" not found`);
       return;
     }
 
-    // The numeric value is usually the next big text div under same card
+    // Try to find the main number within the same card
     const valueEl = labelEl.closest('div')?.parentElement?.querySelector('.text-gray-900');
     if (valueEl) {
       valueEl.textContent = value.toFixed(1);
-      console.log(`Updated Intensity: ${value.toFixed(1)}`);
+      console.log(`Updated ${label}: ${value.toFixed(1)}`);
     } else {
-      console.warn("Intensity value element not found");
+      console.warn(`Value element for "${label}" not found`);
     }
   }
 
@@ -5102,10 +5032,14 @@ window.addEventListener('message', (event) => {
   function handleMessage(event) {
     try {
       const data = JSON.parse(event.data);
-      if (data.type === 'bleData' && data.entry) {
-        const { intensity } = data.entry;
-        latestIntensity = intensity;
-        updateIntensityCard(intensity);
+      if (data.type === 'updateStats' && data.payload) {
+        const { totalExposure, avgIntensity, maxIntensity, latestIntensity } = data.payload;
+
+        // Update all relevant cards
+        if (latestIntensity !== undefined) updateCardValue('Intensity', latestIntensity);
+        if (avgIntensity !== undefined) updateCardValue('Avg Intensity', avgIntensity);
+        if (maxIntensity !== undefined) updateCardValue('Peak Intensity', maxIntensity);
+        if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
     } catch (err) {
       console.error('BLE message parse error:', err);
@@ -5116,7 +5050,7 @@ window.addEventListener('message', (event) => {
   document.addEventListener('message', handleMessage);
   window.addEventListener('message', handleMessage);
 
-  console.log('BLE Intensity updater initialized');
+  console.log('BLE stat updater initialized');
 })();
 </script>
 

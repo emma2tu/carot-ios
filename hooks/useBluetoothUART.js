@@ -40,6 +40,9 @@ export function useBluetoothUART() {
   // ---- Helper: Base64 decode ----
   const b64ToUtf8 = (b64) => Buffer.from(b64, 'base64').toString('utf8');
 
+  // save daily averages
+  const DAILY_STATS_FILE = FileSystem.documentDirectory + 'daily_stats.json';
+
   // ---- Load saved data (readings + stats) on startup ----
   useEffect(() => {
     (async () => {
@@ -74,6 +77,14 @@ export function useBluetoothUART() {
       return;
     }
 
+    // ---- Auto-trim if log too large ----
+    const MAX_LOG_LENGTH = 10000;
+    const TRIM_SIZE = 2000;
+    if (sensorLogData.length > MAX_LOG_LENGTH) {
+      console.warn(`Sensor log exceeded ${MAX_LOG_LENGTH}. Trimming oldest ${TRIM_SIZE} entries.`);
+      setSensorLogData(prev => prev.slice(TRIM_SIZE)); // remove oldest
+    }
+
     // get current dat (start + end in ms)
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
@@ -95,7 +106,34 @@ export function useBluetoothUART() {
     const maxIntensity = Math.max(...intensities);
     const latestIntensity = intensities[intensities.length - 1];
 
-    setStats({ totalExposure, avgIntensity, maxIntensity, latestIntensity });
+    const newStats = { totalExposure, avgIntensity, maxIntensity, latestIntensity };
+    setStats(newStats);
+
+    // ---- Save or update daily averages file ----
+    (async () => {
+      try {
+        const dateKey = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+        let dailyStats = {};
+
+        const exists = await FileSystem.getInfoAsync(DAILY_STATS_FILE);
+        if (exists.exists) {
+          const text = await FileSystem.readAsStringAsync(DAILY_STATS_FILE);
+          dailyStats = JSON.parse(text);
+        }
+
+        dailyStats[dateKey] = {
+          avgIntensity,
+          totalExposure,
+          maxIntensity,
+          count: todayReadings.length,
+          updatedAt: now.toISOString(),
+        };
+
+        await FileSystem.writeAsStringAsync(DAILY_STATS_FILE, JSON.stringify(dailyStats));
+      } catch (err) {
+        console.warn('⚠️ Failed to save daily stats:', err);
+      }
+    })();
   }, [sensorLogData]);
 
   // ---- Save readings + stats to file ----

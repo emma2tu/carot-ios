@@ -2,7 +2,8 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { BleManager } from 'react-native-ble-plx';
 import { Buffer } from 'buffer';
-import * as SQLite from 'expo-sqlite';
+
+//import * as SQLite from 'expo-sqlite';
 
 // BLE UUIDs and Device Identifier
 const DEVICE_NAME_PREFIX = 'CIRCUITPY1330';
@@ -11,7 +12,7 @@ const TX_CHAR_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; // device → app (
 const RX_CHAR_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e'; // app → device (write)
 
 const manager = new BleManager();
-const db = SQLite.openDatabaseSync('readings.db'); // persistent local DB
+//const db = SQLite.openDatabaseSync('readings.db'); // persistent local DB
 
 export function useBluetoothUART() {
   const [isConnected, setIsConnected] = useState(false);
@@ -38,6 +39,7 @@ export function useBluetoothUART() {
   // ---- Helper: Base64 decode ----
   const b64ToUtf8 = (b64) => Buffer.from(b64, 'base64').toString('utf8');
 
+  /*
   // ---- Initialize database ----
   useEffect(() => {
     db.execSync(`
@@ -49,6 +51,7 @@ export function useBluetoothUART() {
       );
     `);
   }, []);
+  
 
   // ---- Save reading ----
   const saveReading = useCallback((reading) => {
@@ -73,7 +76,7 @@ export function useBluetoothUART() {
 
     setStats({ totalExposure, avgIntensity, maxIntensity });
   }, []);
-
+*/
   // ---- Send text command ----
   const sendCommand = useCallback(async (cmd) => {
     // Prevent overlapping BLE writes

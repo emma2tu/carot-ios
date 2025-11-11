@@ -159,29 +159,6 @@ export default function App() {
         )}
       </View>
 
-      {/* 🔹 Stats summary */}
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 10,
-        backgroundColor: '#eef6ff',
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd'
-      }}>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: '600' }}>Total</Text>
-          <Text>{stats.totalExposure.toFixed(1)} BLU</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: '600' }}>Average</Text>
-          <Text>{stats.avgIntensity.toFixed(1)} BLU</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: '600' }}>Max</Text>
-          <Text>{stats.maxIntensity.toFixed(1)} BLU</Text>
-        </View>
-      </View>
-
       {/* Web content */}
       <WebView
         ref={webref}

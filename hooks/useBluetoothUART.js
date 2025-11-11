@@ -74,7 +74,22 @@ export function useBluetoothUART() {
       return;
     }
 
-    const intensities = sensorLogData.map((r) => r.intensity);
+    // get current dat (start + end in ms)
+    const now = new Date();
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const endOfDay = startOfDay + 24 * 60 * 60 * 1000;
+
+    // Filter only today’s readings
+    const todayReadings = sensorLogData.filter(
+      (r) => r.receivedAt >= startOfDay && r.receivedAt < endOfDay
+    );
+
+    if (todayReadings.length === 0) {
+      setStats({ totalExposure: 0, avgIntensity: 0, maxIntensity: 0, latestIntensity: 0 });
+      return;
+    }
+
+    const intensities = todayReadings.map((r) => r.intensity);
     const totalExposure = intensities.reduce((a, b) => a + b, 0);
     const avgIntensity = totalExposure / intensities.length;
     const maxIntensity = Math.max(...intensities);

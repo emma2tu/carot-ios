@@ -39,8 +39,11 @@
     },
     "plugins": [
       "expo-asset",
-      "react-native-ble-plx"
+      "react-native-ble-plx",
+      "expo-sqlite"
     ],
-    "assetBundlePatterns": ["assets/**"]
+    "assetBundlePatterns": [
+      "assets/**"
+    ]
   }
 }

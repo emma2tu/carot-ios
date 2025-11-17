@@ -72,7 +72,9 @@ export default function App() {
   useEffect(() => {
     if (!webref.current) return;
     webref.current.postMessage(
-      JSON.stringify({ type: 'updateStats', payload: stats })
+      JSON.stringify({ type: 'updateStats', payload: stats,
+        latestIntensity: sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+       })
     );
   }, [stats]);
 
@@ -90,6 +92,12 @@ export default function App() {
     (event) => {
       try {
         const data = JSON.parse(event.nativeEvent.data);
+
+        // 🔹 Handle logs from browser console
+        if (data.type === "log") {
+          console.log("[WEBVIEW LOG]:", ...data.args);
+          return;
+        }
 
         // Try reconnecting the BLE if it's not already connected
         if (!isConnected) {
@@ -150,12 +158,14 @@ export default function App() {
         javaScriptEnabled
         domStorageEnabled
 
-        injectedJavaScript={`
+        injectedJavaScriptBeforeContentLoaded={`
           (function() {
             const oldLog = console.log;
             console.log = function(...args) {
-              window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'log', args }));
-              oldLog(...args);
+              try {
+                window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'log', args }));
+              } catch (e) {}
+              oldLog.apply(null, args);
             };
           })();
           true;

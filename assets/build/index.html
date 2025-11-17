@@ -901,11 +901,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 
                                                                                         children: "Blue Light Exposure" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
                                                                                         children: "Track your daily blue light exposure patterns" })] }), 
+
                                                                                         E.jsxs(aZ, { value: e, onValueChange: t, children: [E.jsx(lZ, { className: "w-28 sm:w-32 flex-shrink-0", 
                                                                                         children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [E.jsx(Kc, { value: "today", children: "Today" }), 
                                                                                         E.jsx(Kc, { value: "week", children: "Week" }), E.jsx(Kc, { value: "month", children: "Month" }), 
                                                                                         E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
                                                                                         children: E.jsxs(QK, { data: n, margin: { top: 5, right: 5, left: -20, bottom: 5 }, children: [E.jsx("defs", { 
+                                                                                        
                                                                                           children: E.jsxs("linearGradient", { id: "colorIntensity", x1: "0", y1: "0", x2: "0", y2: "1", 
                                                                                           children: [E.jsx("stop", { offset: "5%", stopColor: "#6366f1", stopOpacity: .3 }), E.jsx("stop", { offset: "95%", stopColor: "#6366f1", stopOpacity: 0 })] }) }), 
                                                                                           E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "time", stroke: "#6b7280", style: { fontSize: "12px" } }), 
@@ -936,8 +938,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                                                                                                   children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
                                                                                                     className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
                                                                                                     children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Peak Activity Period" }), 
-                                                                                                    E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
+                                                                                                    
+                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
+                                                                                                    children: "Peak Activity Period" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
                                                                                                     children: "Highest blue light exposure detected between 2:00 PM - 4:00 PM today. Consider taking breaks during afternoon work sessions." })] })] }) }), 
                                                                                                     E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-green-200", 
                                                                                                     children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
@@ -1129,7 +1132,128 @@ You can add a description to the \`${Ea}\` by passing a \`${YI}\` component as a
 Alternatively, you can use your own component as a description by assigning it an \`id\` and passing the same value to the \`aria-describedby\` prop in \`${Ea}\`. If the description is confusing or duplicative for sighted users, you can use the \`@radix-ui/react-visually-hidden\` primitive as a wrapper around your description component.
 
 For more information, see https://radix-ui.com/primitives/docs/components/alert-dialog`; return N.useEffect(() => { document.getElementById(e.current?.getAttribute("aria-describedby")) || console.warn(t) }, [t, e]), null
-      }, xJ = qI, wJ = WI, SJ = UI, _J = HI, OJ = VI, PJ = QI, AJ = JI, EJ = KI, TJ = XI; function CJ({ ...e }) { return E.jsx(xJ, { "data-slot": "alert-dialog", ...e }) } function kJ({ ...e }) { return E.jsx(wJ, { "data-slot": "alert-dialog-trigger", ...e }) } function jJ({ ...e }) { return E.jsx(SJ, { "data-slot": "alert-dialog-portal", ...e }) } function NJ({ className: e, ...t }) { return E.jsx(_J, { "data-slot": "alert-dialog-overlay", className: st("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50", e), ...t }) } function MJ({ className: e, ...t }) { return E.jsxs(jJ, { children: [E.jsx(NJ, {}), E.jsx(OJ, { "data-slot": "alert-dialog-content", className: st("bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg", e), ...t })] }) } function IJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-header", className: st("flex flex-col gap-2 text-center sm:text-left", e), ...t }) } function RJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-footer", className: st("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", e), ...t }) } function DJ({ className: e, ...t }) { return E.jsx(EJ, { "data-slot": "alert-dialog-title", className: st("text-lg font-semibold", e), ...t }) } function $J({ className: e, ...t }) { return E.jsx(TJ, { "data-slot": "alert-dialog-description", className: st("text-muted-foreground text-sm", e), ...t }) } function LJ({ className: e, ...t }) { return E.jsx(PJ, { className: st(Ib(), e), ...t }) } function BJ({ className: e, ...t }) { return E.jsx(AJ, { className: st(Ib({ variant: "outline" }), e), ...t }) } function FJ() { const { getStoredReadings: e } = SI(), [t, r] = N.useState(e()), n = () => { localStorage.removeItem("carot-blue-light-readings"), r([]), hk.success("All stored data has been cleared") }, i = () => { const x = JSON.stringify(t, null, 2), w = new Blob([x], { type: "application/json" }), g = URL.createObjectURL(w), y = document.createElement("a"); y.href = g, y.download = `carot-data-${new Date().toISOString().split("T")[0]}.json`, document.body.appendChild(y), y.click(), document.body.removeChild(y), URL.revokeObjectURL(g), hk.success("Data exported successfully") }, a = HZ(t), l = VZ(t), u = GZ(t), c = Gg(a), d = Gg(l), h = Gg(u), v = (JSON.stringify(t).length / 1024).toFixed(2); return E.jsxs("div", { className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", children: [E.jsxs("div", { className: "flex items-center justify-between mb-4 sm:mb-6", children: [E.jsxs("div", { children: [E.jsx("h2", { className: "text-gray-900 mb-1", children: "Data Storage" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", children: "Manage your locally stored blue light readings" })] }), E.jsx(BL, { className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-500" })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6", children: [E.jsxs("div", { className: "p-3 sm:p-4 bg-blue-50 rounded-lg", children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", children: "Total Readings" }), E.jsx("div", { className: "text-gray-900", children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", children: "Storage Used" }), E.jsxs("div", { className: "text-gray-900", children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "Today" }), E.jsxs(Hg, { variant: "secondary", children: [a.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [c.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [c.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "This Month" }), E.jsxs(Hg, { variant: "secondary", children: [u.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [h.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [h.averageIntensity, "%"] })] })] })] })] })] }), E.jsxs(dt, { className: "p-4 sm:p-6", children: [E.jsx("h3", { className: "text-gray-900 mb-3 sm:mb-4", children: "Data Actions" }), E.jsxs("div", { className: "flex flex-col sm:flex-row gap-2 sm:gap-3", children: [E.jsxs(ef, { variant: "outline", onClick: i, disabled: t.length === 0, className: "gap-2 flex-1", children: [E.jsx(zL, { className: "w-4 h-4" }), "Export Data"] }), E.jsxs(CJ, { children: [E.jsx(kJ, { asChild: !0, children: E.jsxs(ef, { variant: "outline", disabled: t.length === 0, className: "gap-2 flex-1 text-red-600 hover:text-red-700", children: [E.jsx(GL, { className: "w-4 h-4" }), "Clear All Data"] }) }), E.jsxs(MJ, { children: [E.jsxs(IJ, { children: [E.jsx(DJ, { children: "Are you sure?" }), E.jsxs($J, { children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), E.jsx(dt, { className: "p-3 sm:p-4 bg-gray-50 border-gray-200", children: E.jsxs("div", { className: "flex gap-2 sm:gap-3", children: [E.jsx(WL, { className: "w-4 h-4 sm:w-5 sm:h-5 text-gray-600 flex-shrink-0 mt-0.5" }), E.jsxs("div", { className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "About Data Storage" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", children: [E.jsx("li", { children: "Data stored locally in your browser (localStorage)" }), E.jsx("li", { children: "Automatically retains last 30 days of readings" }), E.jsx("li", { children: "Data persists across sessions" }), E.jsx("li", { children: "Clearing browser data will delete all readings" }), E.jsx("li", { children: "Export regularly to back up your data" })] })] })] }) })] }) } var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; (i || i === 0) && !gk(i) && console.error(HJ(`${i}`, "Progress")); const u = gk(i) ? i : iw; n !== null && !bk(n, u) && console.error(VJ(`${n}`, "Progress")); const c = bk(n, u) ? n : null, d = ad(c) ? a(c, u) : void 0; return E.jsx(qJ, { scope: r, value: c, max: u, children: E.jsx(Be.div, { "aria-valuemax": u, "aria-valuemin": 0, "aria-valuenow": ad(c) ? c : void 0, "aria-valuetext": d, role: "progressbar", "data-state": nR(c, u), "data-value": c ?? void 0, "data-max": u, ...l, ref: t }) }) }); eR.displayName = nw; var tR = "ProgressIndicator", rR = N.forwardRef((e, t) => { const { __scopeProgress: r, ...n } = e, i = WJ(tR, r); return E.jsx(Be.div, { "data-state": nR(i.value, i.max), "data-value": i.value ?? void 0, "data-max": i.max, ...n, ref: t }) }); rR.displayName = tR; function UJ(e, t) { return `${Math.round(e / t * 100)}%` } function nR(e, t) { return e == null ? "indeterminate" : e === t ? "complete" : "loading" } function ad(e) { return typeof e == "number" } function gk(e) { return ad(e) && !isNaN(e) && e > 0 } function bk(e, t) { return ad(e) && !isNaN(e) && e <= t && e >= 0 } function HJ(e, t) { return `Invalid prop \`max\` of value \`${e}\` supplied to \`${t}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${iw}\`.` } function VJ(e, t) {
+      }, xJ = qI, wJ = WI, SJ = UI, _J = HI, OJ = VI, PJ = QI, AJ = JI, EJ = KI, TJ = XI; 
+      function CJ({ ...e }) { return E.jsx(xJ, { "data-slot": "alert-dialog", ...e }) } 
+      function kJ({ ...e }) { return E.jsx(wJ, { "data-slot": "alert-dialog-trigger", ...e }) } 
+      function jJ({ ...e }) { return E.jsx(SJ, { "data-slot": "alert-dialog-portal", ...e }) } 
+      function NJ({ className: e, ...t }) { 
+        return E.jsx(_J, { "data-slot": "alert-dialog-overlay", 
+        className: st("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50", e), ...t }) } 
+        function MJ({ className: e, ...t }) { return E.jsxs(jJ, { 
+          children: [E.jsx(NJ, {}), E.jsx(OJ, { "data-slot": "alert-dialog-content", 
+          className: st("bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg", e), ...t })] }) } 
+          function IJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-header", 
+          className: st("flex flex-col gap-2 text-center sm:text-left", e), ...t }) } 
+          function RJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-footer", 
+          className: st("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", e), ...t }) } 
+          function DJ({ className: e, ...t }) { return E.jsx(EJ, { "data-slot": "alert-dialog-title", 
+          className: st("text-lg font-semibold", e), ...t }) } function $J({ className: e, ...t }) { 
+            return E.jsx(TJ, { "data-slot": "alert-dialog-description", className: st("text-muted-foreground text-sm", e), ...t }) } 
+            function LJ({ className: e, ...t }) { return E.jsx(PJ, { className: st(Ib(), e), ...t }) } 
+            function BJ({ className: e, ...t }) { return E.jsx(AJ, { className: st(Ib({ variant: "outline" }), e), ...t }) } 
+            function FJ() { const { getStoredReadings: e } = SI(), [t, r] = N.useState(e()), n = () => { 
+              localStorage.removeItem("carot-blue-light-readings"), r([]), hk.success("All stored data has been cleared") }, 
+              i = () => { const x = JSON.stringify(t, null, 2), w = new Blob([x], { type: "application/json" }), 
+              g = URL.createObjectURL(w), y = document.createElement("a"); y.href = g, y.download = `carot-data-${new Date().toISOString().split("T")[0]}.json`, 
+              document.body.appendChild(y), y.click(), document.body.removeChild(y), URL.revokeObjectURL(g), 
+              hk.success("Data exported successfully") }, a = HZ(t), l = VZ(t), u = GZ(t), c = Gg(a), d = Gg(l), 
+              h = Gg(u), v = (JSON.stringify(t).length / 1024).toFixed(2); return E.jsxs("div", { 
+                className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", 
+                children: [E.jsxs("div", { className: "flex items-center justify-between mb-4 sm:mb-6", children: [
+                  
+                E.jsxs("div", { children: [E.jsx("h2", { className: "text-gray-900 mb-1", 
+                children: "Data Storage" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
+                children: "Manage your locally stored blue light readings" })] }), E.jsx(BL, { 
+                  className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-500" })] }), E.jsxs("div", { 
+                    className: "grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6", children: [E.jsxs("div", { 
+                      className: "p-3 sm:p-4 bg-blue-50 rounded-lg", children: [
+                        
+                      E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
+                      children: "Total Readings" }), E.jsx("div", { className: "text-gray-900", 
+                      children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", 
+                      
+                      children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
+                      children: "Storage Used" }), E.jsxs("div", { className: "text-gray-900", 
+                      children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", 
+                      children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", 
+                      children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", 
+
+                      children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                      children: "Today" }), E.jsxs(Hg, { variant: "secondary", children: [a.length, " readings"] })] }), 
+                      E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                        
+                      E.jsxs("div", { className: "text-gray-600", 
+                      children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [c.totalHours, "h"] })] }), 
+                      
+                      E.jsxs("div", { className: "text-gray-600", 
+                      children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [c.averageIntensity, "%"] })] })] })] }), 
+                      E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [
+                        E.jsxs("div", { className: "flex items-center justify-between mb-2", 
+                        children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                        children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), 
+                        
+                        E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { 
+                          className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", 
+                          children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", 
+                          children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", 
+                          children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { 
+                            className: "p-3 sm:p-4 border rounded-lg", children: [
+                              
+                            E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
+                              E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                              children: "This Month" }), E.jsxs(Hg, { variant: "secondary", 
+                              children: [u.length, " readings"] })] }), 
+                              
+                              E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                              E.jsxs("div", { className: "text-gray-600", children: ["Total: ", 
+                              E.jsxs("span", { className: "text-gray-900", children: [h.totalHours, "h"] })] }), 
+                              
+                              E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", 
+                              E.jsxs("span", { className: "text-gray-900", children: [h.averageIntensity, "%"] })] })] })] })] })] }), 
+                              
+                              E.jsxs(dt, { className: "p-4 sm:p-6", children: [
+                                E.jsx("h3", { className: "text-gray-900 mb-3 sm:mb-4", 
+                                children: "Data Actions" }), E.jsxs("div", { className: "flex flex-col sm:flex-row gap-2 sm:gap-3", 
+                                children: [E.jsxs(ef, { variant: "outline", onClick: i, disabled: t.length === 0, 
+                                className: "gap-2 flex-1", children: [
+                                  E.jsx(zL, { className: "w-4 h-4" }), "Export Data"] }), 
+                                  E.jsxs(CJ, { children: [E.jsx(kJ, { asChild: !0, children: 
+                                    E.jsxs(ef, { variant: "outline", disabled: t.length === 0, 
+                                    className: "gap-2 flex-1 text-red-600 hover:text-red-700", children: [
+                                      
+                                    E.jsx(GL, { className: "w-4 h-4" }), "Clear All Data"] }) }), 
+                                    E.jsxs(MJ, { children: [E.jsxs(IJ, { children: [E.jsx(DJ, { 
+                                      children: "Are you sure?" }), E.jsxs($J, { 
+                                        children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), 
+                                        E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, 
+                                          className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), E.jsx(dt, { 
+                                            className: "p-3 sm:p-4 bg-gray-50 border-gray-200", children: E.jsxs("div", { 
+                                              className: "flex gap-2 sm:gap-3", children: [E.jsx(WL, { className: "w-4 h-4 sm:w-5 sm:h-5 text-gray-600 flex-shrink-0 mt-0.5" }), 
+                                              
+                                              E.jsxs("div", { className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
+                                              children: "About Data Storage" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", children: [
+                                                E.jsx("li", { children: "Data stored locally in your browser (localStorage)" }), 
+                                                E.jsx("li", { children: "Automatically retains last 30 days of readings" }), 
+                                                E.jsx("li", { children: "Data persists across sessions" }), 
+                                                E.jsx("li", { children: "Clearing browser data will delete all readings" }), 
+                                                E.jsx("li", { children: "Export regularly to back up your data" })] })] })] }) })] }) } 
+                                                
+                                                var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, 
+                                                  value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; 
+                                                  (i || i === 0) && !gk(i) && console.error(HJ(`${i}`, "Progress")); 
+                                                  const u = gk(i) ? i : iw; n !== null && !bk(n, u) && console.error(VJ(`${n}`, "Progress")); 
+                                                  const c = bk(n, u) ? n : null, d = ad(c) ? a(c, u) : void 0; return E.jsx(qJ, { scope: r, value: c, max: u, 
+                                                    children: E.jsx(Be.div, { "aria-valuemax": u, "aria-valuemin": 0, "aria-valuenow": ad(c) ? c : void 0, 
+                                                    "aria-valuetext": d, role: "progressbar", "data-state": nR(c, u), "data-value": c ?? void 0, "data-max": u, ...l, 
+                                                    ref: t }) }) }); eR.displayName = nw; var tR = "ProgressIndicator", rR = N.forwardRef((e, t) => { const { __scopeProgress: r, ...n } = e, 
+                                                    i = WJ(tR, r); return E.jsx(Be.div, { "data-state": nR(i.value, i.max), "data-value": i.value ?? void 0, 
+                                                    "data-max": i.max, ...n, ref: t }) }); rR.displayName = tR; function UJ(e, t) { return `${Math.round(e / t * 100)}%` } 
+                                                    function nR(e, t) { return e == null ? "indeterminate" : e === t ? "complete" : "loading" } 
+                                                    function ad(e) { return typeof e == "number" } function gk(e) { return ad(e) && !isNaN(e) && e > 0 } 
+                                                    function bk(e, t) { return ad(e) && !isNaN(e) && e <= t && e >= 0 } 
+                                                    function HJ(e, t) { return `Invalid prop \`max\` of value \`${e}\` supplied to \`${t}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${iw}\`.` } 
+                                                    function VJ(e, t) {
+
         return `Invalid prop \`value\` of value \`${e}\` supplied to \`${t}\`. The \`value\` prop must be:
   - a positive number
   - less than the value passed to \`max\` (or ${iw} if no \`max\` prop is set)
@@ -5623,6 +5747,112 @@ function XJ({ className: e = "w-10 h-10" }) {
   window.addEventListener('message', handleMessage);
 
   console.log('BLE stat updater initialized');
+})();
+</script>
+
+<script>
+// 🔵 GLOBAL: This will be replaced after React mounts
+window.updateTodayData = (entry) => {
+  console.log("updateTodayData called before React ready");
+};
+
+(function() {
+
+  // A global array holding today's real-time readings
+  window.liveTodayData = [];
+
+  // Utility: format timestamp → "HH:MM"
+  function formatTime(ts) {
+    const d = new Date(ts);
+    return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+  }
+
+  // React Native → WebView messages
+  window.addEventListener("message", event => {
+    try {
+      const msg = JSON.parse(event.data);
+
+      // when RN sends new data
+      if (msg.type === "updateStats" && msg.payload?.latestIntensity != null) {
+
+        const entry = {
+          time: formatTime(Date.now()),
+          intensity: msg.payload.latestIntensity
+        };
+
+        // push to live chart buffer
+        window.liveTodayData.push(entry);
+
+        console.log("Live data", window.liveTodayData);
+
+
+        // keep chart small (optional)
+        if (window.liveTodayData.length > 200) {
+          window.liveTodayData.shift();
+        }
+
+        // poke the React component to update
+        if (window.updateTodayChart) {
+          window.updateTodayChart(window.liveTodayData);
+        }
+      }
+
+    } catch(e) {
+      console.error("bad RN msg", e);
+    }
+  });
+
+})();
+</script>
+
+<script>
+/* --- STEP 2: Hook React's internal state setter for "today" chart --- */
+(function() {
+
+  const interval = setInterval(() => {
+    const rootDiv = document.querySelector("#root");
+
+    if (!rootDiv || !rootDiv._reactRootContainer) return;
+
+    try {
+      const root = rootDiv._reactRootContainer._internalRoot;
+      let found = null;
+
+      // recursively walk react fibers
+      function walk(fiber) {
+        if (!fiber) return;
+
+        const st = fiber.memoizedState;
+
+        // We look for a state that holds an array → the TODAY chart’s data array
+        if (st && st.queue && Array.isArray(st.baseState)) {
+          found = st;
+        }
+
+        walk(fiber.child);
+        walk(fiber.sibling);
+      }
+
+      walk(root.current);
+
+      if (found) {
+        clearInterval(interval);
+        console.log("🔥 React state for TODAY chart patched");
+
+        window.updateTodayChart = function(newData) {
+          found.queue.dispatch({
+            payload: newData,
+            action: 0,
+          });
+        };
+      }
+
+    } catch (err) {
+      console.error("fiber scan error", err);
+    }
+
+  }, 500);
+
 })();
 </script>
 

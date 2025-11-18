@@ -87,6 +87,7 @@ export default function App() {
     }
   }, [isConnected]);
 
+/*
   // Handle connection requests from WebView
   const onMessage = useCallback(
     (event) => {
@@ -104,17 +105,42 @@ export default function App() {
           console.log('[BLE] Attempting to connect...');
           // this triggers your scan + connect flow
           connectAndListen && connectAndListen();
-        } /*
+        } 
+        /*
         else {
           console.log('[BLE] Already connected — sending HELLO');
           sendCommand('HELLO');
-        }*/
+        }
+
       } catch (err) {
         console.error('[WebView] Failed to handle message:', err);
       }
     },
     [isConnected, connectAndListen, sendCommand]
   );
+  */
+
+  const onMessage = useCallback(
+  (event) => {
+    try {
+      const data = JSON.parse(event.nativeEvent.data);
+
+      // 💡 Ignore console.log messages coming from WebView
+      if (data.type === 'log') return;
+
+      // 💡 Only connect when WebView explicitly asks
+      if (data.type === 'connectBluetooth') {
+        console.log('[BLE] connectBluetooth request from WebView');
+        connectAndListen && connectAndListen();
+        return;
+      }
+
+    } catch (err) {
+      console.error('[WebView] Failed to handle message:', err);
+    }
+  },
+  [connectAndListen]
+);
 
   // 🔹 Show loading indicator while HTML loads
   if (!html || !baseDir) {

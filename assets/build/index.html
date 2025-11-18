@@ -1173,7 +1173,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/alert-
                       children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", 
                       
                       children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
-                      children: "Storage Used" }), E.jsxs("div", { className: "text-gray-900", 
+                      children: "Storage Used (KB)" }), E.jsxs("div", { className: "text-gray-900", 
                       children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", 
                       children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", 
                       children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", 
@@ -1192,8 +1192,9 @@ For more information, see https://radix-ui.com/primitives/docs/components/alert-
                         children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
                         children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), 
                         
-                        E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { 
-                          className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", 
+                        E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                          E.jsxs("div", { className: "text-gray-600", 
+                          children: ["Total: ", E.jsxs("span", { className: "text-gray-900", 
                           children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", 
                           children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", 
                           children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { 
@@ -5728,15 +5729,36 @@ function XJ({ className: e = "w-10 h-10" }) {
   function handleMessage(event) {
     try {
       const data = JSON.parse(event.data);
-      if (data.type === 'updateStats' && data.payload) {
-        const { totalExposure, avgIntensity, maxIntensity, latestIntensity } = data.payload;
 
+      if (data.type === 'updateStats' && data.payload) {
+        const { totalExposure, avgIntensity, maxIntensity, latestIntensity, numberReadings } = data.payload;
+
+        
         // Update all relevant cards
         if (latestIntensity !== undefined) updateCardValue('Intensity', latestIntensity);
         if (avgIntensity !== undefined) updateCardValue('Avg Intensity', avgIntensity);
         if (maxIntensity !== undefined) updateCardValue('Peak Intensity', maxIntensity);
         if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
+
+      if (data.type === 'storageStats' && data.payload) {
+        const { sizeKB, totalReadings } = data.payload;
+
+        if (sizeKB !== undefined) updateCardValue('Storage Used (KB)', sizeKB);
+        if (totalReadings !== undefined) updateCardValue('Total Readings', totalReadings);
+
+      }
+
+      /*
+      if (data.type === 'timeRangeStats' && data.payload) {
+        const { readingsToday, readingsWeek, readingsMonth } = data.payload;
+
+        if (readingsToday !== undefined) updateCardValue('Total Today', readingsToday);
+        if (readingsWeek !== undefined) updateCardValue('Total This Week', readingsWeek);
+        if (readingsMonth !== undefined) updateCardValue('Total This Month', readingsMonth);
+
+      }
+      */
     } catch (err) {
       console.error('BLE message parse error:', err);
     }

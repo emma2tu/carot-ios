@@ -2,17 +2,14 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { BleManager } from 'react-native-ble-plx';
 import { Buffer } from 'buffer';
-
 import * as FileSystem from 'expo-file-system/legacy';
-//import * as SQLite from 'expo-sqlite';
 
 const DATA_FILE = FileSystem.documentDirectory + 'sensor_data.json';
+const DAILY_STATS_FILE = FileSystem.documentDirectory + 'daily_stats.json';
 
-// BLE UUIDs and Device Identifier
-const DEVICE_NAME_PREFIX = 'CIRCUITPY1330';
 const SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const TX_CHAR_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; // device → app (notify)
-const RX_CHAR_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e'; // app → device (write)
+const TX_CHAR_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const RX_CHAR_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 
 const manager = new BleManager();
 
@@ -24,79 +21,97 @@ export function useBluetoothUART() {
   const [statusLogData, setStatusLogData] = useState([]);
   const [error, setError] = useState(null);
 
-  // 🧮 Computed stats (now persisted too)
   const [stats, setStats] = useState({
     totalExposure: 0,
     avgIntensity: 0,
     maxIntensity: 0,
+    latestIntensity: 0,
+    numberReadings: 0,
+  });
+
+  // ⭐ NEW: instant storage stats
+  const [storageStats, setStorageStats] = useState({
+    sizeKB: 0,
+    totalReadings: 0,
+  });
+
+  // ⭐ NEW: Day / Week / Month reading counters
+  const [timeRangeStats, setTimeRangeStats] = useState({
+    readingsToday: 0,
+    readingsWeek: 0,
+    readingsMonth: 0,
   });
 
   const txCharRef = useRef(null);
   const rxCharRef = useRef(null);
-  const deviceRef = useRef(null);
   const activeCommandRef = useRef(null);
   const lineBufferRef = useRef('');
+  const deviceRef = useRef(null);
 
-  // ---- Helper: Base64 decode ----
   const b64ToUtf8 = (b64) => Buffer.from(b64, 'base64').toString('utf8');
 
-  // save daily averages
-  const DAILY_STATS_FILE = FileSystem.documentDirectory + 'daily_stats.json';
-
-  // ---- Load saved data (readings + stats) on startup ----
+  // ------------------------------
+  // Load existing data on startup
+  // ------------------------------
   useEffect(() => {
     (async () => {
       try {
+        console.log("[INIT] Loading saved data...");
         const exists = await FileSystem.getInfoAsync(DATA_FILE);
         if (exists.exists) {
           const text = await FileSystem.readAsStringAsync(DATA_FILE);
           const saved = JSON.parse(text);
 
-          // Support both new + old format
           if (Array.isArray(saved)) {
             setSensorLogData(saved);
-            console.log(`📂 Loaded ${saved.length} legacy readings`);
+            console.log(`[INIT] Loaded ${saved.length} legacy readings`);
           } else {
-            if (saved.readings) setSensorLogData(saved.readings);
+            if (saved.readings) {
+              console.log(`[INIT] Loaded ${saved.readings.length} readings`);
+              setSensorLogData(saved.readings);
+            }
             if (saved.stats) setStats(saved.stats);
-            console.log(
-              `📂 Loaded ${saved.readings?.length || 0} readings and stats from local file`
-            );
           }
         }
       } catch (err) {
-        console.warn('⚠️ Failed to load saved data:', err);
+        console.warn('[ERROR] Failed to load saved data:', err);
       }
     })();
   }, []);
 
-  // ---- Compute stats every time readings update ----
+  // ------------------------------
+  // Recompute stats when data updates
+  // ------------------------------
   useEffect(() => {
-    if (!sensorLogData || sensorLogData.length === 0) {
-      setStats({ totalExposure: 0, avgIntensity: 0, maxIntensity: 0, latestIntensity: 0, });
+    if (!sensorLogData.length) {
+      setStats({
+        totalExposure: 0,
+        avgIntensity: 0,
+        maxIntensity: 0,
+        latestIntensity: 0,
+        numberReadings: 0,
+      });
+      console.log("[STATS] No readings — stats reset");
       return;
     }
 
-    // ---- Auto-trim if log too large ----
-    const MAX_LOG_LENGTH = 10000;
-    const TRIM_SIZE = 2000;
-    if (sensorLogData.length > MAX_LOG_LENGTH) {
-      console.warn(`Sensor log exceeded ${MAX_LOG_LENGTH}. Trimming oldest ${TRIM_SIZE} entries.`);
-      setSensorLogData(prev => prev.slice(TRIM_SIZE)); // remove oldest
-    }
-
-    // get current dat (start + end in ms)
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    const endOfDay = startOfDay + 24 * 60 * 60 * 1000;
+    const endOfDay = startOfDay + 86400000;
 
-    // Filter only today’s readings
     const todayReadings = sensorLogData.filter(
       (r) => r.receivedAt >= startOfDay && r.receivedAt < endOfDay
     );
 
-    if (todayReadings.length === 0) {
-      setStats({ totalExposure: 0, avgIntensity: 0, maxIntensity: 0, latestIntensity: 0 });
+    if (!todayReadings.length) {
+      setStats({
+        totalExposure: 0,
+        avgIntensity: 0,
+        maxIntensity: 0,
+        latestIntensity: 0,
+        numberReadings: 0,
+      });
+      console.log("[STATS] No readings today — stats reset");
       return;
     }
 
@@ -106,19 +121,26 @@ export function useBluetoothUART() {
     const maxIntensity = Math.max(...intensities);
     const latestIntensity = intensities[intensities.length - 1];
 
-    const newStats = { totalExposure, avgIntensity, maxIntensity, latestIntensity };
-    setStats(newStats);
+    const newStats = {
+      totalExposure,
+      avgIntensity,
+      maxIntensity,
+      latestIntensity,
+      numberReadings: intensities.length,
+    };
 
-    // ---- Save or update daily averages file ----
+    setStats(newStats);
+    console.log(`[STATS] Updated: latest=${latestIntensity}, count=${intensities.length}`);
+
+    // Save daily stats
     (async () => {
       try {
-        const dateKey = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+        const dateKey = now.toISOString().slice(0, 10);
         let dailyStats = {};
 
         const exists = await FileSystem.getInfoAsync(DAILY_STATS_FILE);
         if (exists.exists) {
-          const text = await FileSystem.readAsStringAsync(DAILY_STATS_FILE);
-          dailyStats = JSON.parse(text);
+          dailyStats = JSON.parse(await FileSystem.readAsStringAsync(DAILY_STATS_FILE));
         }
 
         dailyStats[dateKey] = {
@@ -130,246 +152,322 @@ export function useBluetoothUART() {
         };
 
         await FileSystem.writeAsStringAsync(DAILY_STATS_FILE, JSON.stringify(dailyStats));
+        console.log("[STATS] Daily stats saved");
       } catch (err) {
         console.warn('⚠️ Failed to save daily stats:', err);
       }
     })();
   }, [sensorLogData]);
 
-  // ---- Save readings + stats to file ----
+  // ------------------------------
+  // ⭐ NEW: Synchronous storage stats calculation
+  // ------------------------------
+  useEffect(() => {
+    const json = JSON.stringify(sensorLogData);
+    const sizeBytes = json.length;
+    const sizeKB = sizeBytes / 1024;
+
+    const updated = {
+      sizeKB,
+      totalReadings: sensorLogData.length,
+    };
+
+    setStorageStats(updated);
+    console.log(
+      `[STORAGE] size=${updated.sizeKB.toFixed(1)} KB, total=${updated.totalReadings} readings`
+    );
+  }, [sensorLogData]);
+
+  // ⭐ NEW: compute readingsToday, readingsWeek, readingsMonth
+  useEffect(() => {
+    if (!sensorLogData.length) {
+      setTimeRangeStats({
+        readingsToday: 0,
+        readingsWeek: 0,
+        readingsMonth: 0,
+      });
+      return;
+    }
+
+    const now = new Date();
+
+    // DAY
+    const startDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const endDay = startDay + 86400000;
+
+    // WEEK
+    const day = now.getDay();
+    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+    const monday = new Date(now.setDate(diff));
+    const startWeek = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()).getTime();
+    const endWeek = startWeek + 7 * 86400000;
+
+    // MONTH
+    const startMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+    const endMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1).getTime();
+
+    const readingsToday = sensorLogData.filter(
+      (r) => r.receivedAt >= startDay && r.receivedAt < endDay
+    ).length;
+
+    const readingsWeek = sensorLogData.filter(
+      (r) => r.receivedAt >= startWeek && r.receivedAt < endWeek
+    ).length;
+
+    const readingsMonth = sensorLogData.filter(
+      (r) => r.receivedAt >= startMonth && r.receivedAt < endMonth
+    ).length;
+
+    setTimeRangeStats({
+      readingsToday,
+      readingsWeek,
+      readingsMonth,
+    });
+
+    console.log(
+      `[TIME-STATS] today=${readingsToday}, week=${readingsWeek}, month=${readingsMonth}`
+    );
+
+  }, [sensorLogData]);
+
+
+  // ------------------------------
+  // Persist everything
+  // ------------------------------
   useEffect(() => {
     (async () => {
       try {
-        const payload = JSON.stringify({
-          readings: sensorLogData,
-          stats,
-        });
-        await FileSystem.writeAsStringAsync(DATA_FILE, payload);
+        await FileSystem.writeAsStringAsync(
+          DATA_FILE,
+          JSON.stringify({ readings: sensorLogData, stats })
+        );
+        console.log("[SAVE] Sensor data persisted");
       } catch (err) {
-        console.warn('⚠️ Failed to save sensor data:', err);
+        console.warn('[ERROR] Failed to save sensor data:', err);
       }
     })();
   }, [sensorLogData, stats]);
 
-  // ---- Optional: Clear saved data ----
+  // ------------------------------
+  // Time filtering helpers
+  // ------------------------------
+  const getDataByDay = useCallback((date) => {
+    const d = new Date(date);
+    const start = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const end = start + 86400000;
+    return sensorLogData.filter((r) => r.receivedAt >= start && r.receivedAt < end);
+  }, [sensorLogData]);
+
+  const getDataByWeek = useCallback((date) => {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    const monday = new Date(d.setDate(diff));
+    const start = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()).getTime();
+    const end = start + 7 * 86400000;
+    return sensorLogData.filter((r) => r.receivedAt >= start && r.receivedAt < end);
+  }, [sensorLogData]);
+
+  const getDataByMonth = useCallback((date) => {
+    const d = new Date(date);
+    const start = new Date(d.getFullYear(), d.getMonth(), 1).getTime();
+    const end = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime();
+    return sensorLogData.filter((r) => r.receivedAt >= start && r.receivedAt < end);
+  }, [sensorLogData]);
+
+  const getSortedReadings = useCallback(() => {
+    return [...sensorLogData].sort((a, b) => b.receivedAt - a.receivedAt);
+  }, [sensorLogData]);
+
+  // ------------------------------
+  // Clear storage
+  // ------------------------------
   const clearSavedData = useCallback(async () => {
     try {
       await FileSystem.deleteAsync(DATA_FILE, { idempotent: true });
       setSensorLogData([]);
-      setStats({ totalExposure: 0, avgIntensity: 0, maxIntensity: 0 });
-      console.log('🗑️ Cleared saved sensor data + stats');
+      setStats({});
+      console.log('[DATA] All saved data cleared');
     } catch (err) {
-      console.warn('⚠️ Failed to clear data:', err);
+      console.warn('[ERROR] Failed to clear data:', err);
     }
   }, []);
 
-  // ---- BLE send command ----
+  // ------------------------------
+  // Send BLE command
+  // ------------------------------
   const sendCommand = useCallback(async (cmd) => {
-    if (activeCommandRef.current) {
-      console.log(`[BLE] Skipping command ${cmd} – ${activeCommandRef.current} still running`);
-      return;
-    }
-
-    if (!rxCharRef.current) {
-      console.warn('[BLE] No RX characteristic ready');
-      return;
-    }
+    if (activeCommandRef.current) return;
+    if (!rxCharRef.current) return;
 
     activeCommandRef.current = cmd;
     console.log(`[BLE] Sending command: ${cmd}`);
 
     try {
-      const base64 = Buffer.from(cmd + '\n', 'utf8').toString('base64');
+      const base64 = Buffer.from(cmd + '\n').toString('base64');
       await rxCharRef.current.writeWithResponse(base64);
 
-      const timeoutMs = cmd === 'CLEAR' ? 2000 : 6000;
       setTimeout(() => {
         if (activeCommandRef.current === cmd) {
-          console.log(`[BLE] ${cmd} timed out — resetting active command`);
           activeCommandRef.current = null;
+          console.log(`[BLE] ${cmd} timed out`);
         }
-      }, timeoutMs);
+      }, 6000);
     } catch (err) {
-      console.error(`[BLE] Failed to send ${cmd}:`, err);
+      console.error('[ERROR] BLE write error:', err);
       activeCommandRef.current = null;
     }
   }, []);
 
   const clearLog = useCallback(() => sendCommand('CLEAR'), [sendCommand]);
 
-  // ---- Handle incoming TX data ----
+  // ------------------------------
+  // Handle BLE incoming data
+  // ------------------------------
   const handleTX = useCallback(
     (text) => {
-      const cmd = activeCommandRef.current;
       const now = Date.now();
-      const looksLikeReading = /^\d+,\d+/.test(text.trim());
+      const cmd = activeCommandRef.current;
 
+      const looksLikeReading = /^\d+,\d+/.test(text.trim());
       if (cmd === 'GET' || looksLikeReading) {
         const readings = text
           .split('\n')
           .map((line) => {
-            const [tsStr, intensityStr] = line.trim().split(',');
-            const ts = Number(tsStr);
-            const intensity = Number(intensityStr);
+            const [ts, val] = line.trim().split(',');
+            if (!ts || !val) return null;
 
-            if (isNaN(ts) || isNaN(intensity)) return null;
-            return { deviceTimestamp: ts, intensity, receivedAt: now };
+            return {
+              deviceTimestamp: Number(ts),
+              intensity: Number(val),
+              receivedAt: now,
+            };
           })
           .filter(Boolean);
 
-        if (readings.length > 0) {
-          console.log('Parsed readings:', readings);
+        if (readings.length) {
+          console.log(`[DATA] Received ${readings.length} readings`);
           setSensorLogData((prev) => [...prev, ...readings]);
           return;
         }
       }
 
-      if (
-        text.toUpperCase().includes('END') ||
-        text.toUpperCase().includes('ERROR') ||
-        text.toUpperCase().includes('CLEARED')
-      ) {
-        console.log(`${cmd} complete — resetting active command`);
+      if (/END|ERROR|CLEARED/i.test(text)) {
+        console.log(`[BLE] Command ${cmd} complete`);
         activeCommandRef.current = null;
-
-        if (cmd && cmd !== 'CLEAR' && activeCommandRef.current !== 'CLEAR') {
-          console.log('Sending CLEAR after', cmd);
-          clearLog();
-        }
+        if (cmd !== 'CLEAR') clearLog();
         return;
       }
 
-      const entry = { timestamp: now, command: cmd, text: text.trim() };
-      setStatusLogData((prev) => [...prev, entry]);
+      setStatusLogData((prev) => [
+        ...prev,
+        { timestamp: now, command: cmd, text: text.trim() },
+      ]);
     },
     [clearLog]
   );
 
-  // ---- Connect & discover services ----
+  // ------------------------------
+  // Scan + connect
+  // ------------------------------
   const connectAndListen = useCallback(async () => {
-    console.log('[BLE] Starting scan...');
-    if (['connecting', 'connected', 'scanning'].includes(connectionState)) {
-      console.log('[BLE] Already scanning or connecting — skipping new attempt');
-      return;
-    }
-
+    console.log('[BLE] Scanning...');
     setIsScanning(true);
     setConnectionState('scanning');
-    setError(null);
-
-    const state = await manager.state();
-    if (state !== 'PoweredOn') {
-      console.warn('[BLE] Bluetooth not ready.');
-      setConnectionState('idle');
-      setIsScanning(false);
-      return;
-    }
 
     manager.startDeviceScan([SERVICE_UUID], null, (err, device) => {
       if (err) {
-        console.error('[BLE] Scan error:', err);
-        setError(err.message);
-        setConnectionState('idle');
+        console.error('[ERROR] Scan error:', err);
         setIsScanning(false);
         return;
       }
 
       if (!device) return;
 
-      const matchesByService =
-        device?.serviceUUIDs?.includes(SERVICE_UUID.toUpperCase()) ||
-        device?.serviceUUIDs?.includes(SERVICE_UUID.toLowerCase());
+      const matches =
+        device.serviceUUIDs?.includes(SERVICE_UUID.toLowerCase()) ||
+        device.serviceUUIDs?.includes(SERVICE_UUID.toUpperCase());
 
-      if (matchesByService) {
-        console.log('[BLE] Matched target device:', device.name || device.id);
-        manager.stopDeviceScan();
-        setIsScanning(false);
-        setConnectionState('connecting');
+      if (!matches) return;
 
-        (async () => {
-          try {
-            await device.cancelConnection().catch(() => {});
-            await new Promise((r) => setTimeout(r, 800));
+      console.log('[BLE] Device matched:', device.name || device.id);
 
-            const connected = await device.connect({ autoConnect: true });
-            await connected.discoverAllServicesAndCharacteristics();
+      manager.stopDeviceScan();
+      setIsScanning(false);
+      setConnectionState('connecting');
 
-            deviceRef.current = connected;
-            setIsConnected(true);
-            setConnectionState('connected');
+      (async () => {
+        try {
+          console.log('[BLE] Connecting...');
+          const connected = await device.connect();
+          await connected.discoverAllServicesAndCharacteristics();
 
-            const services = await connected.services();
-            for (const s of services) {
-              const chars = await connected.characteristicsForService(s.uuid);
-              for (const c of chars) {
-                if (c.uuid.toLowerCase() === TX_CHAR_UUID.toLowerCase()) txCharRef.current = c;
-                if (c.uuid.toLowerCase() === RX_CHAR_UUID.toLowerCase()) rxCharRef.current = c;
-              }
+          console.log('[BLE] Connected!');
+          deviceRef.current = connected;
+          setIsConnected(true);
+          setConnectionState('connected');
+
+          const services = await connected.services();
+          for (const s of services) {
+            const chars = await connected.characteristicsForService(s.uuid);
+            for (const c of chars) {
+              if (c.uuid.toLowerCase() === TX_CHAR_UUID.toLowerCase()) txCharRef.current = c;
+              if (c.uuid.toLowerCase() === RX_CHAR_UUID.toLowerCase()) rxCharRef.current = c;
             }
+          }
 
-            if (!txCharRef.current || !rxCharRef.current) {
-              console.error('[BLE] Missing TX or RX characteristic');
-              setConnectionState('disconnected');
+          sendCommand('HELLO');
+
+          txCharRef.current.monitor((error, characteristic) => {
+            if (error) {
+              console.error('[ERROR] Notify error:', error);
               return;
             }
 
-            console.log('[BLE] Sending initial HELLO');
-            await sendCommand('HELLO');
+            const text = b64ToUtf8(characteristic.value);
+            lineBufferRef.current += text;
 
-            txCharRef.current.monitor((error, characteristic) => {
-              if (error) {
-                console.error('[BLE] Notify error:', error);
-                return;
-              }
+            let idx;
+            while ((idx = lineBufferRef.current.indexOf('\n')) !== -1) {
+              const line = lineBufferRef.current.slice(0, idx);
+              lineBufferRef.current = lineBufferRef.current.slice(idx + 1);
+              handleTX(line);
+            }
+          });
 
-              const text = b64ToUtf8(characteristic.value);
-              lineBufferRef.current += text;
-
-              let idx;
-              while ((idx = lineBufferRef.current.indexOf('\n')) !== -1) {
-                const line = lineBufferRef.current.slice(0, idx);
-                lineBufferRef.current = lineBufferRef.current.slice(idx + 1);
-                handleTX(line);
-              }
-            });
-
-            connected.onDisconnected(() => {
-              console.warn('[BLE] Disconnected');
-              setIsConnected(false);
-              setConnectionState('disconnected');
-              txCharRef.current = null;
-              rxCharRef.current = null;
-              setTimeout(() => {
-                if (!['connected', 'connecting'].includes(connectionState)) {
-                  connectAndListen();
-                }
-              }, 4000);
-            });
-          } catch (e) {
-            console.error('[BLE] Connection error:', e);
-            setError(e.message);
+          connected.onDisconnected(() => {
+            console.warn('[BLE] Disconnected!');
+            setIsConnected(false);
             setConnectionState('disconnected');
-            setIsScanning(false);
-          }
-        })();
-      }
+          });
+        } catch (e) {
+          console.error('[ERROR] Connection error:', e);
+        }
+      })();
     });
-  }, [handleTX, connectionState]);
+  }, [handleTX, sendCommand]);
 
-  // ---- Auto-trigger periodic GET ----
+  // ------------------------------
+  // Auto GET every 7 seconds
+  // ------------------------------
   useEffect(() => {
-    const interval = setInterval(() => {
+    const t = setInterval(() => {
       if (isConnected && !activeCommandRef.current) {
+        console.log('[BLE] Auto GET');
         sendCommand('GET');
       }
     }, 7000);
-    return () => clearInterval(interval);
+    return () => clearInterval(t);
   }, [isConnected, sendCommand]);
 
-  // ---- Cleanup ----
+  // ------------------------------
+  // Cleanup BLE
+  // ------------------------------
   useEffect(() => () => manager.destroy(), []);
 
-  // ---- Return values ----
+  // ------------------------------
+  // Return API
+  // ------------------------------
   return {
     isConnected,
     isScanning,
@@ -377,10 +475,20 @@ export function useBluetoothUART() {
     sensorLogData,
     statusLogData,
     error,
+
+    stats,
+    storageStats,   // ⭐ NEW — used like stats
+
     sendCommand,
     clearLog,
     clearSavedData,
     connectAndListen,
-    stats, // persisted + recomputed stats
+
+    getSortedReadings,
+    getDataByDay,
+    getDataByWeek,
+    getDataByMonth,
+
+    timeRangeStats
   };
 }

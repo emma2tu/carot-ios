@@ -22,11 +22,21 @@ export default function App() {
     sensorLogData,
     statusLogData,
     error,
+
+    stats,
+    storageStats,    // ⭐ UPDATED: instant storage metrics
+
     sendCommand,
     clearLog,
     clearSavedData,
     connectAndListen,
-    stats, // exported live stats
+
+    getSortedReadings,
+    getDataByDay,
+    getDataByWeek,
+    getDataByMonth,
+
+    timeRangeStats
   } = useBluetoothUART();
 
   useEffect(() => {
@@ -77,6 +87,25 @@ export default function App() {
        })
     );
   }, [stats]);
+
+  // send storage stats
+  useEffect(() => {
+    if (!webref.current) return;
+    webref.current.postMessage(
+      JSON.stringify({ type: 'storageStats', payload: storageStats,
+       })
+    );
+  }, [storageStats]);
+
+  // send time range stats
+  useEffect(() => {
+    if (!webref.current) return;
+    webref.current.postMessage(
+      JSON.stringify({ type: 'timeRangeStats', payload: timeRangeStats,
+       })
+    );
+  }, [timeRangeStats]);
+
 
   // Notify WebView when BLE connection status changes
   useEffect(() => {

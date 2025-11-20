@@ -1236,17 +1236,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/alert-
                                       children: "Are you sure?" }), E.jsxs($J, { 
                                         children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), 
                                         E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, 
-                                          className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), E.jsx(dt, { 
-                                            className: "p-3 sm:p-4 bg-gray-50 border-gray-200", children: E.jsxs("div", { 
-                                              className: "flex gap-2 sm:gap-3", children: [E.jsx(WL, { className: "w-4 h-4 sm:w-5 sm:h-5 text-gray-600 flex-shrink-0 mt-0.5" }), 
-                                              
-                                              E.jsxs("div", { className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                              children: "About Data Storage" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", children: [
-                                                E.jsx("li", { children: "Data stored locally in your browser (localStorage)" }), 
-                                                E.jsx("li", { children: "Automatically retains last 30 days of readings" }), 
-                                                E.jsx("li", { children: "Data persists across sessions" }), 
-                                                E.jsx("li", { children: "Clearing browser data will delete all readings" }), 
-                                                E.jsx("li", { children: "Export regularly to back up your data" })] })] })] }) })] }) } 
+                                          className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), ] }) } 
                                                 
                                                 var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, 
                                                   value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; 
@@ -1429,26 +1419,13 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                                     E.jsx(QS, { value: "exposure", className: "space-y-4", children: E.jsx(mZ, {}) }), 
                                                                                                                     E.jsx(QS, { value: "data", className: "space-y-4", children: E.jsx(FJ, {}) })] }), 
 
-                                                                                                                    !e && E.jsxs(Kg, { className: "border-orange-200 bg-orange-50", 
-                                                                                                                    children: [E.jsx(Dh, { className: "h-4 w-4 text-orange-600" }), E.jsxs(Yg, { 
-                                                                                                                      className: "text-orange-900 text-xs sm:text-sm", children: [E.jsx("strong", { 
-
-                                                                                                                        children: "Web Bluetooth not supported." }), " This browser doesn't support Web Bluetooth API. For iPhone deployment, use Capacitor with @capacitor-community/bluetooth-le plugin. Mock data mode is available for testing."] })] }), 
                                                                                                                         n && t && E.jsxs(Kg, { className: "border-blue-200 bg-blue-50", 
                                                                                                                         children: [E.jsx(Dh, { className: "h-4 w-4 text-blue-600" }), 
                                                                                                                         E.jsxs(Yg, { className: "text-blue-900 text-xs sm:text-sm", children: [E.jsx("strong", { 
                                                                                                                           children: "Mock Mode Active." }), " Using simulated blue light data. On Android/Desktop Chrome, real Bluetooth connection available. For iOS, wrap with Capacitor and use native Bluetooth plugin."] })] }), 
                                                                                                                           i && E.jsxs(Kg, { className: "border-red-200 bg-red-50", children: [E.jsx(Dh, { 
                                                                                                                             className: "h-4 w-4 text-red-600" }), E.jsx(Yg, { className: "text-red-900 text-xs sm:text-sm", 
-                                                                                                                            children: i })] }), E.jsx(dt, { className: "p-3 sm:p-4 bg-gray-50 border-gray-200", 
-                                                                                                                            children: E.jsxs("div", { className: "flex gap-2 sm:gap-3", children: [E.jsx("div", { 
-                                                                                                                              className: "text-gray-600 flex-shrink-0", children: "💡" }), E.jsxs("div", { 
-                                                                                                                                className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                                                children: "Development Notes" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", 
-                                                                                                                                children: [E.jsxs("li", { children: [E.jsx("strong", { children: "Web Bluetooth API:" }), " Works on Chrome/Edge (Android/Desktop)"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "iOS Safari:" }), " Web Bluetooth not supported - use Capacitor wrapper"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "Data Storage:" }), " All data saved locally in browser localStorage"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "Production:" }), " Replace UUIDs with your necklace's actual service/characteristic IDs"] })] })] })] }) })] })] }) } 
+                                                                                                                            children: i })] }), ] })] }) } 
                                                                                                                                 var JJ = (e, t, r, n, i, a, l, u) => { let c = document.documentElement, d = ["light", "dark"]; 
                                                                                                                                 function h(x) { (Array.isArray(e) ? e : [e]).forEach(w => { let g = w === "class", y = g && a ? i.map(_ => a[_] || _) : i; g ? (c.classList.remove(...y), 
                                                                                                                                 c.classList.add(a && a[x] ? a[x] : x)) : c.setAttribute(w, x) }), p(x) } 
@@ -1465,8 +1442,10 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                                                         typeof window > "u" ? c : "", dangerouslySetInnerHTML: { __html: `(${JJ.toString()})(${h})` } }) }); 
                                                                                                                                         const nee = ({ ...e }) => { const { theme: t = "system" } = ree(); 
                                                                                                                                         return E.jsx(qZ, { theme: t, className: "toaster group", style: { "--normal-bg": "var(--popover)", "--normal-text": "var(--popover-foreground)", "--normal-border": "var(--border)" }, ...e }) }; 
+                                                                                                                                        
                                                                                                                                         function iee() { return N.useEffect(() => { window.ReactNativeWebView?.postMessage(JSON.stringify({ type: "APP_LOADED" })) }, []), 
-                                                                                                                                        E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { 
+                                                                                                                                        E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } 
+                                                                                                                                        a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { 
                                                                                                                                           children: E.jsx(iee, {}) }));
                                                                                                                                           
                                                                                                                                           
@@ -5898,9 +5877,6 @@ function XJ({ className: e = "w-10 h-10" }) {
     }
   });
 </script>
-
-
-
   
 
   <script>
@@ -6023,112 +5999,6 @@ function XJ({ className: e = "w-10 h-10" }) {
   window.addEventListener('message', handleMessage);
 
   console.log('BLE stat updater initialized');
-})();
-</script>
-
-<script>
-// 🔵 GLOBAL: This will be replaced after React mounts
-window.updateTodayData = (entry) => {
-  console.log("updateTodayData called before React ready");
-};
-
-(function() {
-
-  // A global array holding today's real-time readings
-  window.liveTodayData = [];
-
-  // Utility: format timestamp → "HH:MM"
-  function formatTime(ts) {
-    const d = new Date(ts);
-    return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
-  }
-
-  // React Native → WebView messages
-  window.addEventListener("message", event => {
-    try {
-      const msg = JSON.parse(event.data);
-
-      // when RN sends new data
-      if (msg.type === "updateStats" && msg.payload?.latestIntensity != null) {
-
-        const entry = {
-          time: formatTime(Date.now()),
-          intensity: msg.payload.latestIntensity
-        };
-
-        // push to live chart buffer
-        window.liveTodayData.push(entry);
-
-        console.log("Live data", window.liveTodayData);
-
-
-        // keep chart small (optional)
-        if (window.liveTodayData.length > 200) {
-          window.liveTodayData.shift();
-        }
-
-        // poke the React component to update
-        if (window.updateTodayChart) {
-          window.updateTodayChart(window.liveTodayData);
-        }
-      }
-
-    } catch(e) {
-      console.error("bad RN msg", e);
-    }
-  });
-
-})();
-</script>
-
-<script>
-/* --- STEP 2: Hook React's internal state setter for "today" chart --- */
-(function() {
-
-  const interval = setInterval(() => {
-    const rootDiv = document.querySelector("#root");
-
-    if (!rootDiv || !rootDiv._reactRootContainer) return;
-
-    try {
-      const root = rootDiv._reactRootContainer._internalRoot;
-      let found = null;
-
-      // recursively walk react fibers
-      function walk(fiber) {
-        if (!fiber) return;
-
-        const st = fiber.memoizedState;
-
-        // We look for a state that holds an array → the TODAY chart’s data array
-        if (st && st.queue && Array.isArray(st.baseState)) {
-          found = st;
-        }
-
-        walk(fiber.child);
-        walk(fiber.sibling);
-      }
-
-      walk(root.current);
-
-      if (found) {
-        clearInterval(interval);
-        console.log("🔥 React state for TODAY chart patched");
-
-        window.updateTodayChart = function(newData) {
-          found.queue.dispatch({
-            payload: newData,
-            action: 0,
-          });
-        };
-      }
-
-    } catch (err) {
-      console.error("fiber scan error", err);
-    }
-
-  }, 500);
-
 })();
 </script>
 

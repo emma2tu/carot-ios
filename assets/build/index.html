@@ -585,7 +585,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     `).concat(HX, ": ").concat(u, `px;
   }
 `)
-      }, uk = function () { var e = parseInt(document.body.getAttribute(Aa) || "0", 10); return isFinite(e) ? e : 0 }, cQ = function () { N.useEffect(function () { return document.body.setAttribute(Aa, (uk() + 1).toString()), function () { var e = uk() - 1; e <= 0 ? document.body.removeAttribute(Aa) : document.body.setAttribute(Aa, e.toString()) } }, []) }, fQ = function (e) { var t = e.noRelative, r = e.noImportant, n = e.gapMode, i = n === void 0 ? "margin" : n; cQ(); var a = N.useMemo(function () { return sQ(i) }, [i]); return N.createElement(lQ, { styles: uQ(a, !t, i, r ? "" : "!important") }) }, Sb = !1; if (typeof window < "u") try { var Vc = Object.defineProperty({}, "passive", { get: function () { return Sb = !0, !0 } }); window.addEventListener("test", Vc, Vc), window.removeEventListener("test", Vc, Vc) } catch { Sb = !1 } var ma = Sb ? { passive: !1 } : !1, dQ = function (e) { return e.tagName === "TEXTAREA" }, G2 = function (e, t) { if (!(e instanceof Element)) return !1; var r = window.getComputedStyle(e); return r[t] !== "hidden" && !(r.overflowY === r.overflowX && !dQ(e) && r[t] === "visible") }, pQ = function (e) { return G2(e, "overflowY") }, hQ = function (e) { return G2(e, "overflowX") }, ck = function (e, t) { var r = t.ownerDocument, n = t; do { typeof ShadowRoot < "u" && n instanceof ShadowRoot && (n = n.host); var i = K2(e, n); if (i) { var a = Y2(e, n), l = a[1], u = a[2]; if (l > u) return !0 } n = n.parentNode } while (n && n !== r.body); return !1 }, mQ = function (e) { var t = e.scrollTop, r = e.scrollHeight, n = e.clientHeight; return [t, r, n] }, vQ = function (e) { var t = e.scrollLeft, r = e.scrollWidth, n = e.clientWidth; return [t, r, n] }, K2 = function (e, t) { return e === "v" ? pQ(t) : hQ(t) }, Y2 = function (e, t) { return e === "v" ? mQ(t) : vQ(t) }, yQ = function (e, t) { return e === "h" && t === "rtl" ? -1 : 1 }, gQ = function (e, t, r, n, i) { var a = yQ(e, window.getComputedStyle(t).direction), l = a * n, u = r.target, c = t.contains(u), d = !1, h = l > 0, p = 0, v = 0; do { if (!u) break; var x = Y2(e, u), w = x[0], g = x[1], y = x[2], _ = g - y - a * w; (w || _) && K2(e, u) && (p += _, v += w); var P = u.parentNode; u = P && P.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? P.host : P } while (!c && u !== document.body || c && (t.contains(u) || t === u)); return (h && Math.abs(p) < 1 || !h && Math.abs(v) < 1) && (d = !0), d }, Gc = function (e) { return "changedTouches" in e ? [e.changedTouches[0].clientX, e.changedTouches[0].clientY] : [0, 0] }, fk = function (e) { return [e.deltaX, e.deltaY] }, dk = function (e) { return e && "current" in e ? e.current : e }, bQ = function (e, t) { return e[0] === t[0] && e[1] === t[1] }, xQ = function (e) {
+      }, 
+      uk = function () { var e = parseInt(document.body.getAttribute(Aa) || "0", 10); 
+      return isFinite(e) ? e : 0 }, cQ = function () { N.useEffect(function () { 
+        return document.body.setAttribute(Aa, (uk() + 1).toString()), 
+        function () { var e = uk() - 1; e <= 0 ? document.body.removeAttribute(Aa) : document.body.setAttribute(Aa, e.toString()) } }, []) }, fQ = function (e) { var t = e.noRelative, r = e.noImportant, n = e.gapMode, i = n === void 0 ? "margin" : n; cQ(); var a = N.useMemo(function () { return sQ(i) }, [i]); return N.createElement(lQ, { styles: uQ(a, !t, i, r ? "" : "!important") }) }, Sb = !1; if (typeof window < "u") try { var Vc = Object.defineProperty({}, "passive", { get: function () { return Sb = !0, !0 } }); window.addEventListener("test", Vc, Vc), window.removeEventListener("test", Vc, Vc) } catch { Sb = !1 } var ma = Sb ? { passive: !1 } : !1, dQ = function (e) { return e.tagName === "TEXTAREA" }, G2 = function (e, t) { if (!(e instanceof Element)) return !1; var r = window.getComputedStyle(e); return r[t] !== "hidden" && !(r.overflowY === r.overflowX && !dQ(e) && r[t] === "visible") }, pQ = function (e) { return G2(e, "overflowY") }, hQ = function (e) { return G2(e, "overflowX") }, ck = function (e, t) { var r = t.ownerDocument, n = t; do { typeof ShadowRoot < "u" && n instanceof ShadowRoot && (n = n.host); var i = K2(e, n); if (i) { var a = Y2(e, n), l = a[1], u = a[2]; if (l > u) return !0 } n = n.parentNode } while (n && n !== r.body); return !1 }, mQ = function (e) { var t = e.scrollTop, r = e.scrollHeight, n = e.clientHeight; return [t, r, n] }, vQ = function (e) { var t = e.scrollLeft, r = e.scrollWidth, n = e.clientWidth; return [t, r, n] }, K2 = function (e, t) { return e === "v" ? pQ(t) : hQ(t) }, Y2 = function (e, t) { return e === "v" ? mQ(t) : vQ(t) }, yQ = function (e, t) { return e === "h" && t === "rtl" ? -1 : 1 }, gQ = function (e, t, r, n, i) { var a = yQ(e, window.getComputedStyle(t).direction), l = a * n, u = r.target, c = t.contains(u), d = !1, h = l > 0, p = 0, v = 0; do { if (!u) break; var x = Y2(e, u), w = x[0], g = x[1], y = x[2], _ = g - y - a * w; (w || _) && K2(e, u) && (p += _, v += w); var P = u.parentNode; u = P && P.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? P.host : P } while (!c && u !== document.body || c && (t.contains(u) || t === u)); return (h && Math.abs(p) < 1 || !h && Math.abs(v) < 1) && (d = !0), d }, Gc = function (e) { return "changedTouches" in e ? [e.changedTouches[0].clientX, e.changedTouches[0].clientY] : [0, 0] }, fk = function (e) { return [e.deltaX, e.deltaY] }, dk = function (e) { return e && "current" in e ? e.current : e }, bQ = function (e, t) { return e[0] === t[0] && e[1] === t[1] }, xQ = function (e) {
         return `
   .block-interactivity-`.concat(e, ` {pointer-events: none;}
   .allow-interactivity-`).concat(e, ` {pointer-events: all;}
@@ -901,11 +905,18 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 
                                                                                         children: "Blue Light Exposure" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
                                                                                         children: "Track your daily blue light exposure patterns" })] }), 
+
                                                                                         E.jsxs(aZ, { value: e, onValueChange: t, children: [E.jsx(lZ, { className: "w-28 sm:w-32 flex-shrink-0", 
-                                                                                        children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [E.jsx(Kc, { value: "today", children: "Today" }), 
-                                                                                        E.jsx(Kc, { value: "week", children: "Week" }), E.jsx(Kc, { value: "month", children: "Month" }), 
-                                                                                        E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
+                                                                                        children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [
+                                                                                        
+                                                                                        E.jsx(Kc, { value: "today", children: "Today" }), 
+                                                                                        E.jsx(Kc, { value: "week", children: "Week" }), 
+                                                                                        E.jsx(Kc, { value: "month", children: "Month" }), 
+                                                                                        E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), 
+                                                                                        
+                                                                                        e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
                                                                                         children: E.jsxs(QK, { data: n, margin: { top: 5, right: 5, left: -20, bottom: 5 }, children: [E.jsx("defs", { 
+                                                                                        
                                                                                           children: E.jsxs("linearGradient", { id: "colorIntensity", x1: "0", y1: "0", x2: "0", y2: "1", 
                                                                                           children: [E.jsx("stop", { offset: "5%", stopColor: "#6366f1", stopOpacity: .3 }), E.jsx("stop", { offset: "95%", stopColor: "#6366f1", stopOpacity: 0 })] }) }), 
                                                                                           E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "time", stroke: "#6b7280", style: { fontSize: "12px" } }), 
@@ -936,8 +947,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                                                                                                   children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
                                                                                                     className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
                                                                                                     children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Peak Activity Period" }), 
-                                                                                                    E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
+                                                                                                    
+                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
+                                                                                                    children: "Peak Activity Period" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
                                                                                                     children: "Highest blue light exposure detected between 2:00 PM - 4:00 PM today. Consider taking breaks during afternoon work sessions." })] })] }) }), 
                                                                                                     E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-green-200", 
                                                                                                     children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
@@ -1129,7 +1141,119 @@ You can add a description to the \`${Ea}\` by passing a \`${YI}\` component as a
 Alternatively, you can use your own component as a description by assigning it an \`id\` and passing the same value to the \`aria-describedby\` prop in \`${Ea}\`. If the description is confusing or duplicative for sighted users, you can use the \`@radix-ui/react-visually-hidden\` primitive as a wrapper around your description component.
 
 For more information, see https://radix-ui.com/primitives/docs/components/alert-dialog`; return N.useEffect(() => { document.getElementById(e.current?.getAttribute("aria-describedby")) || console.warn(t) }, [t, e]), null
-      }, xJ = qI, wJ = WI, SJ = UI, _J = HI, OJ = VI, PJ = QI, AJ = JI, EJ = KI, TJ = XI; function CJ({ ...e }) { return E.jsx(xJ, { "data-slot": "alert-dialog", ...e }) } function kJ({ ...e }) { return E.jsx(wJ, { "data-slot": "alert-dialog-trigger", ...e }) } function jJ({ ...e }) { return E.jsx(SJ, { "data-slot": "alert-dialog-portal", ...e }) } function NJ({ className: e, ...t }) { return E.jsx(_J, { "data-slot": "alert-dialog-overlay", className: st("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50", e), ...t }) } function MJ({ className: e, ...t }) { return E.jsxs(jJ, { children: [E.jsx(NJ, {}), E.jsx(OJ, { "data-slot": "alert-dialog-content", className: st("bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg", e), ...t })] }) } function IJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-header", className: st("flex flex-col gap-2 text-center sm:text-left", e), ...t }) } function RJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-footer", className: st("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", e), ...t }) } function DJ({ className: e, ...t }) { return E.jsx(EJ, { "data-slot": "alert-dialog-title", className: st("text-lg font-semibold", e), ...t }) } function $J({ className: e, ...t }) { return E.jsx(TJ, { "data-slot": "alert-dialog-description", className: st("text-muted-foreground text-sm", e), ...t }) } function LJ({ className: e, ...t }) { return E.jsx(PJ, { className: st(Ib(), e), ...t }) } function BJ({ className: e, ...t }) { return E.jsx(AJ, { className: st(Ib({ variant: "outline" }), e), ...t }) } function FJ() { const { getStoredReadings: e } = SI(), [t, r] = N.useState(e()), n = () => { localStorage.removeItem("carot-blue-light-readings"), r([]), hk.success("All stored data has been cleared") }, i = () => { const x = JSON.stringify(t, null, 2), w = new Blob([x], { type: "application/json" }), g = URL.createObjectURL(w), y = document.createElement("a"); y.href = g, y.download = `carot-data-${new Date().toISOString().split("T")[0]}.json`, document.body.appendChild(y), y.click(), document.body.removeChild(y), URL.revokeObjectURL(g), hk.success("Data exported successfully") }, a = HZ(t), l = VZ(t), u = GZ(t), c = Gg(a), d = Gg(l), h = Gg(u), v = (JSON.stringify(t).length / 1024).toFixed(2); return E.jsxs("div", { className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", children: [E.jsxs("div", { className: "flex items-center justify-between mb-4 sm:mb-6", children: [E.jsxs("div", { children: [E.jsx("h2", { className: "text-gray-900 mb-1", children: "Data Storage" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", children: "Manage your locally stored blue light readings" })] }), E.jsx(BL, { className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-500" })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6", children: [E.jsxs("div", { className: "p-3 sm:p-4 bg-blue-50 rounded-lg", children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", children: "Total Readings" }), E.jsx("div", { className: "text-gray-900", children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", children: "Storage Used" }), E.jsxs("div", { className: "text-gray-900", children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "Today" }), E.jsxs(Hg, { variant: "secondary", children: [a.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [c.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [c.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", children: "This Month" }), E.jsxs(Hg, { variant: "secondary", children: [u.length, " readings"] })] }), E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [E.jsxs("div", { className: "text-gray-600", children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [h.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [h.averageIntensity, "%"] })] })] })] })] })] }), E.jsxs(dt, { className: "p-4 sm:p-6", children: [E.jsx("h3", { className: "text-gray-900 mb-3 sm:mb-4", children: "Data Actions" }), E.jsxs("div", { className: "flex flex-col sm:flex-row gap-2 sm:gap-3", children: [E.jsxs(ef, { variant: "outline", onClick: i, disabled: t.length === 0, className: "gap-2 flex-1", children: [E.jsx(zL, { className: "w-4 h-4" }), "Export Data"] }), E.jsxs(CJ, { children: [E.jsx(kJ, { asChild: !0, children: E.jsxs(ef, { variant: "outline", disabled: t.length === 0, className: "gap-2 flex-1 text-red-600 hover:text-red-700", children: [E.jsx(GL, { className: "w-4 h-4" }), "Clear All Data"] }) }), E.jsxs(MJ, { children: [E.jsxs(IJ, { children: [E.jsx(DJ, { children: "Are you sure?" }), E.jsxs($J, { children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), E.jsx(dt, { className: "p-3 sm:p-4 bg-gray-50 border-gray-200", children: E.jsxs("div", { className: "flex gap-2 sm:gap-3", children: [E.jsx(WL, { className: "w-4 h-4 sm:w-5 sm:h-5 text-gray-600 flex-shrink-0 mt-0.5" }), E.jsxs("div", { className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "About Data Storage" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", children: [E.jsx("li", { children: "Data stored locally in your browser (localStorage)" }), E.jsx("li", { children: "Automatically retains last 30 days of readings" }), E.jsx("li", { children: "Data persists across sessions" }), E.jsx("li", { children: "Clearing browser data will delete all readings" }), E.jsx("li", { children: "Export regularly to back up your data" })] })] })] }) })] }) } var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; (i || i === 0) && !gk(i) && console.error(HJ(`${i}`, "Progress")); const u = gk(i) ? i : iw; n !== null && !bk(n, u) && console.error(VJ(`${n}`, "Progress")); const c = bk(n, u) ? n : null, d = ad(c) ? a(c, u) : void 0; return E.jsx(qJ, { scope: r, value: c, max: u, children: E.jsx(Be.div, { "aria-valuemax": u, "aria-valuemin": 0, "aria-valuenow": ad(c) ? c : void 0, "aria-valuetext": d, role: "progressbar", "data-state": nR(c, u), "data-value": c ?? void 0, "data-max": u, ...l, ref: t }) }) }); eR.displayName = nw; var tR = "ProgressIndicator", rR = N.forwardRef((e, t) => { const { __scopeProgress: r, ...n } = e, i = WJ(tR, r); return E.jsx(Be.div, { "data-state": nR(i.value, i.max), "data-value": i.value ?? void 0, "data-max": i.max, ...n, ref: t }) }); rR.displayName = tR; function UJ(e, t) { return `${Math.round(e / t * 100)}%` } function nR(e, t) { return e == null ? "indeterminate" : e === t ? "complete" : "loading" } function ad(e) { return typeof e == "number" } function gk(e) { return ad(e) && !isNaN(e) && e > 0 } function bk(e, t) { return ad(e) && !isNaN(e) && e <= t && e >= 0 } function HJ(e, t) { return `Invalid prop \`max\` of value \`${e}\` supplied to \`${t}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${iw}\`.` } function VJ(e, t) {
+      }, xJ = qI, wJ = WI, SJ = UI, _J = HI, OJ = VI, PJ = QI, AJ = JI, EJ = KI, TJ = XI; 
+      function CJ({ ...e }) { return E.jsx(xJ, { "data-slot": "alert-dialog", ...e }) } 
+      function kJ({ ...e }) { return E.jsx(wJ, { "data-slot": "alert-dialog-trigger", ...e }) } 
+      function jJ({ ...e }) { return E.jsx(SJ, { "data-slot": "alert-dialog-portal", ...e }) } 
+      function NJ({ className: e, ...t }) { 
+        return E.jsx(_J, { "data-slot": "alert-dialog-overlay", 
+        className: st("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50", e), ...t }) } 
+        function MJ({ className: e, ...t }) { return E.jsxs(jJ, { 
+          children: [E.jsx(NJ, {}), E.jsx(OJ, { "data-slot": "alert-dialog-content", 
+          className: st("bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg", e), ...t })] }) } 
+          function IJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-header", 
+          className: st("flex flex-col gap-2 text-center sm:text-left", e), ...t }) } 
+          function RJ({ className: e, ...t }) { return E.jsx("div", { "data-slot": "alert-dialog-footer", 
+          className: st("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", e), ...t }) } 
+          function DJ({ className: e, ...t }) { return E.jsx(EJ, { "data-slot": "alert-dialog-title", 
+          className: st("text-lg font-semibold", e), ...t }) } function $J({ className: e, ...t }) { 
+            return E.jsx(TJ, { "data-slot": "alert-dialog-description", className: st("text-muted-foreground text-sm", e), ...t }) } 
+            function LJ({ className: e, ...t }) { return E.jsx(PJ, { className: st(Ib(), e), ...t }) } 
+            function BJ({ className: e, ...t }) { return E.jsx(AJ, { className: st(Ib({ variant: "outline" }), e), ...t }) } 
+            function FJ() { const { getStoredReadings: e } = SI(), [t, r] = N.useState(e()), n = () => { 
+              localStorage.removeItem("carot-blue-light-readings"), r([]), hk.success("All stored data has been cleared") }, 
+              i = () => { const x = JSON.stringify(t, null, 2), w = new Blob([x], { type: "application/json" }), 
+              g = URL.createObjectURL(w), y = document.createElement("a"); y.href = g, y.download = `carot-data-${new Date().toISOString().split("T")[0]}.json`, 
+              document.body.appendChild(y), y.click(), document.body.removeChild(y), URL.revokeObjectURL(g), 
+              hk.success("Data exported successfully") }, a = HZ(t), l = VZ(t), u = GZ(t), c = Gg(a), d = Gg(l), 
+              h = Gg(u), v = (JSON.stringify(t).length / 1024).toFixed(2); return E.jsxs("div", { 
+                className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", 
+                children: [E.jsxs("div", { className: "flex items-center justify-between mb-4 sm:mb-6", children: [
+                  
+                E.jsxs("div", { children: [E.jsx("h2", { className: "text-gray-900 mb-1", 
+                children: "Data Storage" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
+                children: "Manage your locally stored blue light readings" })] }), E.jsx(BL, { 
+                  className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-500" })] }), E.jsxs("div", { 
+                    className: "grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6", children: [E.jsxs("div", { 
+                      className: "p-3 sm:p-4 bg-blue-50 rounded-lg", children: [
+                        
+                      E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
+                      children: "Total Readings" }), E.jsx("div", { className: "text-gray-900", 
+                      children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", 
+                      
+                      children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
+                      children: "Storage Used (KB)" }), E.jsxs("div", { className: "text-gray-900", 
+                      children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", 
+                      children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", 
+                      children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", 
+
+                      children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                      children: "Today" }), E.jsxs(Hg, { variant: "secondary", children: [a.length, " readings"] })] }), 
+                      E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                        
+                      E.jsxs("div", { className: "text-gray-600", 
+                      children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [c.totalHours, "h"] })] }), 
+                      
+                      E.jsxs("div", { className: "text-gray-600", 
+                      children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [c.averageIntensity, "%"] })] })] })] }), 
+                      E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [
+                        E.jsxs("div", { className: "flex items-center justify-between mb-2", 
+                        children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                        children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), 
+                        
+                        E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                          E.jsxs("div", { className: "text-gray-600", 
+                          children: ["Total: ", E.jsxs("span", { className: "text-gray-900", 
+                          children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", 
+                          children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", 
+                          children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { 
+                            className: "p-3 sm:p-4 border rounded-lg", children: [
+                              
+                            E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
+                              E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
+                              children: "This Month" }), E.jsxs(Hg, { variant: "secondary", 
+                              children: [u.length, " readings"] })] }), 
+                              
+                              E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
+                              E.jsxs("div", { className: "text-gray-600", children: ["Total: ", 
+                              E.jsxs("span", { className: "text-gray-900", children: [h.totalHours, "h"] })] }), 
+                              
+                              E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", 
+                              E.jsxs("span", { className: "text-gray-900", children: [h.averageIntensity, "%"] })] })] })] })] })] }), 
+                              
+                              E.jsxs(dt, { className: "p-4 sm:p-6", children: [
+                                E.jsx("h3", { className: "text-gray-900 mb-3 sm:mb-4", 
+                                children: "Data Actions" }), E.jsxs("div", { className: "flex flex-col sm:flex-row gap-2 sm:gap-3", 
+                                children: [E.jsxs(ef, { variant: "outline", onClick: i, disabled: t.length === 0, 
+                                className: "gap-2 flex-1", children: [
+                                  E.jsx(zL, { className: "w-4 h-4" }), "Export Data"] }), 
+                                  E.jsxs(CJ, { children: [E.jsx(kJ, { asChild: !0, children: 
+                                    E.jsxs(ef, { variant: "outline", disabled: t.length === 0, 
+                                    className: "gap-2 flex-1 text-red-600 hover:text-red-700", children: [
+                                      
+                                    E.jsx(GL, { className: "w-4 h-4" }), "Clear All Data"] }) }), 
+                                    E.jsxs(MJ, { children: [E.jsxs(IJ, { children: [E.jsx(DJ, { 
+                                      children: "Are you sure?" }), E.jsxs($J, { 
+                                        children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), 
+                                        E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, 
+                                          className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), ] }) } 
+                                                
+                                                var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, 
+                                                  value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; 
+                                                  (i || i === 0) && !gk(i) && console.error(HJ(`${i}`, "Progress")); 
+                                                  const u = gk(i) ? i : iw; n !== null && !bk(n, u) && console.error(VJ(`${n}`, "Progress")); 
+                                                  const c = bk(n, u) ? n : null, d = ad(c) ? a(c, u) : void 0; return E.jsx(qJ, { scope: r, value: c, max: u, 
+                                                    children: E.jsx(Be.div, { "aria-valuemax": u, "aria-valuemin": 0, "aria-valuenow": ad(c) ? c : void 0, 
+                                                    "aria-valuetext": d, role: "progressbar", "data-state": nR(c, u), "data-value": c ?? void 0, "data-max": u, ...l, 
+                                                    ref: t }) }) }); eR.displayName = nw; var tR = "ProgressIndicator", rR = N.forwardRef((e, t) => { const { __scopeProgress: r, ...n } = e, 
+                                                    i = WJ(tR, r); return E.jsx(Be.div, { "data-state": nR(i.value, i.max), "data-value": i.value ?? void 0, 
+                                                    "data-max": i.max, ...n, ref: t }) }); rR.displayName = tR; function UJ(e, t) { return `${Math.round(e / t * 100)}%` } 
+                                                    function nR(e, t) { return e == null ? "indeterminate" : e === t ? "complete" : "loading" } 
+                                                    function ad(e) { return typeof e == "number" } function gk(e) { return ad(e) && !isNaN(e) && e > 0 } 
+                                                    function bk(e, t) { return ad(e) && !isNaN(e) && e <= t && e >= 0 } 
+                                                    function HJ(e, t) { return `Invalid prop \`max\` of value \`${e}\` supplied to \`${t}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${iw}\`.` } 
+                                                    function VJ(e, t) {
+
         return `Invalid prop \`value\` of value \`${e}\` supplied to \`${t}\`. The \`value\` prop must be:
   - a positive number
   - less than the value passed to \`max\` (or ${iw} if no \`max\` prop is set)
@@ -1254,7 +1378,7 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                         
                                                                         E.jsxs("div", { id: "totalExposure",
                                                                           className: "text-gray-900", children: [c.totalExposure, " BLU"] }), E.jsx("p", { 
-                                                                            className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Today" })] }), E.jsxs(dt, { 
+                                                                            className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "BLU" })] }), E.jsxs(dt, { 
                                                                               className: "p-4 sm:p-6", children: [
                                                                                 
                                                                               E.jsxs("div", { 
@@ -1263,8 +1387,8 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                     className: "w-4 h-4 sm:w-5 sm:h-5 text-indigo-500 flex-shrink-0" })] }), 
                                                                                     
                                                                                     E.jsx("div", { id: "avgIntensity",
-                                                                                      className: "text-gray-900", children: c.averageIntensity }), E.jsx(YJ, { 
-                                                                                        value: c.averageIntensity, max: 255, className: "mt-2" })] }), E.jsxs(dt, { 
+                                                                                      className: "text-gray-900", children: c.averageIntensity }), E.jsx("p", { 
+                                                                                        className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "BLU" })] }), E.jsxs(dt, { 
                                                                                           className: "p-4 sm:p-6", children: [
                                                                                             
                                                                                           E.jsxs("div", { 
@@ -1295,26 +1419,13 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                                     E.jsx(QS, { value: "exposure", className: "space-y-4", children: E.jsx(mZ, {}) }), 
                                                                                                                     E.jsx(QS, { value: "data", className: "space-y-4", children: E.jsx(FJ, {}) })] }), 
 
-                                                                                                                    !e && E.jsxs(Kg, { className: "border-orange-200 bg-orange-50", 
-                                                                                                                    children: [E.jsx(Dh, { className: "h-4 w-4 text-orange-600" }), E.jsxs(Yg, { 
-                                                                                                                      className: "text-orange-900 text-xs sm:text-sm", children: [E.jsx("strong", { 
-
-                                                                                                                        children: "Web Bluetooth not supported." }), " This browser doesn't support Web Bluetooth API. For iPhone deployment, use Capacitor with @capacitor-community/bluetooth-le plugin. Mock data mode is available for testing."] })] }), 
                                                                                                                         n && t && E.jsxs(Kg, { className: "border-blue-200 bg-blue-50", 
                                                                                                                         children: [E.jsx(Dh, { className: "h-4 w-4 text-blue-600" }), 
                                                                                                                         E.jsxs(Yg, { className: "text-blue-900 text-xs sm:text-sm", children: [E.jsx("strong", { 
                                                                                                                           children: "Mock Mode Active." }), " Using simulated blue light data. On Android/Desktop Chrome, real Bluetooth connection available. For iOS, wrap with Capacitor and use native Bluetooth plugin."] })] }), 
                                                                                                                           i && E.jsxs(Kg, { className: "border-red-200 bg-red-50", children: [E.jsx(Dh, { 
                                                                                                                             className: "h-4 w-4 text-red-600" }), E.jsx(Yg, { className: "text-red-900 text-xs sm:text-sm", 
-                                                                                                                            children: i })] }), E.jsx(dt, { className: "p-3 sm:p-4 bg-gray-50 border-gray-200", 
-                                                                                                                            children: E.jsxs("div", { className: "flex gap-2 sm:gap-3", children: [E.jsx("div", { 
-                                                                                                                              className: "text-gray-600 flex-shrink-0", children: "💡" }), E.jsxs("div", { 
-                                                                                                                                className: "min-w-0", children: [E.jsx("p", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                                                children: "Development Notes" }), E.jsxs("ul", { className: "text-gray-700 text-xs sm:text-sm space-y-1 list-disc list-inside", 
-                                                                                                                                children: [E.jsxs("li", { children: [E.jsx("strong", { children: "Web Bluetooth API:" }), " Works on Chrome/Edge (Android/Desktop)"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "iOS Safari:" }), " Web Bluetooth not supported - use Capacitor wrapper"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "Data Storage:" }), " All data saved locally in browser localStorage"] }), 
-                                                                                                                                E.jsxs("li", { children: [E.jsx("strong", { children: "Production:" }), " Replace UUIDs with your necklace's actual service/characteristic IDs"] })] })] })] }) })] })] }) } 
+                                                                                                                            children: i })] }), ] })] }) } 
                                                                                                                                 var JJ = (e, t, r, n, i, a, l, u) => { let c = document.documentElement, d = ["light", "dark"]; 
                                                                                                                                 function h(x) { (Array.isArray(e) ? e : [e]).forEach(w => { let g = w === "class", y = g && a ? i.map(_ => a[_] || _) : i; g ? (c.classList.remove(...y), 
                                                                                                                                 c.classList.add(a && a[x] ? a[x] : x)) : c.setAttribute(w, x) }), p(x) } 
@@ -1331,9 +1442,17 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                                                         typeof window > "u" ? c : "", dangerouslySetInnerHTML: { __html: `(${JJ.toString()})(${h})` } }) }); 
                                                                                                                                         const nee = ({ ...e }) => { const { theme: t = "system" } = ree(); 
                                                                                                                                         return E.jsx(qZ, { theme: t, className: "toaster group", style: { "--normal-bg": "var(--popover)", "--normal-text": "var(--popover-foreground)", "--normal-border": "var(--border)" }, ...e }) }; 
+                                                                                                                                        
                                                                                                                                         function iee() { return N.useEffect(() => { window.ReactNativeWebView?.postMessage(JSON.stringify({ type: "APP_LOADED" })) }, []), 
-                                                                                                                                        E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { 
-                                                                                                                                          children: E.jsx(iee, {}) }));</script>
+                                                                                                                                        E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } 
+                                                                                                                                        a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { 
+                                                                                                                                          children: E.jsx(iee, {}) }));
+                                                                                                                                          
+                                                                                                                                          
+      
+    </script>
+
+
   <style rel="stylesheet" crossorigin>
     /*! tailwindcss v4.1.14 | MIT License | https://tailwindcss.com */
     @layer properties {
@@ -5526,6 +5645,240 @@ function XJ({ className: e = "w-10 h-10" }) {
 <body>
 
   <div id="root"></div>
+
+  <!-- ====================================== -->
+<!--  BLUE LIGHT EXPOSURE CARD (Styled)    -->
+<!-- ====================================== -->
+
+<style>
+
+  #bl-background {
+  background: rgba(242,244,255,0.9);
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%);
+  padding: 20px 0;
+  }
+
+  /* Card style matching screenshot */
+  #bl-card {
+    margin: 20px 16px;
+    padding: 20px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.06);
+  }
+
+  #bl-card-title {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
+  #bl-card-subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 14px;
+  }
+
+  /* Styled dropdown */
+  #bl-select {
+    appearance: none;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 14px;
+    width: 130px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+  }
+</style>
+
+<div id="bl-background">
+  <div id="bl-card">
+
+    <div id="bl-card-title">Blue Light Exposure</div>
+    <div id="bl-card-subtitle">Track your daily blue light exposure patterns</div>
+
+    <select id="bl-select">
+      <option value="today">Today</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+    </select>
+
+    <div style="height:260px; margin-top:10px;">
+      <canvas id="bl_chart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  let blChart;
+  let blMode = "today";
+
+  function createBLChart() {
+    const ctx = document.getElementById("bl_chart").getContext("2d");
+
+    // Blue gradient fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(0, "rgba(72, 118, 255, 0.35)");
+    gradient.addColorStop(1, "rgba(72, 118, 255, 0.0)");
+
+    blChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [{
+          label: "",
+          data: [],
+          borderColor: "rgba(72, 118, 255, 1)",
+          borderWidth: 3,
+          tension: 0.35,
+          fill: true,
+          backgroundColor: gradient,
+          pointRadius: 0,
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            ticks: {
+              color: "#555",
+              maxTicksLimit: 6,
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)",
+            }
+          },
+          y: {
+            ticks: {
+              color: "#555",
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)",
+            },
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  }
+
+  function filterByMode(sensorLogData, mode) {
+    const now = new Date();
+
+    function inDay(r) {
+      const d = new Date(r.receivedAt);
+      return d.toDateString() === now.toDateString();
+    }
+
+    function inWeek(r) {
+      const d = new Date(r.receivedAt);
+      const monday = new Date(now);
+      monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      return d >= monday;
+    }
+
+    function inMonth(r) {
+      const d = new Date(r.receivedAt);
+      return d.getMonth() === now.getMonth();
+    }
+
+    let subset =
+      mode === "today" ? sensorLogData.filter(inDay)
+    : mode === "week"  ? sensorLogData.filter(inWeek)
+    :                   sensorLogData.filter(inMonth);
+
+    return {
+      labels: subset.map(r =>
+        new Date(r.receivedAt).toLocaleTimeString([], { hour: 'numeric', hour12: true })
+      ),
+      values: subset.map(r => r.intensity)
+    };
+  }
+
+  function updateBLChart(sensorLogData) {
+    window.__lastSensorLogData = sensorLogData;
+
+    const { labels, values } = filterByMode(sensorLogData, blMode);
+
+    blChart.data.labels = labels;
+    blChart.data.datasets[0].data = values;
+    blChart.update();
+  }
+
+  window.addEventListener("load", () => {
+    createBLChart();
+
+    document.getElementById("bl-select").onchange = (e) => {
+      blMode = e.target.value;
+      if (window.__lastSensorLogData) updateBLChart(window.__lastSensorLogData);
+    };
+  });
+
+  // Receive data from React Native
+  document.addEventListener("message", (event) => {
+  try {
+    const msg = JSON.parse(event.data);
+    if (msg.type === "sensorData") {
+      window.__lastSensorLogData = msg.payload;   // <--- CORRECT FIELD
+      updateBLChart(msg.payload);                 // <--- CORRECT FIELD
+    }
+  } catch (e) {
+    console.log("Message parse error", e);
+  }
+
+
+
+
+});
+
+</script>
+
+<script>
+  // MOST RELIABLE ON iOS
+  window.ReactNativeWebView = window.ReactNativeWebView || {};
+
+  window.ReactNativeWebView.onMessage = function(event) {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === "sensorData") {
+        console.log("Chart received sensorData:", msg.payload);
+        updateBLChart(msg.payload);
+      }
+    } catch (e) {
+      console.log("onMessage parse error:", e);
+    }
+  };
+
+  // FALLBACK (Android / older RN versions)
+  window.addEventListener("message", function(event) {
+    try {
+      const msg = JSON.parse(event.data);
+      if (msg.type === "sensorData") {
+        console.log("Chart received sensorData (fallback):", msg.payload);
+        updateBLChart(msg.payload);
+      }
+    } catch (e) {
+      console.log("Fallback parse error:", e);
+    }
+  });
+</script>
+  
+
   <script>
     (function() {
       // Initially hide the banner
@@ -5604,15 +5957,38 @@ function XJ({ className: e = "w-10 h-10" }) {
   function handleMessage(event) {
     try {
       const data = JSON.parse(event.data);
-      if (data.type === 'updateStats' && data.payload) {
-        const { totalExposure, avgIntensity, maxIntensity, latestIntensity } = data.payload;
 
+      // update cards with sensor readings
+      if (data.type === 'updateStats' && data.payload) {
+        const { totalExposure, avgIntensity, maxIntensity, latestIntensity, numberReadings } = data.payload;
+
+        
         // Update all relevant cards
         if (latestIntensity !== undefined) updateCardValue('Intensity', latestIntensity);
         if (avgIntensity !== undefined) updateCardValue('Avg Intensity', avgIntensity);
         if (maxIntensity !== undefined) updateCardValue('Peak Intensity', maxIntensity);
         if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
+
+      // update storage stats in data tab
+      if (data.type === 'storageStats' && data.payload) {
+        const { sizeKB, totalReadings } = data.payload;
+
+        if (sizeKB !== undefined) updateCardValue('Storage Used (KB)', sizeKB);
+        if (totalReadings !== undefined) updateCardValue('Total Readings', totalReadings);
+
+      }
+
+      /*
+      if (data.type === 'timeRangeStats' && data.payload) {
+        const { readingsToday, readingsWeek, readingsMonth } = data.payload;
+
+        if (readingsToday !== undefined) updateCardValue('Total Today', readingsToday);
+        if (readingsWeek !== undefined) updateCardValue('Total This Week', readingsWeek);
+        if (readingsMonth !== undefined) updateCardValue('Total This Month', readingsMonth);
+
+      }
+      */
     } catch (err) {
       console.error('BLE message parse error:', err);
     }

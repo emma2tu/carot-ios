@@ -22,11 +22,21 @@ export default function App() {
     sensorLogData,
     statusLogData,
     error,
+
+    stats,
+    storageStats,    // ⭐ UPDATED: instant storage metrics
+
     sendCommand,
     clearLog,
     clearSavedData,
     connectAndListen,
-    stats, // exported live stats
+
+    getSortedReadings,
+    getDataByDay,
+    getDataByWeek,
+    getDataByMonth,
+
+    timeRangeStats
   } = useBluetoothUART();
 
   useEffect(() => {
@@ -72,9 +82,40 @@ export default function App() {
   useEffect(() => {
     if (!webref.current) return;
     webref.current.postMessage(
-      JSON.stringify({ type: 'updateStats', payload: stats })
+      JSON.stringify({ type: 'updateStats', payload: stats,
+        latestIntensity: sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+       })
     );
   }, [stats]);
+
+  // send storage stats
+  useEffect(() => {
+    if (!webref.current) return;
+    webref.current.postMessage(
+      JSON.stringify({ type: 'storageStats', payload: storageStats,
+       })
+    );
+  }, [storageStats]);
+
+  // send time range stats
+  useEffect(() => {
+    if (!webref.current) return;
+    webref.current.postMessage(
+      JSON.stringify({ type: 'timeRangeStats', payload: timeRangeStats,
+       })
+    );
+  }, [timeRangeStats]);
+
+
+  useEffect(() => {
+    if (!webref.current) return;
+    
+    webref.current.postMessage(
+      JSON.stringify({ type: 'sensorData', payload: sensorLogData,
+        })
+    );
+  }, [sensorLogData]);
+
 
   // Notify WebView when BLE connection status changes
   useEffect(() => {
@@ -85,28 +126,60 @@ export default function App() {
     }
   }, [isConnected]);
 
+/*
   // Handle connection requests from WebView
   const onMessage = useCallback(
     (event) => {
       try {
         const data = JSON.parse(event.nativeEvent.data);
 
+        // 🔹 Handle logs from browser console
+        if (data.type === "log") {
+          console.log("[WEBVIEW LOG]:", ...data.args);
+          return;
+        }
+
         // Try reconnecting the BLE if it's not already connected
         if (!isConnected) {
           console.log('[BLE] Attempting to connect...');
           // this triggers your scan + connect flow
           connectAndListen && connectAndListen();
-        } /*
+        } 
+        /*
         else {
           console.log('[BLE] Already connected — sending HELLO');
           sendCommand('HELLO');
-        }*/
+        }
+
       } catch (err) {
         console.error('[WebView] Failed to handle message:', err);
       }
     },
     [isConnected, connectAndListen, sendCommand]
   );
+  */
+
+  const onMessage = useCallback(
+  (event) => {
+    try {
+      const data = JSON.parse(event.nativeEvent.data);
+
+      // 💡 Ignore console.log messages coming from WebView
+      if (data.type === 'log') return;
+
+      // 💡 Only connect when WebView explicitly asks
+      if (data.type === 'connectBluetooth') {
+        console.log('[BLE] connectBluetooth request from WebView');
+        connectAndListen && connectAndListen();
+        return;
+      }
+
+    } catch (err) {
+      console.error('[WebView] Failed to handle message:', err);
+    }
+  },
+  [connectAndListen]
+);
 
   // 🔹 Show loading indicator while HTML loads
   if (!html || !baseDir) {
@@ -150,12 +223,15 @@ export default function App() {
         javaScriptEnabled
         domStorageEnabled
 
-        injectedJavaScript={`
+        
+        injectedJavaScriptBeforeContentLoaded={`
           (function() {
             const oldLog = console.log;
             console.log = function(...args) {
-              window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'log', args }));
-              oldLog(...args);
+              try {
+                window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'log', args }));
+              } catch (e) {}
+              oldLog.apply(null, args);
             };
           })();
           true;

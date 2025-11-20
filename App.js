@@ -107,6 +107,16 @@ export default function App() {
   }, [timeRangeStats]);
 
 
+  useEffect(() => {
+    if (!webref.current) return;
+    
+    webref.current.postMessage(
+      JSON.stringify({ type: 'sensorData', payload: sensorLogData,
+        })
+    );
+  }, [sensorLogData]);
+
+
   // Notify WebView when BLE connection status changes
   useEffect(() => {
     if (webref.current) {
@@ -213,6 +223,7 @@ export default function App() {
         javaScriptEnabled
         domStorageEnabled
 
+        
         injectedJavaScriptBeforeContentLoaded={`
           (function() {
             const oldLog = console.log;

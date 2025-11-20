@@ -585,7 +585,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     `).concat(HX, ": ").concat(u, `px;
   }
 `)
-      }, uk = function () { var e = parseInt(document.body.getAttribute(Aa) || "0", 10); return isFinite(e) ? e : 0 }, cQ = function () { N.useEffect(function () { return document.body.setAttribute(Aa, (uk() + 1).toString()), function () { var e = uk() - 1; e <= 0 ? document.body.removeAttribute(Aa) : document.body.setAttribute(Aa, e.toString()) } }, []) }, fQ = function (e) { var t = e.noRelative, r = e.noImportant, n = e.gapMode, i = n === void 0 ? "margin" : n; cQ(); var a = N.useMemo(function () { return sQ(i) }, [i]); return N.createElement(lQ, { styles: uQ(a, !t, i, r ? "" : "!important") }) }, Sb = !1; if (typeof window < "u") try { var Vc = Object.defineProperty({}, "passive", { get: function () { return Sb = !0, !0 } }); window.addEventListener("test", Vc, Vc), window.removeEventListener("test", Vc, Vc) } catch { Sb = !1 } var ma = Sb ? { passive: !1 } : !1, dQ = function (e) { return e.tagName === "TEXTAREA" }, G2 = function (e, t) { if (!(e instanceof Element)) return !1; var r = window.getComputedStyle(e); return r[t] !== "hidden" && !(r.overflowY === r.overflowX && !dQ(e) && r[t] === "visible") }, pQ = function (e) { return G2(e, "overflowY") }, hQ = function (e) { return G2(e, "overflowX") }, ck = function (e, t) { var r = t.ownerDocument, n = t; do { typeof ShadowRoot < "u" && n instanceof ShadowRoot && (n = n.host); var i = K2(e, n); if (i) { var a = Y2(e, n), l = a[1], u = a[2]; if (l > u) return !0 } n = n.parentNode } while (n && n !== r.body); return !1 }, mQ = function (e) { var t = e.scrollTop, r = e.scrollHeight, n = e.clientHeight; return [t, r, n] }, vQ = function (e) { var t = e.scrollLeft, r = e.scrollWidth, n = e.clientWidth; return [t, r, n] }, K2 = function (e, t) { return e === "v" ? pQ(t) : hQ(t) }, Y2 = function (e, t) { return e === "v" ? mQ(t) : vQ(t) }, yQ = function (e, t) { return e === "h" && t === "rtl" ? -1 : 1 }, gQ = function (e, t, r, n, i) { var a = yQ(e, window.getComputedStyle(t).direction), l = a * n, u = r.target, c = t.contains(u), d = !1, h = l > 0, p = 0, v = 0; do { if (!u) break; var x = Y2(e, u), w = x[0], g = x[1], y = x[2], _ = g - y - a * w; (w || _) && K2(e, u) && (p += _, v += w); var P = u.parentNode; u = P && P.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? P.host : P } while (!c && u !== document.body || c && (t.contains(u) || t === u)); return (h && Math.abs(p) < 1 || !h && Math.abs(v) < 1) && (d = !0), d }, Gc = function (e) { return "changedTouches" in e ? [e.changedTouches[0].clientX, e.changedTouches[0].clientY] : [0, 0] }, fk = function (e) { return [e.deltaX, e.deltaY] }, dk = function (e) { return e && "current" in e ? e.current : e }, bQ = function (e, t) { return e[0] === t[0] && e[1] === t[1] }, xQ = function (e) {
+      }, 
+      uk = function () { var e = parseInt(document.body.getAttribute(Aa) || "0", 10); 
+      return isFinite(e) ? e : 0 }, cQ = function () { N.useEffect(function () { 
+        return document.body.setAttribute(Aa, (uk() + 1).toString()), 
+        function () { var e = uk() - 1; e <= 0 ? document.body.removeAttribute(Aa) : document.body.setAttribute(Aa, e.toString()) } }, []) }, fQ = function (e) { var t = e.noRelative, r = e.noImportant, n = e.gapMode, i = n === void 0 ? "margin" : n; cQ(); var a = N.useMemo(function () { return sQ(i) }, [i]); return N.createElement(lQ, { styles: uQ(a, !t, i, r ? "" : "!important") }) }, Sb = !1; if (typeof window < "u") try { var Vc = Object.defineProperty({}, "passive", { get: function () { return Sb = !0, !0 } }); window.addEventListener("test", Vc, Vc), window.removeEventListener("test", Vc, Vc) } catch { Sb = !1 } var ma = Sb ? { passive: !1 } : !1, dQ = function (e) { return e.tagName === "TEXTAREA" }, G2 = function (e, t) { if (!(e instanceof Element)) return !1; var r = window.getComputedStyle(e); return r[t] !== "hidden" && !(r.overflowY === r.overflowX && !dQ(e) && r[t] === "visible") }, pQ = function (e) { return G2(e, "overflowY") }, hQ = function (e) { return G2(e, "overflowX") }, ck = function (e, t) { var r = t.ownerDocument, n = t; do { typeof ShadowRoot < "u" && n instanceof ShadowRoot && (n = n.host); var i = K2(e, n); if (i) { var a = Y2(e, n), l = a[1], u = a[2]; if (l > u) return !0 } n = n.parentNode } while (n && n !== r.body); return !1 }, mQ = function (e) { var t = e.scrollTop, r = e.scrollHeight, n = e.clientHeight; return [t, r, n] }, vQ = function (e) { var t = e.scrollLeft, r = e.scrollWidth, n = e.clientWidth; return [t, r, n] }, K2 = function (e, t) { return e === "v" ? pQ(t) : hQ(t) }, Y2 = function (e, t) { return e === "v" ? mQ(t) : vQ(t) }, yQ = function (e, t) { return e === "h" && t === "rtl" ? -1 : 1 }, gQ = function (e, t, r, n, i) { var a = yQ(e, window.getComputedStyle(t).direction), l = a * n, u = r.target, c = t.contains(u), d = !1, h = l > 0, p = 0, v = 0; do { if (!u) break; var x = Y2(e, u), w = x[0], g = x[1], y = x[2], _ = g - y - a * w; (w || _) && K2(e, u) && (p += _, v += w); var P = u.parentNode; u = P && P.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? P.host : P } while (!c && u !== document.body || c && (t.contains(u) || t === u)); return (h && Math.abs(p) < 1 || !h && Math.abs(v) < 1) && (d = !0), d }, Gc = function (e) { return "changedTouches" in e ? [e.changedTouches[0].clientX, e.changedTouches[0].clientY] : [0, 0] }, fk = function (e) { return [e.deltaX, e.deltaY] }, dk = function (e) { return e && "current" in e ? e.current : e }, bQ = function (e, t) { return e[0] === t[0] && e[1] === t[1] }, xQ = function (e) {
         return `
   .block-interactivity-`.concat(e, ` {pointer-events: none;}
   .allow-interactivity-`).concat(e, ` {pointer-events: all;}
@@ -903,9 +907,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                                                                                         children: "Track your daily blue light exposure patterns" })] }), 
 
                                                                                         E.jsxs(aZ, { value: e, onValueChange: t, children: [E.jsx(lZ, { className: "w-28 sm:w-32 flex-shrink-0", 
-                                                                                        children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [E.jsx(Kc, { value: "today", children: "Today" }), 
-                                                                                        E.jsx(Kc, { value: "week", children: "Week" }), E.jsx(Kc, { value: "month", children: "Month" }), 
-                                                                                        E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
+                                                                                        children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [
+                                                                                        
+                                                                                        E.jsx(Kc, { value: "today", children: "Today" }), 
+                                                                                        E.jsx(Kc, { value: "week", children: "Week" }), 
+                                                                                        E.jsx(Kc, { value: "month", children: "Month" }), 
+                                                                                        E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), 
+                                                                                        
+                                                                                        e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
                                                                                         children: E.jsxs(QK, { data: n, margin: { top: 5, right: 5, left: -20, bottom: 5 }, children: [E.jsx("defs", { 
                                                                                         
                                                                                           children: E.jsxs("linearGradient", { id: "colorIntensity", x1: "0", y1: "0", x2: "0", y2: "1", 
@@ -1379,7 +1388,7 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                         
                                                                         E.jsxs("div", { id: "totalExposure",
                                                                           className: "text-gray-900", children: [c.totalExposure, " BLU"] }), E.jsx("p", { 
-                                                                            className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Today" })] }), E.jsxs(dt, { 
+                                                                            className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "BLU" })] }), E.jsxs(dt, { 
                                                                               className: "p-4 sm:p-6", children: [
                                                                                 
                                                                               E.jsxs("div", { 
@@ -1388,8 +1397,8 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                     className: "w-4 h-4 sm:w-5 sm:h-5 text-indigo-500 flex-shrink-0" })] }), 
                                                                                     
                                                                                     E.jsx("div", { id: "avgIntensity",
-                                                                                      className: "text-gray-900", children: c.averageIntensity }), E.jsx(YJ, { 
-                                                                                        value: c.averageIntensity, max: 255, className: "mt-2" })] }), E.jsxs(dt, { 
+                                                                                      className: "text-gray-900", children: c.averageIntensity }), E.jsx("p", { 
+                                                                                        className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "BLU" })] }), E.jsxs(dt, { 
                                                                                           className: "p-4 sm:p-6", children: [
                                                                                             
                                                                                           E.jsxs("div", { 
@@ -1458,7 +1467,13 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                                                         return E.jsx(qZ, { theme: t, className: "toaster group", style: { "--normal-bg": "var(--popover)", "--normal-text": "var(--popover-foreground)", "--normal-border": "var(--border)" }, ...e }) }; 
                                                                                                                                         function iee() { return N.useEffect(() => { window.ReactNativeWebView?.postMessage(JSON.stringify({ type: "APP_LOADED" })) }, []), 
                                                                                                                                         E.jsxs("div", { className: "overflow-x-hidden", children: [E.jsx(ZJ, {}), E.jsx(nee, {})] }) } a$.createRoot(document.getElementById("root")).render(E.jsx(I.StrictMode, { 
-                                                                                                                                          children: E.jsx(iee, {}) }));</script>
+                                                                                                                                          children: E.jsx(iee, {}) }));
+                                                                                                                                          
+                                                                                                                                          
+      
+    </script>
+
+
   <style rel="stylesheet" crossorigin>
     /*! tailwindcss v4.1.14 | MIT License | https://tailwindcss.com */
     @layer properties {
@@ -5651,6 +5666,243 @@ function XJ({ className: e = "w-10 h-10" }) {
 <body>
 
   <div id="root"></div>
+
+  <!-- ====================================== -->
+<!--  BLUE LIGHT EXPOSURE CARD (Styled)    -->
+<!-- ====================================== -->
+
+<style>
+
+  #bl-background {
+  background: rgba(242,244,255,0.9);
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%);
+  padding: 20px 0;
+  }
+
+  /* Card style matching screenshot */
+  #bl-card {
+    margin: 20px 16px;
+    padding: 20px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.06);
+  }
+
+  #bl-card-title {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
+  #bl-card-subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 14px;
+  }
+
+  /* Styled dropdown */
+  #bl-select {
+    appearance: none;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 14px;
+    width: 130px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+  }
+</style>
+
+<div id="bl-background">
+  <div id="bl-card">
+
+    <div id="bl-card-title">Blue Light Exposure</div>
+    <div id="bl-card-subtitle">Track your daily blue light exposure patterns</div>
+
+    <select id="bl-select">
+      <option value="today">Today</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+    </select>
+
+    <div style="height:260px; margin-top:10px;">
+      <canvas id="bl_chart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  let blChart;
+  let blMode = "today";
+
+  function createBLChart() {
+    const ctx = document.getElementById("bl_chart").getContext("2d");
+
+    // Blue gradient fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(0, "rgba(72, 118, 255, 0.35)");
+    gradient.addColorStop(1, "rgba(72, 118, 255, 0.0)");
+
+    blChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [{
+          label: "",
+          data: [],
+          borderColor: "rgba(72, 118, 255, 1)",
+          borderWidth: 3,
+          tension: 0.35,
+          fill: true,
+          backgroundColor: gradient,
+          pointRadius: 0,
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            ticks: {
+              color: "#555",
+              maxTicksLimit: 6,
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)",
+            }
+          },
+          y: {
+            ticks: {
+              color: "#555",
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)",
+            },
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  }
+
+  function filterByMode(sensorLogData, mode) {
+    const now = new Date();
+
+    function inDay(r) {
+      const d = new Date(r.receivedAt);
+      return d.toDateString() === now.toDateString();
+    }
+
+    function inWeek(r) {
+      const d = new Date(r.receivedAt);
+      const monday = new Date(now);
+      monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      return d >= monday;
+    }
+
+    function inMonth(r) {
+      const d = new Date(r.receivedAt);
+      return d.getMonth() === now.getMonth();
+    }
+
+    let subset =
+      mode === "today" ? sensorLogData.filter(inDay)
+    : mode === "week"  ? sensorLogData.filter(inWeek)
+    :                   sensorLogData.filter(inMonth);
+
+    return {
+      labels: subset.map(r =>
+        new Date(r.receivedAt).toLocaleTimeString([], { hour: 'numeric', hour12: true })
+      ),
+      values: subset.map(r => r.intensity)
+    };
+  }
+
+  function updateBLChart(sensorLogData) {
+    window.__lastSensorLogData = sensorLogData;
+
+    const { labels, values } = filterByMode(sensorLogData, blMode);
+
+    blChart.data.labels = labels;
+    blChart.data.datasets[0].data = values;
+    blChart.update();
+  }
+
+  window.addEventListener("load", () => {
+    createBLChart();
+
+    document.getElementById("bl-select").onchange = (e) => {
+      blMode = e.target.value;
+      if (window.__lastSensorLogData) updateBLChart(window.__lastSensorLogData);
+    };
+  });
+
+  // Receive data from React Native
+  document.addEventListener("message", (event) => {
+  try {
+    const msg = JSON.parse(event.data);
+    if (msg.type === "sensorData") {
+      window.__lastSensorLogData = msg.payload;   // <--- CORRECT FIELD
+      updateBLChart(msg.payload);                 // <--- CORRECT FIELD
+    }
+  } catch (e) {
+    console.log("Message parse error", e);
+  }
+
+
+
+
+});
+
+</script>
+
+<script>
+  // MOST RELIABLE ON iOS
+  window.ReactNativeWebView = window.ReactNativeWebView || {};
+
+  window.ReactNativeWebView.onMessage = function(event) {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === "sensorData") {
+        console.log("Chart received sensorData:", msg.payload);
+        updateBLChart(msg.payload);
+      }
+    } catch (e) {
+      console.log("onMessage parse error:", e);
+    }
+  };
+
+  // FALLBACK (Android / older RN versions)
+  window.addEventListener("message", function(event) {
+    try {
+      const msg = JSON.parse(event.data);
+      if (msg.type === "sensorData") {
+        console.log("Chart received sensorData (fallback):", msg.payload);
+        updateBLChart(msg.payload);
+      }
+    } catch (e) {
+      console.log("Fallback parse error:", e);
+    }
+  });
+</script>
+
+
+
+  
+
   <script>
     (function() {
       // Initially hide the banner
@@ -5730,6 +5982,7 @@ function XJ({ className: e = "w-10 h-10" }) {
     try {
       const data = JSON.parse(event.data);
 
+      // update cards with sensor readings
       if (data.type === 'updateStats' && data.payload) {
         const { totalExposure, avgIntensity, maxIntensity, latestIntensity, numberReadings } = data.payload;
 
@@ -5741,6 +5994,7 @@ function XJ({ className: e = "w-10 h-10" }) {
         if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
 
+      // update storage stats in data tab
       if (data.type === 'storageStats' && data.payload) {
         const { sizeKB, totalReadings } = data.payload;
 

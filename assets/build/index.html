@@ -5653,7 +5653,7 @@ function XJ({ className: e = "w-10 h-10" }) {
 <style>
 
   #bl-background {
-  background: rgba(242,244,255,0.9);
+  background: rgba(242,244,255,0.9); /* lavender bkgd */
   width: 100vw !important;
   margin-left: calc(-50vw + 50%);
   padding: 20px 0;
@@ -5697,6 +5697,101 @@ function XJ({ className: e = "w-10 h-10" }) {
     width: 130px;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
   }
+
+  #storage-background {
+    background: rgba(242,244,255,0.9);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: 20px 0;
+  }
+
+  #storage-card {
+    background: #FFFFFF;
+    border-radius: 22px;
+    padding: 20px;
+    margin: 24px 16px;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .storage-header {
+    margin-bottom: 16px;
+  }
+
+  .storage-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .storage-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  /* Two-box row */
+  .storage-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .storage-box {
+    background: #F7F9FF;
+    flex: 1;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #EEF0FA;
+    margin-right: 12px;
+  }
+
+  .storage-box:last-child {
+    margin-right: 0;
+  }
+
+  .storage-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+
+  .storage-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #222;
+  }
+
+  /* Daily/week/month breakdown */
+  .storage-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #EEE;
+    padding: 16px;
+    margin-bottom: 12px;
+
+    display: flex;                      /* NEW */
+    align-items: center;                /* vertically center title + pill */
+    justify-content: space-between;     /* title on left, pill on right */
+  }
+
+  .storage-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+
+  .storage-section-value {
+    padding: 4px 10px;
+    background: #F8F8F8;
+    border-radius: 12px;
+    color: #444;
+    font-size: 14px;
+}
+
 </style>
 
 <div id="bl-background">
@@ -5840,29 +5935,103 @@ function XJ({ className: e = "w-10 h-10" }) {
     console.log("Message parse error", e);
   }
 
-
-
-
 });
 
+// Update Data Storage card
+function updateStorageCard(stats, sensorLogData) {
+    // Update total + storage size
+    document.getElementById("storage-total").textContent = stats.totalReadings;
+    document.getElementById("storage-size").textContent = stats.sizeKB.toFixed(2) + " KB";
+
+    // Compute Today/Week/Month counts
+    const now = new Date();
+
+    function inDay(r) {
+      const d = new Date(r.receivedAt);
+      return d.toDateString() === now.toDateString();
+    }
+
+    function inWeek(r) {
+      const d = new Date(r.receivedAt);
+      const monday = new Date(now);
+      monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      return d >= monday;
+    }
+
+    function inMonth(r) {
+      const d = new Date(r.receivedAt);
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }
+
+    const todayCount = sensorLogData.filter(inDay).length;
+    const weekCount = sensorLogData.filter(inWeek).length;
+    const monthCount = sensorLogData.filter(inMonth).length;
+
+    document.getElementById("storage-today").textContent = `${todayCount} readings`;
+    document.getElementById("storage-week").textContent = `${weekCount} readings`;
+    document.getElementById("storage-month").textContent = `${monthCount} readings`;
+  }
+
 </script>
+
+<div id="storage-background">
+  <div id="storage-card">
+    <div class="storage-header">
+      <div class="storage-title">Data Storage</div>
+      <div class="storage-subtitle">Manage your locally stored blue light readings</div>
+    </div>
+
+    <div class="storage-row">
+      <div class="storage-box">
+        <div class="storage-label">Total Readings</div>
+        <div id="storage-total" class="storage-value">0</div>
+      </div>
+
+      <div class="storage-box">
+        <div class="storage-label">Storage Used</div>
+        <div id="storage-size" class="storage-value">0.00 KB</div>
+      </div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">Today</div>
+      <div id="storage-today" class="storage-section-value">0 readings</div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">This Week</div>
+      <div id="storage-week" class="storage-section-value">0 readings</div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">This Month</div>
+      <div id="storage-month" class="storage-section-value">0 readings</div>
+    </div>
+  </div>
+</div>
 
 <script>
   // MOST RELIABLE ON iOS
   window.ReactNativeWebView = window.ReactNativeWebView || {};
 
   window.ReactNativeWebView.onMessage = function(event) {
-    try {
-      const msg = JSON.parse(event.data);
+  try {
+    const msg = JSON.parse(event.data);
 
-      if (msg.type === "sensorData") {
-        console.log("Chart received sensorData:", msg.payload);
-        updateBLChart(msg.payload);
-      }
-    } catch (e) {
-      console.log("onMessage parse error:", e);
+    if (msg.type === "sensorData") {
+      window.__lastSensorLogData = msg.payload;
+      updateBLChart(msg.payload);
     }
-  };
+
+    if (msg.type === "storageStats") {
+      updateStorageCard(msg.payload, window.__lastSensorLogData || []);
+    }
+
+  } catch (e) {
+    console.log("onMessage parse error:", e);
+  }
+};
+
 
   // FALLBACK (Android / older RN versions)
   window.addEventListener("message", function(event) {
@@ -5876,6 +6045,7 @@ function XJ({ className: e = "w-10 h-10" }) {
       console.log("Fallback parse error:", e);
     }
   });
+
 </script>
   
 
@@ -5970,6 +6140,7 @@ function XJ({ className: e = "w-10 h-10" }) {
         if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
 
+      /*
       // update storage stats in data tab
       if (data.type === 'storageStats' && data.payload) {
         const { sizeKB, totalReadings } = data.payload;
@@ -5978,7 +6149,7 @@ function XJ({ className: e = "w-10 h-10" }) {
         if (totalReadings !== undefined) updateCardValue('Total Readings', totalReadings);
 
       }
-
+      */
       /*
       if (data.type === 'timeRangeStats' && data.payload) {
         const { readingsToday, readingsWeek, readingsMonth } = data.payload;

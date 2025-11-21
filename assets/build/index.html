@@ -5488,6 +5488,7 @@ function XJ({ className: e = "w-10 h-10" }) {
     box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
   }
 
+  /* Data Storage Tracking */
   #storage-background {
     background: rgba(242,244,255,0.9);
     width: 100vw;
@@ -5580,9 +5581,95 @@ function XJ({ className: e = "w-10 h-10" }) {
     border-radius: 12px;
     color: #444;
     font-size: 14px;
+  }
+
+  /* Sensor Reading Cards */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 16px;
+  }
+
+  .metric-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
+  }
+
+  .metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .metric-icon {
+    font-size: 18px;
+    opacity: 0.85;
+  }
+
+  .metric-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+  }
+
+  .metric-sub {
+    font-size: 13px;
+    color: #777;
 }
 
+
 </style>
+
+<div class="metrics-grid">
+
+  <!-- Total Exposure -->
+  <div class="metric-card">
+    <div class="metric-sub">
+      <span>Total Exposure</span>
+    </div>
+    <div id="metric-total-exposure" class="metric-value">0 BLU</div>
+    <div class="metric-sub">BLU</div>
+  </div>
+
+  <!-- Avg Intensity -->
+  <div class="metric-card">
+    <div class="metric-sub">
+      <span>Avg Intensity</span>
+    </div>
+    <div id="metric-avg-intensity" class="metric-value">0</div>
+    <div class="metric-sub">BLU</div>
+  </div>
+
+  <!-- Latest Intensity Timestamp -->
+  <div class="metric-card">
+    <div class="metric-sub">
+      <span>Intensity</span>
+    </div>
+    <div id="metric-latest-time" class="metric-value">--</div>
+    <div class="metric-sub">BLU</div>
+  </div>
+
+  <!-- Peak Intensity -->
+  <div class="metric-card">
+    <div class="metric-sub">
+      <span>Peak Intensity</span>
+    </div>
+    <div id="metric-peak" class="metric-value">0</div>
+    <div class="metric-sub">Max reading</div>
+  </div>
+
+</div>
+
 
 <div id="bl-background">
   <div id="bl-card">
@@ -5761,6 +5848,27 @@ function updateStorageCard(stats, sensorLogData) {
     document.getElementById("storage-week").textContent = `${weekCount} readings`;
     document.getElementById("storage-month").textContent = `${monthCount} readings`;
   }
+
+  function updateMetricCards(stats) {
+    document.getElementById("metric-total-exposure").textContent =
+      stats.totalExposure.toFixed(1) + " BLU";
+
+    document.getElementById("metric-avg-intensity").textContent =
+      Math.round(stats.avgIntensity);
+
+    document.getElementById("metric-peak").textContent =
+      stats.maxIntensity;
+
+    const latest = window.__lastSensorLogData?.at(-1);
+    if (latest) {
+      document.getElementById("metric-latest-time").textContent =
+        new Date(latest.receivedAt).toLocaleTimeString([], {
+          hour: 'numeric',
+          minute: '2-digit'
+        });
+    }
+  }
+
 
 </script>
 

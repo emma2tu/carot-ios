@@ -898,137 +898,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                                                                                     return u }, []), l = N.useMemo(() => { const u = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], c = [], 
                                                                                     d = new Date().getMonth(); for (let h = 11; h >= 0; h--) { const p = (d - h + 12) % 12, v = p >= 10 || p <= 2 ? 1.2 : .9, x = 310 * v, 
                                                                                     w = (Math.random() - .5) * 50; c.push({ month: u[p], blu: Math.max(200, Math.min(450, x + w)), 
-                                                                                    avgIntensity: Math.round(50 * v + (Math.random() - .5) * 15) }) } return c }, []); return E.jsxs("div", { 
-                                                                                      className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", children: [E.jsxs("div", { 
-                                                                                        className: "flex items-start sm:items-center justify-between mb-4 sm:mb-6 gap-2 flex-col sm:flex-row", 
-                                                                                        children: [E.jsxs("div", { className: "min-w-0", children: [E.jsx("h2", { className: "text-gray-900 mb-1", 
+                                                                                    avgIntensity: Math.round(50 * v + (Math.random() - .5) * 15) }) } return c }, []); } 
 
-                                                                                        children: "Blue Light Exposure" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
-                                                                                        children: "Track your daily blue light exposure patterns" })] }), 
 
-                                                                                        E.jsxs(aZ, { value: e, onValueChange: t, children: [E.jsx(lZ, { className: "w-28 sm:w-32 flex-shrink-0", 
-                                                                                        children: E.jsx(sZ, {}) }), E.jsxs(uZ, { children: [
-                                                                                        
-                                                                                        E.jsx(Kc, { value: "today", children: "Today" }), 
-                                                                                        E.jsx(Kc, { value: "week", children: "Week" }), 
-                                                                                        E.jsx(Kc, { value: "month", children: "Month" }), 
-                                                                                        E.jsx(Kc, { value: "year", children: "Year" })] })] })] }), 
-                                                                                        
-                                                                                        e === "today" ? E.jsx(Nc, { width: "100%", height: 250, 
-                                                                                        children: E.jsxs(QK, { data: n, margin: { top: 5, right: 5, left: -20, bottom: 5 }, children: [E.jsx("defs", { 
-                                                                                        
-                                                                                          children: E.jsxs("linearGradient", { id: "colorIntensity", x1: "0", y1: "0", x2: "0", y2: "1", 
-                                                                                          children: [E.jsx("stop", { offset: "5%", stopColor: "#6366f1", stopOpacity: .3 }), E.jsx("stop", { offset: "95%", stopColor: "#6366f1", stopOpacity: 0 })] }) }), 
-                                                                                          E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "time", stroke: "#6b7280", style: { fontSize: "12px" } }), 
-                                                                                          E.jsx(zn, { stroke: "#6b7280", style: { fontSize: "12px" }, label: { value: "Intensity", angle: -90, position: "insideLeft", 
-                                                                                          style: { fontSize: "12px" } } }), E.jsx(wr, { contentStyle: { backgroundColor: "white", border: "1px solid #e5e7eb", 
-                                                                                          borderRadius: "8px", fontSize: "12px" } }), E.jsx(Vi, { type: "monotone", dataKey: "intensity", stroke: "#6366f1", 
-                                                                                          strokeWidth: 2, fill: "url(#colorIntensity)", name: "Intensity" })] }) }) : e === "week" ? E.jsx(Nc, { 
-                                                                                            width: "100%", height: 250, children: E.jsxs(qC, { data: i, margin: { top: 5, right: 5, left: -20, bottom: 5 }, 
-                                                                                            children: [E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "day", stroke: "#6b7280", 
-                                                                                            style: { fontSize: "12px" } }), E.jsx(zn, { stroke: "#6b7280", style: { fontSize: "12px" } }), E.jsx(wr, { 
-                                                                                              contentStyle: { backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "8px", fontSize: "12px" } }), 
-                                                                                              E.jsx(Un, { wrapperStyle: { fontSize: "12px" } }), E.jsx($i, { dataKey: "blu", fill: "#3b82f6", name: "BLU", 
-                                                                                              radius: [8, 8, 0, 0] })] }) }) : e === "month" ? E.jsx(Nc, { width: "100%", height: 250, 
-                                                                                              children: E.jsxs(XK, { data: a, margin: { top: 5, right: 5, left: -20, bottom: 5 }, 
-                                                                                              children: [E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "date", 
-                                                                                              stroke: "#6b7280", style: { fontSize: "12px" } }), E.jsx(zn, { stroke: "#6b7280", style: { fontSize: "12px" } }), 
-                                                                                              E.jsx(wr, { contentStyle: { backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "8px", 
-                                                                                              fontSize: "12px" } }), E.jsx(Un, { wrapperStyle: { fontSize: "12px" } }), E.jsx(hu, { type: "monotone", 
-                                                                                              dataKey: "blu", stroke: "#3b82f6", strokeWidth: 2, dot: { fill: "#3b82f6", r: 2 }, name: "Daily BLU" })] }) }) : E.jsx(Nc, 
-                                                                                              { width: "100%", height: 250, children: E.jsxs(qC, { data: l, margin: { top: 5, right: 5, left: -20, bottom: 5 }, 
-                                                                                              children: [E.jsx(dl, { strokeDasharray: "3 3", stroke: "#e5e7eb" }), E.jsx(Fn, { dataKey: "month", stroke: "#6b7280", 
-                                                                                              style: { fontSize: "12px" } }), E.jsx(zn, { stroke: "#6b7280", style: { fontSize: "12px" } }), 
-                                                                                              E.jsx(wr, { contentStyle: { backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "8px", 
-                                                                                              fontSize: "12px" } }), E.jsx(Un, { wrapperStyle: { fontSize: "12px" } }), E.jsx($i, { dataKey: "blu", 
-                                                                                              fill: "#6366f1", name: "Avg BLU", radius: [8, 8, 0, 0] })] }) })] }), E.jsxs("div", { 
-                                                                                                className: "grid grid-cols-1 gap-3 sm:gap-4", children: [e === "today" && E.jsxs(E.Fragment, { 
-                                                                                                  children: [E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200", 
-                                                                                                  children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                    className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                    children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                    
-                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                    children: "Peak Activity Period" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                    children: "Highest blue light exposure detected between 2:00 PM - 4:00 PM today. Consider taking breaks during afternoon work sessions." })] })] }) }), 
-                                                                                                    E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-green-200", 
-                                                                                                    children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                      className: "w-10 h-10 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                      children: E.jsx(hl, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                      children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Morning Pattern" }), 
-                                                                                                      E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                      children: "Your morning exposure (6 AM - 12 PM) is moderate. Natural light in the morning helps regulate circadian rhythm." })] })] }) }), 
-                                                                                                      E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-violet-50 border-purple-200", 
-                                                                                                      children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                        className: "w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                        children: E.jsx(rj, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                        children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Evening Recommendation" }), 
-                                                                                                        E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                        children: "Try reducing screen time after 9 PM. Current evening exposure may impact sleep quality." })] })] }) })] }), 
-                                                                                                        e === "week" && E.jsxs(E.Fragment, { children: [E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200", 
-                                                                                                        children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                          className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                          children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                          children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                          children: "Weekday vs Weekend Pattern" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                          children: "Your weekday exposure (Mon-Fri) is 38% higher than weekends. This suggests work-related screen time is the primary source." })] })] }) }), 
-                                                                                                          E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200", 
-                                                                                                          children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                            className: "w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                            children: E.jsx(Xc, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                            children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Mid-Week Spike" }), 
-                                                                                                            E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                            children: "Wednesday shows peak exposure this week. Consider implementing the 20-20-20 rule: every 20 minutes, look at something 20 feet away for 20 seconds." })] })] }) }), 
-                                                                                                            E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-green-200", 
-                                                                                                            children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                              className: "w-10 h-10 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                              children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                              children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Positive Trend" }), 
-                                                                                                              E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                              children: "Your average daily exposure decreased 12% compared to last week. Keep up the healthy habits!" })] })] }) })] }), 
-                                                                                                              e === "month" && E.jsxs(E.Fragment, { children: [E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200", 
-                                                                                                              children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                                children: E.jsx(Xc, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                                children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                                children: "Monthly Pattern Analysis" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                children: "Exposure levels show a cyclical pattern with peaks every 7-10 days, likely correlating with your work schedule and project deadlines." })] })] }) }), 
-                                                                                                                E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-violet-50 to-purple-50 border-violet-200", 
-                                                                                                                children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                  className: "w-10 h-10 rounded-full bg-violet-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                                  children: E.jsx(hl, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                                  children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Best Days This Month" }), E.jsx("p", { 
-                                                                                                                    className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                    children: "Days with BLU below 250 show better balance. Try to replicate the habits from your lower-exposure days." })] })] }) }), 
-                                                                                                                    E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200", 
-                                                                                                                    children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                      className: "w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                                      children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                                      children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                                      children: "Improvement Opportunity" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                      children: "Your exposure decreased 15% this month. Continue reducing afternoon screen time to maintain this positive trend." })] })] }) })] }), 
-                                                                                                                      e === "year" && E.jsxs(E.Fragment, { children: [E.jsx(dt, { 
-                                                                                                                        className: "p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200", 
-                                                                                                                        children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                          className: "w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                                          children: E.jsx(ya, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                                          children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", 
-                                                                                                                          children: "Seasonal Trend Detected" }), E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                          children: "Blue light exposure tends to be 20% higher during winter months (Nov-Feb), likely due to increased indoor time and reduced natural daylight." })] })] }) }), 
-                                                                                                                          E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-green-200", 
-                                                                                                                          children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                            className: "w-10 h-10 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0", children: E.jsx(hl, { 
-                                                                                                                              className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", children: [E.jsx("h4", { 
-                                                                                                                                className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Summer Behavior" }), E.jsx("p", { 
-                                                                                                                                  className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                                  children: "June-August showed the lowest exposure levels. Consider spending more time outdoors year-round to replicate this natural balance." })] })] }) }), 
-                                                                                                                                  E.jsx(dt, { className: "p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-violet-50 border-purple-200", 
-                                                                                                                                  children: E.jsxs("div", { className: "flex items-start gap-3", children: [E.jsx("div", { 
-                                                                                                                                    className: "w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center flex-shrink-0", 
-                                                                                                                                    children: E.jsx(Xc, { className: "w-5 h-5 text-white" }) }), E.jsxs("div", { className: "flex-1", 
-                                                                                                                                    children: [E.jsx("h4", { className: "text-gray-900 mb-1 text-sm sm:text-base", children: "Long-Term Health" }), 
-                                                                                                                                    E.jsx("p", { className: "text-gray-700 text-xs sm:text-sm", 
-                                                                                                                                    children: "Your yearly average is within healthy range. Continue monitoring to maintain good eye health and sleep quality over time." })] })] }) })] })] })] }) } 
                                                                                                                                     function vZ(e) { if (typeof document > "u") return; 
                                                                                                                                     let t = document.head || document.getElementsByTagName("head")[0], 
                                                                                                                                     r = document.createElement("style"); r.type = "text/css", t.appendChild(r), 
@@ -1167,76 +1039,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/alert-
               document.body.appendChild(y), y.click(), document.body.removeChild(y), URL.revokeObjectURL(g), 
               hk.success("Data exported successfully") }, a = HZ(t), l = VZ(t), u = GZ(t), c = Gg(a), d = Gg(l), 
               h = Gg(u), v = (JSON.stringify(t).length / 1024).toFixed(2); return E.jsxs("div", { 
-                className: "space-y-3 sm:space-y-4", children: [E.jsxs(dt, { className: "p-4 sm:p-6", 
-                children: [E.jsxs("div", { className: "flex items-center justify-between mb-4 sm:mb-6", children: [
-                  
-                E.jsxs("div", { children: [E.jsx("h2", { className: "text-gray-900 mb-1", 
-                children: "Data Storage" }), E.jsx("p", { className: "text-gray-600 text-xs sm:text-sm", 
-                children: "Manage your locally stored blue light readings" })] }), E.jsx(BL, { 
-                  className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-500" })] }), E.jsxs("div", { 
-                    className: "grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6", children: [E.jsxs("div", { 
-                      className: "p-3 sm:p-4 bg-blue-50 rounded-lg", children: [
-                        
-                      E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
-                      children: "Total Readings" }), E.jsx("div", { className: "text-gray-900", 
-                      children: t.length })] }), E.jsxs("div", { className: "p-3 sm:p-4 bg-indigo-50 rounded-lg", 
-                      
-                      children: [E.jsx("div", { className: "text-xs sm:text-sm text-gray-600 mb-1", 
-                      children: "Storage Used (KB)" }), E.jsxs("div", { className: "text-gray-900", 
-                      children: [v, " KB"] })] })] }), E.jsxs("div", { className: "space-y-3", 
-                      children: [E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", 
-                      children: [E.jsxs("div", { className: "flex items-center justify-between mb-2", 
-
-                      children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
-                      children: "Today" }), E.jsxs(Hg, { variant: "secondary", children: [a.length, " readings"] })] }), 
-                      E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
-                        
-                      E.jsxs("div", { className: "text-gray-600", 
-                      children: ["Total: ", E.jsxs("span", { className: "text-gray-900", children: [c.totalHours, "h"] })] }), 
-                      
-                      E.jsxs("div", { className: "text-gray-600", 
-                      children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", children: [c.averageIntensity, "%"] })] })] })] }), 
-                      E.jsxs("div", { className: "p-3 sm:p-4 border rounded-lg", children: [
-                        E.jsxs("div", { className: "flex items-center justify-between mb-2", 
-                        children: [E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
-                        children: "This Week" }), E.jsxs(Hg, { variant: "secondary", children: [l.length, " readings"] })] }), 
-                        
-                        E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
-                          E.jsxs("div", { className: "text-gray-600", 
-                          children: ["Total: ", E.jsxs("span", { className: "text-gray-900", 
-                          children: [d.totalHours, "h"] })] }), E.jsxs("div", { className: "text-gray-600", 
-                          children: ["Avg: ", E.jsxs("span", { className: "text-gray-900", 
-                          children: [d.averageIntensity, "%"] })] })] })] }), E.jsxs("div", { 
-                            className: "p-3 sm:p-4 border rounded-lg", children: [
-                              
-                            E.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
-                              E.jsx("span", { className: "text-gray-900 text-sm sm:text-base", 
-                              children: "This Month" }), E.jsxs(Hg, { variant: "secondary", 
-                              children: [u.length, " readings"] })] }), 
-                              
-                              E.jsxs("div", { className: "grid grid-cols-2 gap-2 text-xs sm:text-sm", children: [
-                              E.jsxs("div", { className: "text-gray-600", children: ["Total: ", 
-                              E.jsxs("span", { className: "text-gray-900", children: [h.totalHours, "h"] })] }), 
-                              
-                              E.jsxs("div", { className: "text-gray-600", children: ["Avg: ", 
-                              E.jsxs("span", { className: "text-gray-900", children: [h.averageIntensity, "%"] })] })] })] })] })] }), 
-                              
-                              E.jsxs(dt, { className: "p-4 sm:p-6", children: [
-                                E.jsx("h3", { className: "text-gray-900 mb-3 sm:mb-4", 
-                                children: "Data Actions" }), E.jsxs("div", { className: "flex flex-col sm:flex-row gap-2 sm:gap-3", 
-                                children: [E.jsxs(ef, { variant: "outline", onClick: i, disabled: t.length === 0, 
-                                className: "gap-2 flex-1", children: [
-                                  E.jsx(zL, { className: "w-4 h-4" }), "Export Data"] }), 
-                                  E.jsxs(CJ, { children: [E.jsx(kJ, { asChild: !0, children: 
-                                    E.jsxs(ef, { variant: "outline", disabled: t.length === 0, 
-                                    className: "gap-2 flex-1 text-red-600 hover:text-red-700", children: [
-                                      
-                                    E.jsx(GL, { className: "w-4 h-4" }), "Clear All Data"] }) }), 
-                                    E.jsxs(MJ, { children: [E.jsxs(IJ, { children: [E.jsx(DJ, { 
-                                      children: "Are you sure?" }), E.jsxs($J, { 
-                                        children: ["This will permanently delete all ", t.length, " stored blue light readings. This action cannot be undone."] })] }), 
-                                        E.jsxs(RJ, { children: [E.jsx(BJ, { children: "Cancel" }), E.jsx(LJ, { onClick: n, 
-                                          className: "bg-red-600 hover:bg-red-700", children: "Delete All Data" })] })] })] })] })] }), ] }) } 
+                className: "space-y-3 sm:space-y-4"}) } 
                                                 
                                                 var nw = "Progress", iw = 100, [zJ] = Fi(nw), [qJ, WJ] = zJ(nw), eR = N.forwardRef((e, t) => { const { __scopeProgress: r, 
                                                   value: n = null, max: i, getValueLabel: a = UJ, ...l } = e; 
@@ -1410,22 +1213,9 @@ function XJ({ className: e = "w-10 h-10" }) {
                                                                                                             
                                                                                                             E.jsx("div", { id: "maxIntensity",
                                                                                                               className: "text-gray-900", children: c.peakIntensity }), E.jsx("p", { 
-                                                                                                                className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Max reading" })] })] }), 
-                                                                                                                
-                                                                                                                E.jsxs(_L, { defaultValue: "exposure", className: "space-y-4", children: [E.jsxs(OL, { 
-                                                                                                                  className: "grid w-full grid-cols-2", children: [
-                                                                                                                    E.jsx(XS, { value: "exposure", className: "text-xs sm:text-sm", children: "Tracking" }), 
-                                                                                                                    E.jsx(XS, { value: "data", className: "text-xs sm:text-sm", children: "Data" })] }), 
-                                                                                                                    E.jsx(QS, { value: "exposure", className: "space-y-4", children: E.jsx(mZ, {}) }), 
-                                                                                                                    E.jsx(QS, { value: "data", className: "space-y-4", children: E.jsx(FJ, {}) })] }), 
-
-                                                                                                                        n && t && E.jsxs(Kg, { className: "border-blue-200 bg-blue-50", 
-                                                                                                                        children: [E.jsx(Dh, { className: "h-4 w-4 text-blue-600" }), 
-                                                                                                                        E.jsxs(Yg, { className: "text-blue-900 text-xs sm:text-sm", children: [E.jsx("strong", { 
-                                                                                                                          children: "Mock Mode Active." }), " Using simulated blue light data. On Android/Desktop Chrome, real Bluetooth connection available. For iOS, wrap with Capacitor and use native Bluetooth plugin."] })] }), 
-                                                                                                                          i && E.jsxs(Kg, { className: "border-red-200 bg-red-50", children: [E.jsx(Dh, { 
-                                                                                                                            className: "h-4 w-4 text-red-600" }), E.jsx(Yg, { className: "text-red-900 text-xs sm:text-sm", 
-                                                                                                                            children: i })] }), ] })] }) } 
+                                                                                                                className: "text-gray-500 mt-1 text-xs sm:text-sm", children: "Max reading" }
+                                                                                                              )] })] }), ] })] }) } 
+                                                                                                              
                                                                                                                                 var JJ = (e, t, r, n, i, a, l, u) => { let c = document.documentElement, d = ["light", "dark"]; 
                                                                                                                                 function h(x) { (Array.isArray(e) ? e : [e]).forEach(w => { let g = w === "class", y = g && a ? i.map(_ => a[_] || _) : i; g ? (c.classList.remove(...y), 
                                                                                                                                 c.classList.add(a && a[x] ? a[x] : x)) : c.setAttribute(w, x) }), p(x) } 
@@ -6139,27 +5929,6 @@ function updateStorageCard(stats, sensorLogData) {
         if (maxIntensity !== undefined) updateCardValue('Peak Intensity', maxIntensity);
         if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
       }
-
-      /*
-      // update storage stats in data tab
-      if (data.type === 'storageStats' && data.payload) {
-        const { sizeKB, totalReadings } = data.payload;
-
-        if (sizeKB !== undefined) updateCardValue('Storage Used (KB)', sizeKB);
-        if (totalReadings !== undefined) updateCardValue('Total Readings', totalReadings);
-
-      }
-      */
-      /*
-      if (data.type === 'timeRangeStats' && data.payload) {
-        const { readingsToday, readingsWeek, readingsMonth } = data.payload;
-
-        if (readingsToday !== undefined) updateCardValue('Total Today', readingsToday);
-        if (readingsWeek !== undefined) updateCardValue('Total This Week', readingsWeek);
-        if (readingsMonth !== undefined) updateCardValue('Total This Month', readingsMonth);
-
-      }
-      */
     } catch (err) {
       console.error('BLE message parse error:', err);
     }

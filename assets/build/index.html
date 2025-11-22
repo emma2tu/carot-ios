@@ -38,7 +38,7 @@
   #bl-card-title {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
-    font-size: 19px;
+    font-size: 18px;
     color: #333;
     margin-bottom: 4px;
   }
@@ -81,7 +81,7 @@
   }
 
   .storage-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #333;
   }
@@ -120,37 +120,9 @@
   }
 
   .storage-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: #222;
-  }
-
-  /* Daily/week/month breakdown */
-  .storage-section {
-    background: #FFFFFF;
-    border-radius: 16px;
-    border: 1px solid #EEE;
-    padding: 16px;
-    margin-bottom: 12px;
-
-    display: flex;                      /* NEW */
-    align-items: center;                /* vertically center title + pill */
-    justify-content: space-between;     /* title on left, pill on right */
-  }
-
-  .storage-section-title {
     font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-  }
-
-  .storage-section-value {
-    padding: 4px 10px;
-    background: #F8F8F8;
-    border-radius: 12px;
-    color: #444;
-    font-size: 14px;
+    font-weight: 400;
+    color: #222;
   }
 
   /* Sensor Reading Cards */
@@ -538,21 +510,6 @@
         <div class="storage-label">Storage Used</div>
         <div id="storage-size" class="storage-value">0.00 KB</div>
       </div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">Today</div>
-      <div id="storage-today" class="storage-section-value">0 readings</div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">This Week</div>
-      <div id="storage-week" class="storage-section-value">0 readings</div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">This Month</div>
-      <div id="storage-month" class="storage-section-value">0 readings</div>
     </div>
   </div>
 </div>

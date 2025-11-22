@@ -5443,7 +5443,7 @@ function XJ({ className: e = "w-10 h-10" }) {
 <style>
 
   #bl-background {
-  background: rgba(242,244,255,0.9); /* lavender bkgd */
+  background: rgba(239, 243, 252, 1);
   width: 100vw !important;
   margin-left: calc(-50vw + 50%);
   padding: 20px 0;
@@ -5454,7 +5454,7 @@ function XJ({ className: e = "w-10 h-10" }) {
     margin: 20px 16px;
     padding: 20px;
     border-radius: 22px;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(0,0,0,0.06);
     box-shadow: 0px 8px 20px rgba(0,0,0,0.06);
   }
@@ -5489,12 +5489,6 @@ function XJ({ className: e = "w-10 h-10" }) {
   }
 
   /* Data Storage Tracking */
-  #storage-background {
-    background: rgba(242,244,255,0.9);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    padding: 20px 0;
-  }
 
   #storage-card {
     background: #FFFFFF;
@@ -5616,10 +5610,11 @@ function XJ({ className: e = "w-10 h-10" }) {
   }
 
   .metric-value {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 400;
     color: #222;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .metric-sub {
@@ -5630,48 +5625,53 @@ function XJ({ className: e = "w-10 h-10" }) {
 
 </style>
 
-<div class="metrics-grid">
 
-  <!-- Total Exposure -->
-  <div class="metric-card">
-    <div class="metric-sub">
-      <span>Total Exposure</span>
-    </div>
-    <div id="metric-total-exposure" class="metric-value">0 BLU</div>
-    <div class="metric-sub">BLU</div>
-  </div>
-
-  <!-- Avg Intensity -->
-  <div class="metric-card">
-    <div class="metric-sub">
-      <span>Avg Intensity</span>
-    </div>
-    <div id="metric-avg-intensity" class="metric-value">0</div>
-    <div class="metric-sub">BLU</div>
-  </div>
-
-  <!-- Latest Intensity Timestamp -->
-  <div class="metric-card">
-    <div class="metric-sub">
-      <span>Intensity</span>
-    </div>
-    <div id="metric-latest-time" class="metric-value">--</div>
-    <div class="metric-sub">BLU</div>
-  </div>
-
-  <!-- Peak Intensity -->
-  <div class="metric-card">
-    <div class="metric-sub">
-      <span>Peak Intensity</span>
-    </div>
-    <div id="metric-peak" class="metric-value">0</div>
-    <div class="metric-sub">Max reading</div>
-  </div>
-
-</div>
-
+<!--  gui components    -->
 
 <div id="bl-background">
+  
+<!--  sensor reading cards    -->
+  <div class="metrics-grid">
+
+    <!-- Total Exposure -->
+    <div class="metric-card">
+      <div class="metric-sub">
+        <span>Total Exposure</span>
+      </div>
+      <div id="metric-total-exposure" class="metric-value">0 BLU</div>
+      <div class="metric-sub">BLU</div>
+    </div>
+
+    <!-- Avg Intensity -->
+    <div class="metric-card">
+      <div class="metric-sub">
+        <span>Avg Intensity</span>
+      </div>
+      <div id="metric-avg-intensity" class="metric-value">0</div>
+      <div class="metric-sub">BLU</div>
+    </div>
+
+    <!-- Latest Intensity Timestamp -->
+    <div class="metric-card">
+      <div class="metric-sub">
+        <span>Intensity</span>
+      </div>
+      <div id="metric-latest-time" class="metric-value">--</div>
+      <div class="metric-sub">BLU</div>
+    </div>
+
+    <!-- Peak Intensity -->
+    <div class="metric-card">
+      <div class="metric-sub">
+        <span>Peak Intensity</span>
+      </div>
+      <div id="metric-peak" class="metric-value">0</div>
+      <div class="metric-sub">Max reading</div>
+    </div>
+
+  </div>
+
+<!--  blue light exposure graph    -->
   <div id="bl-card">
 
     <div id="bl-card-title">Blue Light Exposure</div>
@@ -5687,6 +5687,41 @@ function XJ({ className: e = "w-10 h-10" }) {
       <canvas id="bl_chart"></canvas>
     </div>
 
+  </div>
+
+  <!-- data storage cards    -->
+  <div id="storage-card">
+    <div class="storage-header">
+      <div class="storage-title">Data Storage</div>
+      <div class="storage-subtitle">Manage your locally stored blue light readings</div>
+    </div>
+
+    <div class="storage-row">
+      <div class="storage-box">
+        <div class="storage-label">Total Readings</div>
+        <div id="storage-total" class="storage-value">0</div>
+      </div>
+
+      <div class="storage-box">
+        <div class="storage-label">Storage Used</div>
+        <div id="storage-size" class="storage-value">0.00 KB</div>
+      </div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">Today</div>
+      <div id="storage-today" class="storage-section-value">0 readings</div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">This Week</div>
+      <div id="storage-week" class="storage-section-value">0 readings</div>
+    </div>
+
+    <div class="storage-section">
+      <div class="storage-section-title">This Month</div>
+      <div id="storage-month" class="storage-section-value">0 readings</div>
+    </div>
   </div>
 </div>
 
@@ -5872,41 +5907,6 @@ function updateStorageCard(stats, sensorLogData) {
 
 </script>
 
-<div id="storage-background">
-  <div id="storage-card">
-    <div class="storage-header">
-      <div class="storage-title">Data Storage</div>
-      <div class="storage-subtitle">Manage your locally stored blue light readings</div>
-    </div>
-
-    <div class="storage-row">
-      <div class="storage-box">
-        <div class="storage-label">Total Readings</div>
-        <div id="storage-total" class="storage-value">0</div>
-      </div>
-
-      <div class="storage-box">
-        <div class="storage-label">Storage Used</div>
-        <div id="storage-size" class="storage-value">0.00 KB</div>
-      </div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">Today</div>
-      <div id="storage-today" class="storage-section-value">0 readings</div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">This Week</div>
-      <div id="storage-week" class="storage-section-value">0 readings</div>
-    </div>
-
-    <div class="storage-section">
-      <div class="storage-section-title">This Month</div>
-      <div id="storage-month" class="storage-section-value">0 readings</div>
-    </div>
-  </div>
-</div>
 
 <script>
   // MOST RELIABLE ON iOS

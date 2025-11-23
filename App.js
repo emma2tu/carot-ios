@@ -80,13 +80,22 @@ export default function App() {
 
   // send persisted stats whenever they update
   useEffect(() => {
+    console.log("sending updates with webview",{
+      ...stats,
+      latestIntensity:
+      sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+    });
+
     if (!webref.current) return;
+
     webref.current.postMessage(
-      JSON.stringify({ type: 'updateStats', payload: stats,
+      JSON.stringify({ type: 'updateStats', payload: {
+        ...stats,
         latestIntensity: sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+      }
        })
     );
-  }, [stats]);
+  }, [stats, sensorLogData]);
 
   // send storage stats
   useEffect(() => {

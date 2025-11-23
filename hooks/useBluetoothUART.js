@@ -385,7 +385,7 @@ export function useBluetoothUART() {
       if (!device) return;
 
       // Add these for debugging:
-      console.log(device.name, device.id, device.serviceUUIDs);
+      //console.log(device.name, device.id, device.serviceUUIDs);
 
       // NEW matching logic
       const matches =

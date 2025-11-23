@@ -174,7 +174,8 @@
       align-items: center;
 
       height: 60px;
-      padding: 0 8px;
+      padding-left: 0;
+      padding-right: 8px;
       background: #FFFFFF;
 
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -231,7 +232,8 @@
     }
 
     #ble-status-banner {
-      width: 100%;
+      width: 92vw !important;
+      margin-left: calc(-50vw + 50%);
       padding: 10px 14px;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 14px;
@@ -710,56 +712,54 @@
 
 </script>
 
-<!-- Primary RN → WebView bridge -->
+<!-- Primary RN → WebView unified message bridge -->
 <script>
+(function () {
+
+  function handleMessage(event) {
+    let msg;
+    try {
+      msg = JSON.parse(event.data);
+      console.log("WEBVIEW RECEIVED:", msg);
+    } catch (e) {
+      console.log("Message parse error:", e, event.data);
+      return;
+    }
+
+    // --- SENSOR DATA (full log array) ---
+    if (msg.type === "sensorData") {
+      window.__lastSensorLogData = msg.payload;
+      updateBLChart(msg.payload);
+    }
+
+    // --- STORAGE STATS (total readings + size) ---
+    if (msg.type === "storageStats") {
+      updateStorageCard(msg.payload, window.__lastSensorLogData || []);
+    }
+
+    // --- REAL-TIME METRIC SUMMARY (avg, peak, etc.) ---
+    if (msg.type === "updateStats") {
+      updateMetricCards(msg.payload);
+    }
+
+    // --- BLE CONNECTION BANNER ---
+    if (msg.type === "bleConnection") {
+      handleBleConnectionMessage(!!msg.isConnected);
+    }
+  }
+
+  // iOS primary channel
   window.ReactNativeWebView = window.ReactNativeWebView || {};
+  window.ReactNativeWebView.onMessage = handleMessage;
 
-  // iOS path
-  window.ReactNativeWebView.onMessage = function(event) {
-    try {
-      const msg = JSON.parse(event.data);
+  // Android / fallback channels
+  document.addEventListener("message", handleMessage);
+  window.addEventListener("message", handleMessage);
 
-      if (msg.type === "sensorData") {
-        window.__lastSensorLogData = msg.payload;
-        updateBLChart(msg.payload);
-      }
-
-      if (msg.type === "storageStats") {
-        updateStorageCard(msg.payload, window.__lastSensorLogData || []);
-      }
-
-      if (msg.type === "updateStats") {
-        updateMetricCards(msg.payload);
-      }
-
-      if (msg.type === "bleConnection") {
-        handleBleConnectionMessage(!!msg.isConnected);
-      }
-
-    } catch (e) {
-      console.log("onMessage parse error:", e);
-    }
-  };
-
-  // Android fallback
-  window.addEventListener("message", (event) => {
-    try {
-      const msg = JSON.parse(event.data);
-
-      if (msg.type === "sensorData") {
-        window.__lastSensorLogData = msg.payload;
-        updateBLChart(msg.payload);
-      }
-
-      if (msg.type === "bleConnection") {
-        handleBleConnectionMessage(!!msg.isConnected);
-      }
-
-    } catch (e) {
-      console.log("fallback parse error:", e);
-    }
-  });
+  console.log("Unified RN → WebView message bridge initialized");
+})();
 </script>
+
 
 <!-- BLE Button + Banner -->
 <script>

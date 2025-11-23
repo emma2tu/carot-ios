@@ -562,10 +562,10 @@
       <!-- Latest Intensity Timestamp -->
       <div class="metric-card">
         <div class="metric-sub">
-          <span>Intensity</span>
+          <span>Peak Time</span>
         </div>
-        <div id="metric-latest-time" class="metric-value">--</div>
-        <div class="metric-sub">BLU</div>
+        <div id="metric-peak-time" class="metric-value">--</div>
+        <div class="metric-sub"></div>
       </div>
 
       <!-- Peak Intensity -->
@@ -743,11 +743,15 @@
         stats.maxIntensity;
     }
 
-    // 4. Latest intensity (RN sends this)
-    if (stats.latestIntensity !== undefined) {
-      document.getElementById("metric-latest-time").textContent =
-        stats.latestIntensity;
+    // 4. Peak time
+    if (stats.peakTime !== undefined) {
+      document.getElementById("metric-peak-time").textContent =
+        new Date(stats.peakTime).toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        });
     }
+
   }
 
 </script>

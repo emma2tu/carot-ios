@@ -80,13 +80,22 @@ export default function App() {
 
   // send persisted stats whenever they update
   useEffect(() => {
+    console.log("sending updates with webview",{
+      ...stats,
+      latestIntensity:
+      sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+    });
+
     if (!webref.current) return;
+
     webref.current.postMessage(
-      JSON.stringify({ type: 'updateStats', payload: stats,
+      JSON.stringify({ type: 'updateStats', payload: {
+        ...stats,
         latestIntensity: sensorLogData[sensorLogData.length - 1]?.intensity ?? null,
+      }
        })
     );
-  }, [stats]);
+  }, [stats, sensorLogData]);
 
   // send storage stats
   useEffect(() => {
@@ -194,24 +203,10 @@ export default function App() {
 
   // 🔹 Render WebView with a connection status banner
   return (
+    
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       {/* Connection status bar */}
 
-      <View style={{ padding: 10, backgroundColor: '#f8f8f8' }}>
-        {isScanning ? (
-          <Text style={{ fontSize: 16, fontWeight: '500', color: '#007bff' }}>
-            Scanning for Bluetooth devices...
-          </Text>
-        ) : isConnected ? (
-          <Text style={{ fontSize: 16, fontWeight: '500', color: 'green' }}>
-            Connected to device
-          </Text>
-        ) : (
-          <Text style={{ fontSize: 16, fontWeight: '500', color: 'red' }}>
-            Not connected
-          </Text>
-        )}
-      </View>
 
       {/* Web content */}
       <WebView

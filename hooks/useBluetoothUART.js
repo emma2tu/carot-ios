@@ -27,6 +27,7 @@ export function useBluetoothUART() {
     maxIntensity: 0,
     latestIntensity: 0,
     numberReadings: 0,
+    peakTime: 0,
   });
 
   // ⭐ NEW: instant storage stats
@@ -90,6 +91,7 @@ export function useBluetoothUART() {
         maxIntensity: 0,
         latestIntensity: 0,
         numberReadings: 0,
+        peakTime: 0,
       });
       console.log("[STATS] No readings — stats reset");
       return;
@@ -110,6 +112,7 @@ export function useBluetoothUART() {
         maxIntensity: 0,
         latestIntensity: 0,
         numberReadings: 0,
+        peakTime: 0,
       });
       console.log("[STATS] No readings today — stats reset");
       return;
@@ -121,12 +124,20 @@ export function useBluetoothUART() {
     const maxIntensity = Math.max(...intensities);
     const latestIntensity = intensities[intensities.length - 1];
 
+    const maxReading = todayReadings.reduce(
+      (max, r) => (r.intensity > max.intensity ? r : max),
+      todayReadings[0]
+    );
+
+    const peakTime = maxReading.receivedAt; 
+
     const newStats = {
       totalExposure,
       avgIntensity,
       maxIntensity,
       latestIntensity,
       numberReadings: intensities.length,
+      peakTime,
     };
 
     setStats(newStats);
@@ -375,7 +386,7 @@ export function useBluetoothUART() {
     setIsScanning(true);
     setConnectionState('scanning');
 
-    manager.startDeviceScan([SERVICE_UUID], null, (err, device) => {
+    manager.startDeviceScan(null, null, (err, device) => {
       if (err) {
         console.error('[ERROR] Scan error:', err);
         setIsScanning(false);
@@ -384,9 +395,14 @@ export function useBluetoothUART() {
 
       if (!device) return;
 
+      // Add these for debugging:
+      //console.log(device.name, device.id, device.serviceUUIDs);
+
+      // NEW matching logic
       const matches =
-        device.serviceUUIDs?.includes(SERVICE_UUID.toLowerCase()) ||
-        device.serviceUUIDs?.includes(SERVICE_UUID.toUpperCase());
+        (device.name && device.name.toLowerCase().includes("circuitpy")) ||
+        device.id === "CIRCUITPY1330";
+
 
       if (!matches) return;
 

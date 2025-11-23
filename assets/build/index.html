@@ -231,44 +231,63 @@
       color: #333;
     }
 
-    #ble-status-banner {
-      width: 92vw !important;
-      margin-left: calc(-50vw + 50%);
-      padding: 10px 14px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      text-align: left;
+    /* BLE status banner */
+    #ble-status-banner.banner {
+      width: calc(100% - 32px);
+      margin: 8px auto;
+      padding: 14px 8px;
 
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
 
-      background: #f5f5f5;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;  
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      color: white;
+
+      background: linear-gradient(90deg, #4A85FF 0%, #4945FF 100%);
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
     }
 
     #ble-status-banner.hidden {
       display: none;
     }
 
-    #ble-status-banner.connected {
-      background: #eaffea;
-      color: #1a7f1a;
-      border-bottom: 1px solid #b7e8b7;
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
 
-    #ble-status-banner.disconnected {
-      background: #ffecec;
-      color: #d63a3a;
-      border-bottom: 1px solid #f1b3b3;
+    .banner-right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
 
-    #ble-status-banner.scanning {
-      background: #fff8e6;
-      color: #b8860b;
-      border-bottom: 1px solid #f2da9a;
+    /* DEFAULT STATUS LIGHT (will be overridden by JS) */
+    .light {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #00d267; /* connected by default */
     }
+
+    /* Different light colors for states */
+    .light.connected { background: #00d267; }   /* green */
+    .light.scanning  { background: #e7b400; }   /* yellow */
+    .light.disconnected { background: #ff3b30; } /* red */
+
+    .intensity-icon {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
   </style>
 
   <!--  GUI components  -->
@@ -493,12 +512,33 @@
     </div>
   </div>
 
-  <!-- BLE Status Banner -->
-  <div id="ble-status-banner" class="hidden">
-    <span id="ble-status-text">Scanning...</span>
-  </div>
 
   <div id="bl-background">
+
+    <!-- BLE Status Banner -->
+    <div id="ble-status-banner" class="banner hidden">
+      <div class="banner-left">
+        <span id="ble-status-light" class="light"></span>
+        <span id="ble-status-text">Scanning...</span>
+      </div>
+
+      <div class="banner-right">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <line x1="12" y1="2" x2="12" y2="5"></line>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"></line>
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"></line>
+          <line x1="2" y1="12" x2="5" y2="12"></line>
+          <line x1="19" y1="12" x2="22" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"></line>
+          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="intensity-icon" width="20" height="20"></svg>
+        <span id="ble-intensity-value">--</span>
+      </div>
+    </div>
+
     <!--  Sensor reading cards    -->
     <div class="metrics-grid">
       <!-- Total Exposure -->
@@ -506,7 +546,7 @@
         <div class="metric-sub">
           <span>Total Exposure</span>
         </div>
-        <div id="metric-total-exposure" class="metric-value">0 BLU</div>
+        <div id="metric-total-exposure" class="metric-value">0</div>
         <div class="metric-sub">BLU</div>
       </div>
 
@@ -688,7 +728,7 @@
     // 1. Total Exposure
     if (stats.totalExposure !== undefined) {
       document.getElementById("metric-total-exposure").textContent =
-        stats.totalExposure.toFixed(1) + " BLU";
+        stats.totalExposure.toFixed(1);
     }
 
     // 2. Average intensity
@@ -740,7 +780,12 @@
     // --- REAL-TIME METRIC SUMMARY (avg, peak, etc.) ---
     if (msg.type === "updateStats") {
       updateMetricCards(msg.payload);
+
+      if (msg.payload?.latestIntensity !== undefined) {
+        updateBannerIntensity(msg.payload.latestIntensity);
+      }
     }
+    
 
     // --- BLE CONNECTION BANNER ---
     if (msg.type === "bleConnection") {
@@ -765,24 +810,33 @@
 <script>
   const bleBanner = document.getElementById("ble-status-banner");
   const bleText = document.getElementById("ble-status-text");
-  const bleButton = document.getElementById("ble-button");
+  const bleLight = document.getElementById("ble-status-light");
+  const bleIntensity = document.getElementById("ble-intensity-value");
 
   let bleLock = false;
   let bleScanTimeout = null;
 
-  bleButton.addEventListener("click", () => {
+  // When user taps the BLE button
+  document.getElementById("ble-button").addEventListener("click", () => {
     if (bleLock) return;
     bleLock = true;
 
-    bleBanner.classList.remove("hidden", "connected", "disconnected");
-    bleBanner.classList.add("scanning");
-    bleText.textContent = "Scanning...";
+    bleBanner.classList.remove("hidden");
 
+    // Show scanning state
+    bleText.textContent = "Scanning…";
+
+    bleLight.classList.remove("connected", "disconnected");
+    bleLight.classList.add("scanning");
+
+    bleIntensity.textContent = "-- intensity";
+
+    // Safety timeout
     if (bleScanTimeout) clearTimeout(bleScanTimeout);
     bleScanTimeout = setTimeout(() => {
-      if (!bleBanner.classList.contains("connected")) {
-        bleBanner.classList.remove("scanning");
-        bleBanner.classList.add("disconnected");
+      if (!bleLight.classList.contains("connected")) {
+        bleLight.classList.remove("scanning");
+        bleLight.classList.add("disconnected");
         bleText.textContent = "Disconnected";
       }
       bleLock = false;
@@ -793,21 +847,47 @@
     );
   });
 
+  // React Native BLE state updates
   function handleBleConnectionMessage(isConnected) {
     bleLock = false;
     if (bleScanTimeout) clearTimeout(bleScanTimeout);
 
-    bleBanner.classList.remove("hidden", "scanning", "connected", "disconnected");
+    bleBanner.classList.remove("hidden");
+
+    const dot = document.getElementById("ble-status-light");
 
     if (isConnected) {
-      bleBanner.classList.add("connected");
+      bleLight.className = "light connected";
       bleText.textContent = "Necklace Connected";
     } else {
-      bleBanner.classList.add("disconnected");
+      bleLight.className = "light disconnected";
       bleText.textContent = "Disconnected";
     }
+
   }
+
+  // Update right-side intensity
+  function updateBannerIntensity(value) {
+    bleIntensity.textContent = `${value} intensity`;
+  }
+
+  // RN → WebView listener
+  window.addEventListener("message", (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === "bleConnection") {
+        handleBleConnectionMessage(msg.isConnected);
+      }
+
+      if (msg.type === "updateStats" && msg.payload?.latestIntensity !== undefined) {
+        updateBannerIntensity(msg.payload.latestIntensity);
+      }
+
+    } catch (e) {}
+  });
 </script>
+
 
 <!-- Stats updater (updateStats already merged above) -->
 <script>

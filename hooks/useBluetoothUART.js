@@ -375,7 +375,7 @@ export function useBluetoothUART() {
     setIsScanning(true);
     setConnectionState('scanning');
 
-    manager.startDeviceScan([SERVICE_UUID], null, (err, device) => {
+    manager.startDeviceScan(null, null, (err, device) => {
       if (err) {
         console.error('[ERROR] Scan error:', err);
         setIsScanning(false);
@@ -384,9 +384,14 @@ export function useBluetoothUART() {
 
       if (!device) return;
 
+      // Add these for debugging:
+      console.log(device.name, device.id, device.serviceUUIDs);
+
+      // NEW matching logic
       const matches =
-        device.serviceUUIDs?.includes(SERVICE_UUID.toLowerCase()) ||
-        device.serviceUUIDs?.includes(SERVICE_UUID.toUpperCase());
+        (device.name && device.name.toLowerCase().includes("circuitpy")) ||
+        device.id === "CIRCUITPY1330";
+
 
       if (!matches) return;
 

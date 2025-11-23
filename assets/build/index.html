@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,515 +12,570 @@
   <div id="root"></div>
 
   <!-- ====================================== -->
-<!--  BLUE LIGHT EXPOSURE CARD (Styled)    -->
-<!-- ====================================== -->
-
-<style>
-
-  #bl-background {
-  background: rgba(239, 243, 252, 1);
-  width: 100vw !important;
-  margin-left: calc(-50vw + 50%);
-  padding: 2px 0 16px 0;
-  }
-
-  /* Card style matching screenshot */
-  #bl-card {
-    margin: 20px 16px;
-    padding: 20px;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.06);
-  }
-
-  #bl-card-title {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 4px;
-  }
-
-  #bl-card-subtitle {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 14px;
-  }
-
-  /* Styled dropdown */
-  #bl-select {
-    appearance: none;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 8px 14px;
-    font-size: 15px;
-    color: #333;
-    margin-bottom: 14px;
-    width: 130px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-  }
-
-  /* Data Storage Tracking */
-
-  #storage-card {
-    background: #FFFFFF;
-    border-radius: 22px;
-    padding: 20px;
-    margin: 24px 16px;
-    border: 1px solid #E6E6E6;
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
-  .storage-header {
-    margin-bottom: 16px;
-  }
-
-  .storage-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  .storage-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-top: 4px;
-  }
-
-  /* Two-box row */
-  .storage-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 16px;
-    margin-bottom: 20px;
-  }
-
-  .storage-box {
-    background: #F7F9FF;
-    flex: 1;
-    padding: 16px;
-    border-radius: 14px;
-    border: 1px solid #EEF0FA;
-    margin-right: 12px;
-  }
-
-  .storage-box:last-child {
-    margin-right: 0;
-  }
-
-  .storage-label {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 6px;
-  }
-
-  .storage-value {
-    font-size: 16px;
-    font-weight: 400;
-    color: #222;
-  }
-
-  /* Sensor Reading Cards */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 16px;
-  }
-
-  .metric-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 20px;
-    padding: 18px;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
-  }
-
-  .metric-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-
-  .metric-icon {
-    font-size: 18px;
-    opacity: 0.85;
-  }
-
-  .metric-value {
-    font-size: 16px;
-    font-weight: 400;
-    color: #222;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-
-  .metric-sub {
-    font-size: 13px;
-    color: #777;
-}
-
-#carot-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 60px;                 /* matches standard iOS nav bar */
-  padding: 0 8px;    
-  background: #FFFFFF;
-
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
-
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.carot-icon {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carot-icon svg {
-  width: 100%;   /* actual icon size */
-  height: 100%;
-}
-
-.carot-title {
-  font-size: 16px;
-  font-weight: 400;
-  color: #222;
-}
-
-/* Right Bluetooth button */
-#ble-button {
-  
-  width: 35px;
-  height: 35px;
-  border-radius: 12px;
-  background: #FFFFFF;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
-
-  cursor: pointer;
-}
-
-.ble-icon {
-  font-size: 20px;
-  color: #333;
-}
-
-
-</style>
-
-
-<!--  gui components    -->
-
-<!--  carot header    -->
-<div id="carot-header">
-  <div class="header-left">
-    <div class="carot-icon">
-      
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1024 1024">
-  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
-  <defs>
-    <style>
-      .st0 {
-        fill: #5ab7e4;
-      }
-
-      .st1 {
-        fill: #d3eaf5;
-      }
-
-      .st2 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st3 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st4 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st5 {
-        fill: url(#linear-gradient4);
-      }
-
-      .st6 {
-        fill: #addbf0;
-      }
-
-      .st7 {
-        fill: #80c4e6;
-      }
-
-      .st8 {
-        fill: #c9e3f0;
-      }
-
-      .st9 {
-        fill: url(#linear-gradient);
-      }
-
-      .st10 {
-        fill: #c5ccc8;
-      }
-
-      .st11 {
-        fill: #3170ae;
-      }
-
-      .st12 {
-        fill: #b8e2f4;
-      }
-
-      .st13 {
-        fill: #8ad3ef;
-      }
-
-      .st14 {
-        fill: #d8dcd7;
-      }
-
-      .st15 {
-        fill: #4782bb;
-      }
-
-      .st16 {
-        fill: #b0e1f4;
-      }
-
-      .st17 {
-        fill: #89c4e3;
-      }
-
-      .st18 {
-        fill: #99cee8;
-      }
-
-      .st19 {
-        fill: #77a8d0;
-      }
-
-      .st20 {
-        fill: #85d4f1;
-      }
-
-      .st21 {
-        fill: #5eacd8;
-      }
-
-      .st22 {
-        fill: #539fd2;
-      }
-
-      .st23 {
-        fill: #ecf0f1;
-      }
-
-      .st24 {
-        fill: #84b8dc;
-      }
-
-      .st25 {
-        fill: #80bce0;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="486.16" y1="371.73" x2="476.78" y2="390.41" gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2476b8"/>
-      <stop offset="1" stop-color="#318ec8"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient1" x1="475.84" y1="373.73" x2="456.09" y2="396.16" gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#4d9dd0"/>
-      <stop offset="1" stop-color="#69bde4"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient2" x1="407.47" y1="425.85" x2="475.91" y2="514.56" gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#64b1db"/>
-      <stop offset="1" stop-color="#5481b6"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient3" x1="433.4" y1="416.73" x2="484.23" y2="524.16" gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)" gradientUnits="userSpaceOnUse">
-      <stop offset=".05" stop-color="#4ab0dc"/>
-      <stop offset=".42" stop-color="#3c93ca"/>
-      <stop offset="1" stop-color="#3e6ba6"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient4" x1="468.76" y1="412.26" x2="524.63" y2="501.72" gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2f97cf"/>
-      <stop offset=".17" stop-color="#1974b8"/>
-      <stop offset="1" stop-color="#285494"/>
-    </linearGradient>
-  </defs>
-  <circle class="st1" cx="507.66" cy="512" r="460.8"/>
-  <g>
-    <path class="st8" d="M444.69,306.17c-2.33.08-13.36-.92-11.93,3.25-5.35-6.16-22.95.23-30.51-5.07-2.34-47.82,54.85-39.66,85.17-40.48l-7.17,40.12-35.57,2.18Z"/>
-    <path class="st17" d="M561.33,262.99c9.54,12.26,15.86,26.99,26.24,38.2.59.64,1.38,1.35.9,2.37-.64,0-.85.4-1.49.41-24.87.29-49.7.18-74.58.73-.22,0-.45-.15-.67-.14l1.05-41.06c16.18-.21,32.37-.6,48.55-.49Z"/>
-    <path class="st9" d="M595.71,348.57c-6.59,11.18-13.84,22.09-20.45,33.3-1.13,1.92-2.26,3.86-3.35,5.8-2.79-1-17.61.38-21.85.4l36.92-84.1c.64,0,.85-.4,1.49-.41,10.06-.11,20.77.55,30.5-1.45-1.53,12.74-16.27,34.6-23.26,46.46Z"/>
-    <path class="st18" d="M432.76,309.41l37.05,79.62c-3.97.09-18.74-.73-21.03-.15-6.68-12.5-14.35-24.42-21.69-36.5-7.06-11.62-24.21-35.19-24.84-48.04,7.56,5.3,25.16-1.1,30.51,5.07Z"/>
-    <path class="st12" d="M512.78,263.49l-1.05,41.06c-23,.51-43.28.77-67.04,1.62l35.57-2.18,7.17-40.12c8.41-.23,16.94-.27,25.36-.38Z"/>
-    <path class="st19" d="M618.97,302.11c-9.73,2.01-20.44,1.34-30.5,1.45.48-1.01-.31-1.73-.9-2.37l7.17-36.86c14.53,4.75,26.15,21.81,24.23,37.77Z"/>
-    <path class="st24" d="M594.74,264.34l-7.17,36.86c-10.38-11.21-16.7-25.94-26.24-38.2,10.93.07,22.75-2.15,33.41,1.34Z"/>
-    <path class="st6" d="M512.4,304.7l-.38,83.94c-14.05.15-28.16.08-42.21.4l-37.05-79.62c-1.43-4.17,9.59-3.16,11.93-3.25,23.76-.84,44.04-1.11,67.04-1.62.22,0,.45.15.67.14Z"/>
-    <path class="st3" d="M586.98,303.97l-36.92,84.1c-12.67.08-25.37.44-38.03.57l.38-83.94c24.87-.55,49.7-.44,74.58-.73Z"/>
-    <g>
-      <path class="st23" d="M571.91,387.67c2.26.81,1.26,1.16,1.57,2.51.37,1.62-.59,3.92.31,5.14-.12.01-.1,1.95-.78,2.01-41.97-1.61-84.42,1.89-126.07.23l.21-7.56c.23-.8.97-.93,1.64-1.1,2.29-.58,17.06.24,21.03.15,14.05-.32,28.16-.25,42.21-.4,12.67-.13,25.36-.49,38.03-.57,4.24-.03,19.06-1.4,21.85-.4Z"/>
-      <path class="st14" d="M445.95,389.01c-.15,6.2,2.23,11.93-5.72,10.37-4.44-3.93-2.26-11.41,5.72-10.37Z"/>
-      <path class="st10" d="M573.79,395.31c-.9-1.22.06-3.52-.31-5.14,2.81-4.42,8.78-4.05,8.8,1.52.04,7.77-5.42,3.29-8.5,3.62Z"/>
-    </g>
-  </g>
-  <g>
-    <path class="st2" d="M388.1,415.11c-.74,1.45-1.89,2.04-.89,4.16l.27,3.68-2.09-3.34-28.86.35c-1.28.36.16,6.61.27,6.94,1,2.82,5.04,8.66,6.51,12.26,42.12,103.51,89.42,204.45,122.24,311.86l.82,2.71-2.42-.16-12.58-8.48c-1.88-1.81-3.66-3.66-5.49-5.52-38.3-83.91-72.44-170.45-107.87-255.91-5.8-13.99-17.42-33.12-20.07-47.38-.91-4.88-.93-11.74-.63-16.79,1.76-2.07,4.36.37,6.04-1.97,1.55-2.16-1.12-4.37.92-5.96.34,5.23.7,4.91,5.83,5.59,2.43.32,32.9.01,34.53-.59.52-.19,2.21-2.26,2.27-2.41l1.19.98Z"/>
-    <path class="st11" d="M550.35,746.74c-23.43,20.4-56.61,19.83-78.98-1.66l12.58,8.48,2.42.16-.82-2.71c3.38,6.58,8.78,2.69,13.76,2.94.25.01,2.58,2.27,4.4,2.39.84.06,3.55-2.98,5.67-.24l1.89-3.94c1.32.71-.41,2.59.27,3.68,1.17,1.86,24.23.96,25.69-3.57l43.69-135.53,89.08-200.08c1.85.07,10.26-.72,11.11.56-.57,1.32.43,3.33.46,4.44.2,8.41-9.54,30.79-13.28,39.17-.84,1.88-5.03,5.25-5.8,7.45-.44,1.25,1.86,1.88,1.57,2.51-.63,1.36-5.48,6.69-5.8,7.45-.31.71.09,6.05-.96,7.76-1.37,2.24-5.46,3.73-6.48,7.31-.27.96,1.62,2.37,1.57,2.51-.5,1.46-3.71,5.37-4.17,6.35-.1.23-.19,4.67-.36,4.99-.4.75-5.26,3.71-6.18,5.92-.84,2.02-.05,6.84-.14,7.21-.06.26-1.59.85-1.64,1.1-.04.2,1.37,3.71,1.27,3.89-.58,1.05-3.82,1.87-3.95,2.05-.96,1.38-3.74,4.65-3.87,4.97-.22.54-.27,8.2-.43,8.6-.9,2.14-4.3,1.97-4.69,5.52-.13,1.2,1.6,2.36,1.57,2.51-.08.46-4.24,2.19-5.66,6.76-.84,2.7.72,7.74.24,8.74-.26.54-2.9,1.58-3.28,2.2-.66,1.09-1.83,4.56-2.67,5.95-.45.73-3.78,2.11-4.1,2.75-.2.41,1.39.57,1.19.98-2.73,5.75-2.26,9.81-3.48,13.02-.08.21-3.34,2.68-3.43,2.89-.66,1.69.27,5.56.16,5.83-.75,1.78-8.3,11.95-8.33,12.71-.02.59,2.48,1.93,1.95,4.04-.22.88-3.73,2.89-4.39,4.13-.59,1.11.58,2.67-.22,4.3-.16.33-3.24,2.53-3.43,2.89-.63,1.22-.04,4.35-.36,4.99-3.18,6.33-6.13,5.68-8.4,16.31-.05.25-1.61.87-1.64,1.1-.16,1.28,2.88,2.59,2.91,2.8.11.64-8.27,8.73-8.41,9.79-.32,2.38,7.19,4.26,3.45,10.15-.54.86-3.49,1.86-4.25,3.44-.2.42-.88,8.47-1.25,9.15-.26.47-4.95,3.68-5.06,3.99-.2.54,1.41,6.61.24,8.74-.73,1.32-7.02,6.77-7.59,9.24-.51,2.19,2.02,4.87,1.35,6.81-.1.29-4.19,3.71-4.39,4.13-4.21,8.6-8.29,15.1-12.71,23.36-.22.42.64,2.7-.22,4.3-.18.33-6.21,3.05-6.41,3.7-1.37,4.57,7.13-1.75,8.72-1.4Z"/>
-    <path class="st15" d="M686.86,416.63c-.01,2.42.04,5.58-.28,7.91-3.33,23.96-28.29,72.28-38.32,97.21-26.18,65.09-51.58,141.33-81.39,203.54-4.5,9.39-8.81,14.75-16.52,21.46-1.59-.35-10.09,5.96-8.72,1.4.2-.65,6.23-3.37,6.41-3.7.86-1.6,0-3.88.22-4.3,4.42-8.26,8.5-14.76,12.71-23.36.21-.42,4.29-3.84,4.39-4.13.66-1.94-1.86-4.61-1.35-6.81.57-2.47,6.86-7.92,7.59-9.24,1.17-2.14-.44-8.2-.24-8.74.11-.31,4.81-3.51,5.06-3.99.37-.68,1.05-8.73,1.25-9.15.75-1.58,3.7-2.58,4.25-3.44,3.74-5.9-3.77-7.77-3.45-10.15.14-1.06,8.52-9.15,8.41-9.79-.03-.2-3.07-1.51-2.91-2.8.03-.23,1.58-.85,1.64-1.1,2.27-10.63,5.22-9.98,8.4-16.31.32-.64-.27-3.78.36-4.99.19-.36,3.26-2.56,3.43-2.89.8-1.63-.37-3.19.22-4.3.66-1.24,4.17-3.25,4.39-4.13.53-2.11-1.97-3.45-1.95-4.04.03-.76,7.58-10.93,8.33-12.71.11-.27-.81-4.14-.16-5.83.08-.21,3.35-2.68,3.43-2.89,1.22-3.2.76-7.26,3.48-13.02.2-.41-1.4-.57-1.19-.98.31-.63,3.65-2.02,4.1-2.75.85-1.38,2.01-4.85,2.67-5.95.37-.62,3.02-1.66,3.28-2.2.49-1-1.08-6.04-.24-8.74,1.41-4.57,5.58-6.3,5.66-6.76.03-.15-1.7-1.31-1.57-2.51.39-3.55,3.78-3.38,4.69-5.52.17-.4.21-8.06.43-8.6.13-.32,2.91-3.59,3.87-4.97.13-.19,3.37-1.01,3.95-2.05.1-.18-1.31-3.69-1.27-3.89.04-.25,1.58-.84,1.64-1.1.08-.37-.7-5.19.14-7.21.92-2.21,5.78-5.17,6.18-5.92.17-.33.26-4.77.36-4.99.45-.98,3.66-4.9,4.17-6.35.05-.14-1.84-1.55-1.57-2.51,1.01-3.58,5.11-5.07,6.48-7.31,1.05-1.71.65-7.05.96-7.76.33-.76,5.17-6.09,5.8-7.45.29-.63-2.01-1.26-1.57-2.51.77-2.2,4.97-5.58,5.8-7.45,3.74-8.39,13.48-30.77,13.28-39.17-.03-1.11-1.03-3.12-.46-4.44-.85-1.28-9.26-.5-11.11-.56-12.22-.44-24.85-.63-37.07-.67.42-1.3.54-2.32.07-3.61l10.84-49.11c12.58,1.78,18.68,12.97,29.04,18.52.07,4.51,7.05,12.96,7.9,17.26.48,2.45-1.17,8.31-.35,11.51.22.88,2.21.36,2.54,1.27.77,2.13-4.16,5.54,3.89,4.81Z"/>
-    <path class="st20" d="M512.4,401.82c-.25,4.6,1.35,14.54-3.26,15.24-40.64.56-81.27,2.82-121.93,2.2-1-2.11.15-2.7.89-4.16,7.71-15.12,28.11-37.42,38.54-52.25.43-.61,1.08-2.23.67-3.12,18.53-.7,37.17-.65,55.71-1.14l-10.98,56.33c4.59-.28,36.59,1.74,38.56.27,1.69-1.26-.78-11.33,1.8-13.38Z"/>
-    <path class="st0" d="M599.95,356.78c1.25,1.55,1.42,5.16,2.1,6.61,6.53,13.94,26.25,36.17,30.96,48.99.47,1.29.35,2.31-.07,3.61-28.05-.09-56.33.56-84.42.8,1.01-2.75,5.58.2,5.66-3.5l-7.78-55.62c17.86-.22,35.66-1.03,53.54-.88Z"/>
-    <path class="st13" d="M546.4,357.66l7.78,55.62c-.08,3.7-4.66.75-5.66,3.5-11.96.1-23.92.15-35.87.31-1.18.02-2.36-.04-3.51-.02,4.6-.7,3-10.64,3.26-15.24.8-14.61.53-29.24,1.64-43.83,10.79-.18,21.58-.2,32.37-.33Z"/>
-    <path class="st16" d="M514.04,357.99c-1.11,14.6-.84,29.23-1.64,43.83-2.58,2.05-.11,12.12-1.8,13.38-1.97,1.47-33.97-.55-38.56-.27l10.98-56.33c10.32-.27,20.71-.45,31.02-.62Z"/>
-    <path class="st22" d="M686.86,416.63c-8.05.72-3.11-2.69-3.89-4.81-.33-.91-2.31-.39-2.54-1.27-.81-3.2.84-9.06.35-11.51-.85-4.3-7.83-12.75-7.9-17.26-10.36-5.55-16.47-16.73-29.04-18.52l-10.84,49.11c-4.71-12.82-24.42-35.04-30.96-48.99-.68-1.44-.85-5.06-2.1-6.61,23.35.2,41.93-3.81,62.55,11.19,14.52,10.56,24.44,30.24,24.36,48.66Z"/>
-    <path class="st21" d="M385.05,376.79c.24,6.17,3.36,33.7,1.85,37.34-.06.15-1.75,2.22-2.27,2.41-1.63.61-32.1.92-34.53.59-5.13-.68-5.49-.36-5.83-5.59-2.04,1.59.63,3.8-.92,5.96-1.67,2.34-4.27-.1-6.04,1.97.46-7.55,1.55-13.04,4.29-20.09,2.07,4.52,3.25-1.65,4.02-2.4,6.22-6.07,13.09-11.57,18.95-18.04,6.8,1.35,13.42-1.85,20.47-2.15Z"/>
-    <path class="st7" d="M388.1,415.11l-1.19-.98c1.5-3.63-1.62-31.17-1.85-37.34-.17-4.38.56-9.26.13-13.74,14.5-3.4,27.26-2.75,42.13-3.31.41.88-.24,2.51-.67,3.12-10.43,14.83-30.84,37.13-38.54,52.25Z"/>
-    <path class="st25" d="M385.18,363.06c.43,4.48-.29,9.36-.13,13.74-7.05.3-13.67,3.49-20.47,2.15-5.86,6.48-12.73,11.97-18.95,18.04-.77.75-1.95,6.92-4.02,2.4,7.91-20.34,23.67-31.67,43.57-36.33Z"/>
-    <path class="st4" d="M511.28,752.16l-1.89,3.94c-2.12-2.74-4.83.29-5.67.24-1.82-.12-4.15-2.38-4.4-2.39-4.98-.25-10.39,3.64-13.76-2.94-32.83-107.41-80.13-208.35-122.24-311.86-1.46-3.6-5.51-9.44-6.51-12.26-.12-.32-1.55-6.58-.27-6.94l28.86-.35,2.09,3.34-.27-3.68c40.66.61,81.28-1.65,121.93-2.2,1.15-.02,2.33.04,3.51.02l-1.37,335.07Z"/>
-    <path class="st5" d="M670,416.65l-89.08,200.08-43.69,135.53c-1.45,4.52-24.52,5.43-25.69,3.57-.68-1.08,1.05-2.97-.27-3.68l1.37-335.07c11.95-.16,23.91-.2,35.87-.31,28.09-.24,56.37-.89,84.42-.8,12.22.04,24.84.24,37.07.67Z"/>
-  </g>
-</svg>
-    </div>
-
-
-
-    <span class="carot-title">Carot</span>
-  </div>
-
-  <div class="header-right">
-    <div id="ble-button">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="17"
-        height="17"
-      >
-        <path
-          d="M12 3v18l4.5-4.5L12 12l4.5-4.5L12 3zM7 7l5 5m-5 5l5-5"
-          fill="none"
-          stroke="#111827"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-    </div>
-  </div>
-</div>
-
-<div id="bl-background">
-
-<!--  sensor reading cards    -->
-  <div class="metrics-grid">
-
-    <!-- Total Exposure -->
-    <div class="metric-card">
-      <div class="metric-sub">
-        <span>Total Exposure</span>
-      </div>
-      <div id="metric-total-exposure" class="metric-value">0 BLU</div>
-      <div class="metric-sub">BLU</div>
-    </div>
-
-    <!-- Avg Intensity -->
-    <div class="metric-card">
-      <div class="metric-sub">
-        <span>Avg Intensity</span>
-      </div>
-      <div id="metric-avg-intensity" class="metric-value">0</div>
-      <div class="metric-sub">BLU</div>
-    </div>
-
-    <!-- Latest Intensity Timestamp -->
-    <div class="metric-card">
-      <div class="metric-sub">
-        <span>Intensity</span>
-      </div>
-      <div id="metric-latest-time" class="metric-value">--</div>
-      <div class="metric-sub">BLU</div>
-    </div>
-
-    <!-- Peak Intensity -->
-    <div class="metric-card">
-      <div class="metric-sub">
-        <span>Peak Intensity</span>
-      </div>
-      <div id="metric-peak" class="metric-value">0</div>
-      <div class="metric-sub">Max reading</div>
-    </div>
-
-  </div>
-
-<!--  blue light exposure graph    -->
-  <div id="bl-card">
-
-    <div id="bl-card-title">Blue Light Exposure</div>
-    <div id="bl-card-subtitle">Track your daily blue light exposure patterns</div>
-
-    <select id="bl-select">
-      <option value="today">Today</option>
-      <option value="week">Week</option>
-      <option value="month">Month</option>
-    </select>
-
-    <div style="height:260px; margin-top:10px;">
-      <canvas id="bl_chart"></canvas>
-    </div>
-
-  </div>
-
-  <!-- data storage cards    -->
-  <div id="storage-card">
-    <div class="storage-header">
-      <div class="storage-title">Data Storage</div>
-      <div class="storage-subtitle">Manage your locally stored blue light readings</div>
-    </div>
-
-    <div class="storage-row">
-      <div class="storage-box">
-        <div class="storage-label">Total Readings</div>
-        <div id="storage-total" class="storage-value">0</div>
+  <!--  BLUE LIGHT EXPOSURE CARD (Styled)    -->
+  <!-- ====================================== -->
+
+  <style>
+    #bl-background {
+      background: rgba(239, 243, 252, 1);
+      width: 100vw !important;
+      margin-left: calc(-50vw + 50%);
+      padding: 2px 0 16px 0;
+    }
+
+    /* Card style matching screenshot */
+    #bl-card {
+      margin: 20px 16px;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    #bl-card-title {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    #bl-card-subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 14px;
+    }
+
+    /* Styled dropdown */
+    #bl-select {
+      appearance: none;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 14px;
+      width: 130px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Data Storage Tracking */
+
+    #storage-card {
+      background: #FFFFFF;
+      border-radius: 22px;
+      padding: 20px;
+      margin: 24px 16px;
+      border: 1px solid #E6E6E6;
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .storage-header {
+      margin-bottom: 16px;
+    }
+
+    .storage-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .storage-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* Two-box row */
+    .storage-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .storage-box {
+      background: #F7F9FF;
+      flex: 1;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid #EEF0FA;
+      margin-right: 12px;
+    }
+
+    .storage-box:last-child {
+      margin-right: 0;
+    }
+
+    .storage-label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .storage-value {
+      font-size: 16px;
+      font-weight: 400;
+      color: #222;
+    }
+
+    /* Sensor Reading Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 16px;
+    }
+
+    .metric-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .metric-icon {
+      font-size: 18px;
+      opacity: 0.85;
+    }
+
+    .metric-value {
+      font-size: 16px;
+      font-weight: 400;
+      color: #222;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .metric-sub {
+      font-size: 13px;
+      color: #777;
+    }
+
+    #carot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      height: 60px;
+      padding: 0 8px;
+      background: #FFFFFF;
+
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
+
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .carot-icon {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carot-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .carot-title {
+      font-size: 16px;
+      font-weight: 400;
+      color: #222;
+    }
+
+    /* Right Bluetooth button */
+    #ble-button {
+      width: 35px;
+      height: 35px;
+      border-radius: 12px;
+      background: #FFFFFF;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+
+      cursor: pointer;
+    }
+
+    .ble-icon {
+      font-size: 20px;
+      color: #333;
+    }
+
+    #ble-status-banner {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: left;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      background: #f5f5f5;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    #ble-status-banner.hidden {
+      display: none;
+    }
+
+    #ble-status-banner.connected {
+      background: #eaffea;
+      color: #1a7f1a;
+      border-bottom: 1px solid #b7e8b7;
+    }
+
+    #ble-status-banner.disconnected {
+      background: #ffecec;
+      color: #d63a3a;
+      border-bottom: 1px solid #f1b3b3;
+    }
+
+    #ble-status-banner.scanning {
+      background: #fff8e6;
+      color: #b8860b;
+      border-bottom: 1px solid #f2da9a;
+    }
+  </style>
+
+  <!--  GUI components  -->
+
+  <!--  Carot header  -->
+  <div id="carot-header">
+    <div class="header-left">
+      <div class="carot-icon">
+        <!-- Your Carot SVG (unchanged) -->
+        <?xml version="1.0" encoding="UTF-8"?>
+        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+          viewBox="0 0 1024 1024">
+          <defs>
+            <style>
+              .st0 {
+                fill: #5ab7e4;
+              }
+
+              .st1 {
+                fill: #d3eaf5;
+              }
+
+              .st2 {
+                fill: url(#linear-gradient2);
+              }
+
+              .st3 {
+                fill: url(#linear-gradient1);
+              }
+
+              .st4 {
+                fill: url(#linear-gradient3);
+              }
+
+              .st5 {
+                fill: url(#linear-gradient4);
+              }
+
+              .st6 {
+                fill: #addbf0;
+              }
+
+              .st7 {
+                fill: #80c4e6;
+              }
+
+              .st8 {
+                fill: #c9e3f0;
+              }
+
+              .st9 {
+                fill: url(#linear-gradient);
+              }
+
+              .st10 {
+                fill: #c5ccc8;
+              }
+
+              .st11 {
+                fill: #3170ae;
+              }
+
+              .st12 {
+                fill: #b8e2f4;
+              }
+
+              .st13 {
+                fill: #8ad3ef;
+              }
+
+              .st14 {
+                fill: #d8dcd7;
+              }
+
+              .st15 {
+                fill: #4782bb;
+              }
+
+              .st16 {
+                fill: #b0e1f4;
+              }
+
+              .st17 {
+                fill: #89c4e3;
+              }
+
+              .st18 {
+                fill: #99cee8;
+              }
+
+              .st19 {
+                fill: #77a8d0;
+              }
+
+              .st20 {
+                fill: #85d4f1;
+              }
+
+              .st21 {
+                fill: #5eacd8;
+              }
+
+              .st22 {
+                fill: #539fd2;
+              }
+
+              .st23 {
+                fill: #ecf0f1;
+              }
+
+              .st24 {
+                fill: #84b8dc;
+              }
+
+              .st25 {
+                fill: #80bce0;
+              }
+            </style>
+            <linearGradient id="linear-gradient" x1="486.16" y1="371.73" x2="476.78" y2="390.41"
+              gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)"
+              gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#2476b8" />
+              <stop offset="1" stop-color="#318ec8" />
+            </linearGradient>
+            <linearGradient id="linear-gradient1" x1="475.84" y1="373.73" x2="456.09" y2="396.16"
+              gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)"
+              gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#4d9dd0" />
+              <stop offset="1" stop-color="#69bde4" />
+            </linearGradient>
+            <linearGradient id="linear-gradient2" x1="407.47" y1="425.85" x2="475.91" y2="514.56"
+              gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)"
+              gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#64b1db" />
+              <stop offset="1" stop-color="#5481b6" />
+            </linearGradient>
+            <linearGradient id="linear-gradient3" x1="433.4" y1="416.73" x2="484.23" y2="524.16"
+              gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)"
+              gradientUnits="userSpaceOnUse">
+              <stop offset=".05" stop-color="#4ab0dc" />
+              <stop offset=".42" stop-color="#3c93ca" />
+              <stop offset="1" stop-color="#3e6ba6" />
+            </linearGradient>
+            <linearGradient id="linear-gradient4" x1="468.76" y1="412.26" x2="524.63" y2="501.72"
+              gradientTransform="translate(-511.64 -1033.62) rotate(12.06) scale(2.83 2.91)"
+              gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#2f97cf" />
+              <stop offset=".17" stop-color="#1974b8" />
+              <stop offset="1" stop-color="#285494" />
+            </linearGradient>
+          </defs>
+          <circle class="st1" cx="507.66" cy="512" r="460.8" />
+          <g>
+            <path class="st8"
+              d="M444.69,306.17c-2.33.08-13.36-.92-11.93,3.25-5.35-6.16-22.95.23-30.51-5.07-2.34-47.82,54.85-39.66,85.17-40.48l-7.17,40.12-35.57,2.18Z" />
+            <path class="st17"
+              d="M561.33,262.99c9.54,12.26,15.86,26.99,26.24,38.2.59.64,1.38,1.35.9,2.37-.64,0-.85.4-1.49.41-24.87.29-49.7.18-74.58.73-.22,0-.45-.15-.67-.14l1.05-41.06c16.18-.21,32.37-.6,48.55-.49Z" />
+            <path class="st9"
+              d="M595.71,348.57c-6.59,11.18-13.84,22.09-20.45,33.3-1.13,1.92-2.26,3.86-3.35,5.8-2.79-1-17.61.38-21.85.4l36.92-84.1c.64,0,.85-.4,1.49-.41,10.06-.11,20.77.55,30.5-1.45-1.53,12.74-16.27,34.6-23.26,46.46Z" />
+            <path class="st18"
+              d="M432.76,309.41l37.05,79.62c-3.97.09-18.74-.73-21.03-.15-6.68-12.5-14.35-24.42-21.69-36.5-7.06-11.62-24.21-35.19-24.84-48.04,7.56,5.3,25.16-1.1,30.51,5.07Z" />
+            <path class="st12"
+              d="M512.78,263.49l-1.05,41.06c-23,.51-43.28.77-67.04,1.62l35.57-2.18,7.17-40.12c8.41-.23,16.94-.27,25.36-.38Z" />
+            <path class="st19"
+              d="M618.97,302.11c-9.73,2.01-20.44,1.34-30.5,1.45.48-1.01-.31-1.73-.9-2.37l7.17-36.86c14.53,4.75,26.15,21.81,24.23,37.77Z" />
+            <path class="st24"
+              d="M594.74,264.34l-7.17,36.86c-10.38-11.21-16.7-25.94-26.24-38.2,10.93.07,22.75-2.15,33.41,1.34Z" />
+            <path class="st6"
+              d="M512.4,304.7l-.38,83.94c-14.05.15-28.16.08-42.21.4l-37.05-79.62c-1.43-4.17,9.59-3.16,11.93-3.25,23.76-.84,44.04-1.11,67.04-1.62.22,0,.45.15.67.14Z" />
+            <path class="st3"
+              d="M586.98,303.97l-36.92,84.1c-12.67.08-25.37.44-38.03.57l.38-83.94c24.87-.55,49.7-.44,74.58-.73Z" />
+            <g>
+              <path class="st23"
+                d="M571.91,387.67c2.26.81,1.26,1.16,1.57,2.51.37,1.62-.59,3.92.31,5.14-.12.01-.1,1.95-.78,2.01-41.97-1.61-84.42,1.89-126.07.23l.21-7.56c.23-.8.97-.93,1.64-1.1,2.29-.58,17.06.24,21.03.15,14.05-.32,28.16-.25,42.21-.4,12.67-.13,25.36-.49,38.03-.57,4.24-.03,19.06-1.4,21.85-.4Z" />
+              <path class="st14"
+                d="M445.95,389.01c-.15,6.2,2.23,11.93-5.72,10.37-4.44-3.93-2.26-11.41,5.72-10.37Z" />
+              <path class="st10"
+                d="M573.79,395.31c-.9-1.22.06-3.52-.31-5.14,2.81-4.42,8.78-4.05,8.8,1.52.04,7.77-5.42,3.29-8.5,3.62Z" />
+            </g>
+          </g>
+          <g>
+            <path class="st2"
+              d="M388.1,415.11c-.74,1.45-1.89,2.04-.89,4.16l.27,3.68-2.09-3.34-28.86.35c-1.28.36.16,6.61.27,6.94,1,2.82,5.04,8.66,6.51,12.26,42.12,103.51,89.42,204.45,122.24,311.86l.82,2.71-2.42-.16-12.58-8.48c-1.88-1.81-3.66-3.66-5.49-5.52-38.3-83.91-72.44-170.45-107.87-255.91-5.8-13.99-17.42-33.12-20.07-47.38-.91-4.88-.93-11.74-.63-16.79,1.76-2.07,4.36.37,6.04-1.97,1.55-2.16-1.12-4.37.92-5.96.34,5.23.7,4.91,5.83,5.59,2.43.32,32.9.01,34.53-.59.52-.19,2.21-2.26,2.27-2.41l1.19.98Z" />
+            <path class="st11"
+              d="M550.35,746.74c-23.43,20.4-56.61,19.83-78.98-1.66l12.58,8.48,2.42.16-.82-2.71c3.38,6.58,8.78,2.69,13.76,2.94.25.01,2.58,2.27,4.4,2.39.84.06,3.55-2.98,5.67-.24l1.89-3.94c1.32.71-.41,2.59.27,3.68,1.17,1.86,24.23.96,25.69-3.57l43.69-135.53,89.08-200.08c1.85.07,10.26-.72,11.11.56-.57,1.32.43,3.33.46,4.44.2,8.41-9.54,30.79-13.28,39.17-.84,1.88-5.03,5.25-5.8,7.45-.44,1.25,1.86,1.88,1.57,2.51-.63,1.36-5.48,6.69-5.8,7.45-.31.71.09,6.05-.96,7.76-1.37,2.24-5.46,3.73-6.48,7.31-.27.96,1.62,2.37,1.57,2.51-.5,1.46-3.71,5.37-4.17,6.35-.1.23-.19,4.67-.36,4.99-.4.75-5.26,3.71-6.18,5.92-.84,2.02-.05,6.84-.14,7.21-.06.26-1.59.85-1.64,1.1-.04.2,1.37,3.71,1.27,3.89-.58,1.05-3.82,1.87-3.95,2.05-.96,1.38-3.74,4.65-3.87,4.97-.22.54-.27,8.2-.43,8.6-.9,2.14-4.3,1.97-4.69,5.52-.13,1.2,1.6,2.36,1.57,2.51-.08.46-4.24,2.19-5.66,6.76-.84,2.7.72,7.74.24,8.74-.26.54-2.9,1.58-3.28,2.2-.66,1.09-1.83,4.56-2.67,5.95-.45.73-3.78,2.11-4.1,2.75-.2.41,1.39.57,1.19.98-2.73,5.75-2.26,9.81-3.48,13.02-.08.21-3.34,2.68-3.43,2.89-.66,1.69.27,5.56.16,5.83-.75,1.78-8.3,11.95-8.33,12.71-.02.59,2.48,1.93,1.95,4.04-.22.88-3.73,2.89-4.39,4.13-.59,1.11.58,2.67-.22,4.3-.16.33-3.24,2.53-3.43,2.89-.63,1.22-.04,4.35-.36,4.99-3.18,6.33-6.13,5.68-8.4,16.31-.05.25-1.61.87-1.64,1.1-.16,1.28,2.88,2.59,2.91,2.8.11.64-8.27,8.73-8.41,9.79-.32,2.38,7.19,4.26,3.45,10.15-.54.86-3.49,1.86-4.25,3.44-.2.42-.88,8.47-1.25,9.15-.26.47-4.95,3.68-5.06,3.99-.2.54,1.41,6.61.24,8.74-.73,1.32-7.02,6.77-7.59,9.24-.51,2.19,2.02,4.87,1.35,6.81-.1.29-4.19,3.71-4.39,4.13-4.21,8.6-8.29,15.1-12.71,23.36-.22.42.64,2.7-.22,4.3-.18.33-6.21,3.05-6.41,3.7-1.37,4.57,7.13-1.75,8.72-1.4Z" />
+            <path class="st15"
+              d="M686.86,416.63c-.01,2.42.04,5.58-.28,7.91-3.33,23.96-28.29,72.28-38.32,97.21-26.18,65.09-51.58,141.33-81.39,203.54-4.5,9.39-8.81,14.75-16.52,21.46-1.59-.35-10.09,5.96-8.72,1.4.2-.65,6.23-3.37,6.41-3.7.86-1.6,0-3.88.22-4.3,4.42-8.26,8.5-14.76,12.71-23.36.21-.42,4.29-3.84,4.39-4.13.66-1.94-1.86-4.61-1.35-6.81.57-2.47,6.86-7.92,7.59-9.24,1.17-2.14-.44-8.2-.24-8.74.11-.31,4.81-3.51,5.06-3.99.37-.68,1.05-8.73,1.25-9.15.75-1.58,3.7-2.58,4.25-3.44,3.74-5.9-3.77-7.77-3.45-10.15.14-1.06,8.52-9.15,8.41-9.79-.03-.2-3.07-1.51-2.91-2.8.03-.23,1.58-.85,1.64-1.1,2.27-10.63,5.22-9.98,8.4-16.31.32-.64-.27-3.78.36-4.99.19-.36,3.26-2.56,3.43-2.89.8-1.63-.37-3.19.22-4.3.66-1.24,4.17-3.25,4.39-4.13.53-2.11-1.97-3.45-1.95-4.04.03-.76,7.58-10.93,8.33-12.71.11-.27-.81-4.14-.16-5.83.08-.21,3.35-2.68,3.43-2.89,1.22-3.2.76-7.26,3.48-13.02.2-.41-1.4-.57-1.19-.98.31-.63,3.65-2.02,4.1-2.75.85-1.38,2.01-4.85,2.67-5.95.37-.62,3.02-1.66,3.28-2.2.49-1-1.08-6.04-.24-8.74,1.41-4.57,5.58-6.3,5.66-6.76.03-.15-1.7-1.31-1.57-2.51.39-3.55,3.78-3.38,4.69-5.52.17-.4.21-8.06.43-8.6.13-.32,2.91-3.59,3.87-4.97.13-.19,3.37-1.01,3.95-2.05.1-.18-1.31-3.69-1.27-3.89.04-.25,1.58-.84,1.64-1.1.08-.37-.7-5.19.14-7.21.92-2.21,5.78-5.17,6.18-5.92.17-.33.26-4.77.36-4.99.45-.98,3.66-4.9,4.17-6.35.05-.14-1.84-1.55-1.57-2.51,1.01-3.58,5.11-5.07,6.48-7.31,1.05-1.71.65-7.05.96-7.76.33-.76,5.17-6.09,5.8-7.45.29-.63-2.01-1.26-1.57-2.51.77-2.2,4.97-5.58,5.8-7.45,3.74-8.39,13.48-30.77,13.28-39.17-.03-1.11-1.03-3.12-.46-4.44-.85-1.28-9.26-.5-11.11-.56-12.22-.44-24.85-.63-37.07-.67.42-1.3.54-2.32.07-3.61l10.84-49.11c12.58,1.78,18.68,12.97,29.04,18.52.07,4.51,7.05,12.96,7.9,17.26.48,2.45-1.17,8.31-.35,11.51.22.88,2.21.36,2.54,1.27.77,2.13-4.16,5.54,3.89,4.81Z" />
+            <path class="st20"
+              d="M512.4,401.82c-.25,4.6,1.35,14.54-3.26,15.24-40.64.56-81.27,2.82-121.93,2.2-1-2.11.15-2.7.89-4.16,7.71-15.12,28.11-37.42,38.54-52.25.43-.61,1.08-2.23.67-3.12,18.53-.7,37.17-.65,55.71-1.14l-10.98,56.33c4.59-.28,36.59,1.74,38.56.27,1.69-1.26-.78-11.33,1.8-13.38Z" />
+            <path class="st0"
+              d="M599.95,356.78c1.25,1.55,1.42,5.16,2.1,6.61,6.53,13.94,26.25,36.17,30.96,48.99.47,1.29.35,2.31-.07,3.61-28.05-.09-56.33.56-84.42.8,1.01-2.75,5.58.2,5.66-3.5l-7.78-55.62c17.86-.22,35.66-1.03,53.54-.88Z" />
+            <path class="st13"
+              d="M546.4,357.66l7.78,55.62c-.08,3.7-4.66.75-5.66,3.5-11.96.1-23.92.15-35.87.31-1.18.02-2.36-.04-3.51-.02,4.6-.7,3-10.64,3.26-15.24.8-14.61.53-29.24,1.64-43.83,10.79-.18,21.58-.2,32.37-.33Z" />
+            <path class="st16"
+              d="M514.04,357.99c-1.11,14.6-.84,29.23-1.64,43.83-2.58,2.05-.11,12.12-1.8,13.38-1.97,1.47-33.97-.55-38.56-.27l10.98-56.33c10.32-.27,20.71-.45,31.02-.62Z" />
+            <path class="st22"
+              d="M686.86,416.63c-8.05.72-3.11-2.69-3.89-4.81-.33-.91-2.31-.39-2.54-1.27-.81-3.2.84-9.06.35-11.51-.85-4.3-7.83-12.75-7.9-17.26-10.36-5.55-16.47-16.73-29.04-18.52l-10.84,49.11c-4.71-12.82-24.42-35.04-30.96-48.99-.68-1.44-.85-5.06-2.1-6.61,23.35.2,41.93-3.81,62.55,11.19,14.52,10.56,24.44,30.24,24.36,48.66Z" />
+            <path class="st21"
+              d="M385.05,376.79c.24,6.17,3.36,33.7,1.85,37.34-.06.15-1.75,2.22-2.27,2.41-1.63.61-32.1.92-34.53.59-5.13-.68-5.49-.36-5.83-5.59-2.04,1.59.63,3.8-.92,5.96-1.67,2.34-4.27-.1-6.04,1.97.46-7.55,1.55-13.04,4.29-20.09,2.07,4.52,3.25-1.65,4.02-2.4,6.22-6.07,13.09-11.57,18.95-18.04,6.8,1.35,13.42-1.85,20.47-2.15Z" />
+            <path class="st7"
+              d="M388.1,415.11l-1.19-.98c1.5-3.63-1.62-31.17-1.85-37.34-.17-4.38.56-9.26.13-13.74,14.5-3.4,27.26-2.75,42.13-3.31.41.88-.24,2.51-.67,3.12-10.43,14.83-30.84,37.13-38.54,52.25Z" />
+            <path class="st25"
+              d="M385.18,363.06c.43,4.48-.29,9.36-.13,13.74-7.05.3-13.67,3.49-20.47,2.15-5.86,6.48-12.73,11.97-18.95,18.04-.77.75-1.95,6.92-4.02,2.4,7.91-20.34,23.67-31.67,43.57-36.33Z" />
+            <path class="st4"
+              d="M511.28,752.16l-1.89,3.94c-2.12-2.74-4.83.29-5.67.24-1.82-.12-4.15-2.38-4.4-2.39-4.98-.25-10.39,3.64-13.76-2.94-32.83-107.41-80.13-208.35-122.24-311.86-1.46-3.6-5.51-9.44-6.51-12.26-.12-.32-1.55-6.58-.27-6.94l28.86-.35,2.09,3.34-.27-3.68c40.66.61,81.28-1.65,121.93-2.2,1.15-.02,2.33.04,3.51.02l-1.37,335.07Z" />
+            <path class="st5"
+              d="M670,416.65l-89.08,200.08-43.69,135.53c-1.45,4.52-24.52,5.43-25.69,3.57-.68-1.08,1.05-2.97-.27-3.68l1.37-335.07c11.95-.16,23.91-.2,35.87-.31,28.09-.24,56.37-.89,84.42-.8,12.22.04,24.84.24,37.07.67Z" />
+          </g>
+        </svg>
       </div>
 
-      <div class="storage-box">
-        <div class="storage-label">Storage Used</div>
-        <div id="storage-size" class="storage-value">0.00 KB</div>
+      <span class="carot-title">Carot</span>
+    </div>
+
+    <div class="header-right">
+      <div id="ble-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17">
+          <path d="M12 3v18l4.5-4.5L12 12l4.5-4.5L12 3zM7 7l5 5m-5 5l5-5" fill="none" stroke="#111827" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- BLE Status Banner -->
+  <div id="ble-status-banner" class="hidden">
+    <span id="ble-status-text">Scanning...</span>
+  </div>
+
+  <div id="bl-background">
+    <!--  Sensor reading cards    -->
+    <div class="metrics-grid">
+      <!-- Total Exposure -->
+      <div class="metric-card">
+        <div class="metric-sub">
+          <span>Total Exposure</span>
+        </div>
+        <div id="metric-total-exposure" class="metric-value">0 BLU</div>
+        <div class="metric-sub">BLU</div>
+      </div>
+
+      <!-- Avg Intensity -->
+      <div class="metric-card">
+        <div class="metric-sub">
+          <span>Avg Intensity</span>
+        </div>
+        <div id="metric-avg-intensity" class="metric-value">0</div>
+        <div class="metric-sub">BLU</div>
+      </div>
+
+      <!-- Latest Intensity Timestamp -->
+      <div class="metric-card">
+        <div class="metric-sub">
+          <span>Intensity</span>
+        </div>
+        <div id="metric-latest-time" class="metric-value">--</div>
+        <div class="metric-sub">BLU</div>
+      </div>
+
+      <!-- Peak Intensity -->
+      <div class="metric-card">
+        <div class="metric-sub">
+          <span>Peak Intensity</span>
+        </div>
+        <div id="metric-peak" class="metric-value">0</div>
+        <div class="metric-sub">Max reading</div>
+      </div>
+    </div>
+
+    <!--  Blue light exposure graph    -->
+    <div id="bl-card">
+      <div id="bl-card-title">Blue Light Exposure</div>
+      <div id="bl-card-subtitle">Track your daily blue light exposure patterns</div>
+
+      <select id="bl-select">
+        <option value="today">Today</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+      </select>
+
+      <div style="height:260px; margin-top:10px;">
+        <canvas id="bl_chart"></canvas>
+      </div>
+    </div>
+
+    <!-- data storage cards    -->
+    <div id="storage-card">
+      <div class="storage-header">
+        <div class="storage-title">Data Storage</div>
+        <div class="storage-subtitle">Manage your locally stored blue light readings</div>
+      </div>
+
+      <div class="storage-row">
+        <div class="storage-box">
+          <div class="storage-label">Total Readings</div>
+          <div id="storage-total" class="storage-value">0</div>
+        </div>
+
+        <div class="storage-box">
+          <div class="storage-label">Storage Used</div>
+          <div id="storage-size" class="storage-value">0.00 KB</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<!-- Chart + sensor data logic -->
 <script>
   let blChart;
   let blMode = "today";
@@ -529,7 +583,6 @@
   function createBLChart() {
     const ctx = document.getElementById("bl_chart").getContext("2d");
 
-    // Blue gradient fill
     const gradient = ctx.createLinearGradient(0, 0, 0, 260);
     gradient.addColorStop(0, "rgba(72, 118, 255, 0.35)");
     gradient.addColorStop(1, "rgba(72, 118, 255, 0.0)");
@@ -557,23 +610,15 @@
               color: "#555",
               maxTicksLimit: 6,
             },
-            grid: {
-              color: "rgba(0,0,0,0.05)",
-            }
+            grid: { color: "rgba(0,0,0,0.05)" }
           },
           y: {
-            ticks: {
-              color: "#555",
-            },
-            grid: {
-              color: "rgba(0,0,0,0.05)",
-            },
+            ticks: { color: "#555" },
+            grid: { color: "rgba(0,0,0,0.05)" },
             beginAtZero: true
           }
         },
-        plugins: {
-          legend: { display: false }
-        }
+        plugins: { legend: { display: false } }
       }
     });
   }
@@ -600,14 +645,14 @@
 
     let subset =
       mode === "today" ? sensorLogData.filter(inDay)
-    : mode === "week"  ? sensorLogData.filter(inWeek)
-    :                   sensorLogData.filter(inMonth);
+      : mode === "week" ? sensorLogData.filter(inWeek)
+      : sensorLogData.filter(inMonth);
 
     return {
       labels: subset.map(r =>
-        new Date(r.receivedAt).toLocaleTimeString([], { hour: 'numeric', hour12: true })
+        new Date(r.receivedAt).toLocaleTimeString([], { hour: "numeric", hour12: true })
       ),
-      values: subset.map(r => r.intensity)
+      values: subset.map(r => r.intensity),
     };
   }
 
@@ -618,232 +663,156 @@
 
     blChart.data.labels = labels;
     blChart.data.datasets[0].data = values;
+
     blChart.update();
   }
 
   window.addEventListener("load", () => {
     createBLChart();
-
     document.getElementById("bl-select").onchange = (e) => {
       blMode = e.target.value;
       if (window.__lastSensorLogData) updateBLChart(window.__lastSensorLogData);
     };
   });
 
-  // Receive data from React Native
-  document.addEventListener("message", (event) => {
-  try {
-    const msg = JSON.parse(event.data);
-    if (msg.type === "sensorData") {
-      window.__lastSensorLogData = msg.payload;   // <--- CORRECT FIELD
-      updateBLChart(msg.payload);                 // <--- CORRECT FIELD
-    }
-  } catch (e) {
-    console.log("Message parse error", e);
-  }
-
-});
-
-// Update Data Storage card
-function updateStorageCard(stats, sensorLogData) {
-    // Update total + storage size
+  // Update Data Storage card
+  function updateStorageCard(stats, sensorLogData) {
     document.getElementById("storage-total").textContent = stats.totalReadings;
     document.getElementById("storage-size").textContent = stats.sizeKB.toFixed(2) + " KB";
-
-    // Compute Today/Week/Month counts
-    const now = new Date();
-
-    function inDay(r) {
-      const d = new Date(r.receivedAt);
-      return d.toDateString() === now.toDateString();
-    }
-
-    function inWeek(r) {
-      const d = new Date(r.receivedAt);
-      const monday = new Date(now);
-      monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-      return d >= monday;
-    }
-
-    function inMonth(r) {
-      const d = new Date(r.receivedAt);
-      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-    }
-
-    const todayCount = sensorLogData.filter(inDay).length;
-    const weekCount = sensorLogData.filter(inWeek).length;
-    const monthCount = sensorLogData.filter(inMonth).length;
-
-    document.getElementById("storage-today").textContent = `${todayCount} readings`;
-    document.getElementById("storage-week").textContent = `${weekCount} readings`;
-    document.getElementById("storage-month").textContent = `${monthCount} readings`;
   }
 
+  // Update metric summary cards
   function updateMetricCards(stats) {
-    document.getElementById("metric-total-exposure").textContent =
-      stats.totalExposure.toFixed(1) + " BLU";
+    // 1. Total Exposure
+    if (stats.totalExposure !== undefined) {
+      document.getElementById("metric-total-exposure").textContent =
+        stats.totalExposure.toFixed(1) + " BLU";
+    }
 
-    document.getElementById("metric-avg-intensity").textContent =
-      Math.round(stats.avgIntensity);
+    // 2. Average intensity
+    if (stats.avgIntensity !== undefined) {
+      document.getElementById("metric-avg-intensity").textContent =
+        Math.round(stats.avgIntensity);
+    }
 
-    document.getElementById("metric-peak").textContent =
-      stats.maxIntensity;
+    // 3. Peak intensity
+    if (stats.maxIntensity !== undefined) {
+      document.getElementById("metric-peak").textContent =
+        stats.maxIntensity;
+    }
 
-    const latest = window.__lastSensorLogData?.at(-1);
-    if (latest) {
+    // 4. Latest intensity (RN sends this)
+    if (stats.latestIntensity !== undefined) {
       document.getElementById("metric-latest-time").textContent =
-        new Date(latest.receivedAt).toLocaleTimeString([], {
-          hour: 'numeric',
-          minute: '2-digit'
-        });
+        stats.latestIntensity;
     }
   }
 
 </script>
 
-
+<!-- Primary RN → WebView bridge -->
 <script>
-  // MOST RELIABLE ON iOS
   window.ReactNativeWebView = window.ReactNativeWebView || {};
 
+  // iOS path
   window.ReactNativeWebView.onMessage = function(event) {
-  try {
-    const msg = JSON.parse(event.data);
-
-    if (msg.type === "sensorData") {
-      window.__lastSensorLogData = msg.payload;
-      updateBLChart(msg.payload);
-    }
-
-    if (msg.type === "storageStats") {
-      updateStorageCard(msg.payload, window.__lastSensorLogData || []);
-    }
-
-  } catch (e) {
-    console.log("onMessage parse error:", e);
-  }
-};
-
-
-  // FALLBACK (Android / older RN versions)
-  window.addEventListener("message", function(event) {
     try {
       const msg = JSON.parse(event.data);
+
       if (msg.type === "sensorData") {
-        console.log("Chart received sensorData (fallback):", msg.payload);
+        window.__lastSensorLogData = msg.payload;
         updateBLChart(msg.payload);
       }
+
+      if (msg.type === "storageStats") {
+        updateStorageCard(msg.payload, window.__lastSensorLogData || []);
+      }
+
+      if (msg.type === "updateStats") {
+        updateMetricCards(msg.payload);
+      }
+
+      if (msg.type === "bleConnection") {
+        handleBleConnectionMessage(!!msg.isConnected);
+      }
+
     } catch (e) {
-      console.log("Fallback parse error:", e);
+      console.log("onMessage parse error:", e);
+    }
+  };
+
+  // Android fallback
+  window.addEventListener("message", (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === "sensorData") {
+        window.__lastSensorLogData = msg.payload;
+        updateBLChart(msg.payload);
+      }
+
+      if (msg.type === "bleConnection") {
+        handleBleConnectionMessage(!!msg.isConnected);
+      }
+
+    } catch (e) {
+      console.log("fallback parse error:", e);
     }
   });
-
 </script>
-  
 
-  <script>
-    (function() {
-      // Initially hide the banner
-      const observer = new MutationObserver(() => {
-        const banner = Array.from(document.querySelectorAll('span'))
-          .find(el => el.textContent.includes('Necklace connected') || el.textContent.includes('Connect'));
-        if (banner) {
-          banner.textContent = ''; // start blank
-          banner.style.color = 'gray';
-          observer.disconnect();
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
+<!-- BLE Button + Banner -->
+<script>
+  const bleBanner = document.getElementById("ble-status-banner");
+  const bleText = document.getElementById("ble-status-text");
+  const bleButton = document.getElementById("ble-button");
 
-      // Listen for messages from React Native
-      window.addEventListener('message', (event) => {
-        try {
-          const msg = JSON.parse(event.data);
+  let bleLock = false;
+  let bleScanTimeout = null;
 
-          // Step 1: Web asks native to connect
-          if (msg.type === 'connectBluetooth') {
-            // Send trigger to native side
-            window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'connectBluetooth' }));
-          }
+  bleButton.addEventListener("click", () => {
+    if (bleLock) return;
+    bleLock = true;
 
-          // Step 2: Native sends connection update
-          if (msg.type === 'bleConnection') {
-            const connected = msg.isConnected;
+    bleBanner.classList.remove("hidden", "connected", "disconnected");
+    bleBanner.classList.add("scanning");
+    bleText.textContent = "Scanning...";
 
-            const banner = Array.from(document.querySelectorAll('span'))
-              .find(el =>
-                el.textContent.includes('Necklace connected') ||
-                el.textContent.includes('Connect') ||
-                el.textContent === ''
-              );
-
-            if (banner) {
-              banner.textContent = connected ? 'Necklace Connected' : 'Disconnected';
-              banner.style.color = connected ? 'green' : 'red';
-            }
-          }
-        } catch (err) {
-          console.error('BLE message parse error', err);
-        }
-      });
-    })();
-  </script>
-
-  <script>
-(function() {
-  // Utility: find card by label text
-  function findCardByLabel(label) {
-    const elements = [...document.querySelectorAll('span, div, p, h3')];
-    return elements.find(el => el.textContent.trim().toLowerCase() === label.toLowerCase());
-  }
-
-  // Update a card’s displayed numeric value
-  function updateCardValue(label, value) {
-    const labelEl = findCardByLabel(label);
-    if (!labelEl) {
-      console.warn(`Label "${label}" not found`);
-      return;
-    }
-
-    // Try to find the main number within the same card
-    const valueEl = labelEl.closest('div')?.parentElement?.querySelector('.text-gray-900');
-    if (valueEl) {
-      valueEl.textContent = value.toFixed(1);
-      console.log(`Updated ${label}: ${value.toFixed(1)}`);
-    } else {
-      console.warn(`Value element for "${label}" not found`);
-    }
-  }
-
-  // Handle messages from React Native (BLE updates)
-  function handleMessage(event) {
-    try {
-      const data = JSON.parse(event.data);
-
-      // update cards with sensor readings
-      if (data.type === 'updateStats' && data.payload) {
-        const { totalExposure, avgIntensity, maxIntensity, latestIntensity, numberReadings } = data.payload;
-
-        
-        // Update all relevant cards
-        if (latestIntensity !== undefined) updateCardValue('Intensity', latestIntensity);
-        if (avgIntensity !== undefined) updateCardValue('Avg Intensity', avgIntensity);
-        if (maxIntensity !== undefined) updateCardValue('Peak Intensity', maxIntensity);
-        if (totalExposure !== undefined) updateCardValue('Total Exposure', totalExposure);
+    if (bleScanTimeout) clearTimeout(bleScanTimeout);
+    bleScanTimeout = setTimeout(() => {
+      if (!bleBanner.classList.contains("connected")) {
+        bleBanner.classList.remove("scanning");
+        bleBanner.classList.add("disconnected");
+        bleText.textContent = "Disconnected";
       }
-    } catch (err) {
-      console.error('BLE message parse error:', err);
+      bleLock = false;
+    }, 10000);
+
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "connectBluetooth" })
+    );
+  });
+
+  function handleBleConnectionMessage(isConnected) {
+    bleLock = false;
+    if (bleScanTimeout) clearTimeout(bleScanTimeout);
+
+    bleBanner.classList.remove("hidden", "scanning", "connected", "disconnected");
+
+    if (isConnected) {
+      bleBanner.classList.add("connected");
+      bleText.textContent = "Necklace Connected";
+    } else {
+      bleBanner.classList.add("disconnected");
+      bleText.textContent = "Disconnected";
     }
   }
-
-  // React Native → WebView message bridges
-  document.addEventListener('message', handleMessage);
-  window.addEventListener('message', handleMessage);
-
-  console.log('BLE stat updater initialized');
-})();
 </script>
 
+<!-- Stats updater (updateStats already merged above) -->
+<script>
+  console.log("WebView stats + BLE interface initialized");
+</script>
 
 
 </body>

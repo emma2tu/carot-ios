@@ -288,6 +288,40 @@
       opacity: 0.9;
     }
 
+    /* Dynamic analysis card */
+    .analysis-card {
+      display: flex;
+      gap: 16px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px;
+      margin: 20px 16px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .analysis-card.hidden {
+      display: none;
+    }
+
+    .analysis-icon {
+      font-size: 32px;
+    }
+
+    .analysis-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .analysis-text {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
   </style>
 
   <!--  GUI components  -->
@@ -578,6 +612,14 @@
       </div>
     </div>
 
+    <!-- Dynamic Analysis Card -->
+    <div id="analysis-card" class="analysis-card hidden">
+      <div class="analysis-content">
+        <div id="analysis-title" class="analysis-title">Loading…</div>
+        <div id="analysis-text" class="analysis-text"></div>
+      </div>
+    </div>
+
     <!--  Blue light exposure graph    -->
     <div id="bl-card">
       <div id="bl-card-title">Blue Light Exposure</div>
@@ -788,6 +830,8 @@
       if (msg.payload?.latestIntensity !== undefined) {
         updateBannerIntensity(msg.payload.latestIntensity);
       }
+
+      updateAnalysisCard(msg.payload);
     }
     
 
@@ -891,6 +935,55 @@
     } catch (e) {}
   });
 </script>
+
+<script>
+function updateAnalysisCard(stats) {
+  const card = document.getElementById("analysis-card");
+  const title = document.getElementById("analysis-title");
+  const text = document.getElementById("analysis-text");
+
+  // If no readings today → hide card
+  if (!stats || !stats.latestIntensity) {
+    card.classList.add("hidden");
+    return;
+  }
+
+  const now = new Date();
+  const hour = now.getHours();
+  const intensity = stats.latestIntensity;
+
+  // ------- RULE 1: After 10 PM -------
+  if (hour >= 22) {
+    card.classList.remove("hidden");
+    title.textContent = "Reduce Blue Light at Night";
+    text.textContent =
+      "It's past 10 PM. Reduce screen exposure to improve sleep quality.";
+    return;
+  }
+
+  // ------- RULE 2: High afternoon exposure -------
+  if (hour >= 14 && hour <= 17 && intensity > 70) {
+    card.classList.remove("hidden");
+    title.textContent = "High Afternoon Exposure";
+    text.textContent =
+      "Blue light levels are elevated during the afternoon. Consider taking short breaks.";
+    return;
+  }
+
+  // ------- RULE 3: Morning light suggestion -------
+  if (hour >= 6 && hour < 12 && intensity < 20) {
+    card.classList.remove("hidden");
+    title.textContent = "Low Morning Light";
+    text.textContent =
+      "Your morning exposure is low. Natural morning light helps regulate circadian rhythm.";
+    return;
+  }
+
+  // Default: hide card if no rule triggered
+  card.classList.add("hidden");
+}
+</script>
+
 
 
 <!-- Stats updater (updateStats already merged above) -->

@@ -979,6 +979,15 @@ function updateAnalysisCard(stats) {
     return;
   }
 
+  // ------- RULE 4: Catch all rule -------
+  if (hour < 22) {
+    card.classList.remove("hidden");
+    title.textContent = "Eye Strain Relief";
+    text.textContent =
+      "Follow 20-20-20 rule. Adjust your screen settings to minimize glare";
+    return;
+  }
+
   // Default: hide card if no rule triggered
   card.classList.add("hidden");
 }
